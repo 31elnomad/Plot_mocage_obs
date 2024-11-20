@@ -6,7 +6,10 @@ Created on the Wed Nov 20
 @author baclesm
 """
 import argparse
-from script.read_config import config
+import os
+import sys
+sys.append(os.path.abspath("script"))
+from .read_config import config
 
 def create_argparse():
     parser = argparse.ArgumentParser()
