@@ -19,11 +19,11 @@ def create_argparse():
     parser.add_argument('-start', '--start',
                          nargs='?', const=None,
                          help='date du début',
-                         metavar='ddeb')
-    parser.add_argument('-dfin', '--dfin',
+                         metavar='start')
+    parser.add_argument('-end', '--end',
                         nargs='?', const=None,
                         help='date de fin',
-                        metavar='dfin')      
+                        metavar='end')      
     parser.add_argument('-deltat', '--deltat',
                         nargs='?', const=None,
                         help='pas de temps',
