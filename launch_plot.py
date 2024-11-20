@@ -9,7 +9,7 @@ import argparse
 import os
 import sys
 sys.path.append(os.path.abspath("script"))
-from .read_config import config
+from read_config import config
 
 def create_argparse():
     parser = argparse.ArgumentParser()
