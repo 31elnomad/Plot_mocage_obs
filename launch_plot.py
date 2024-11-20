@@ -33,4 +33,6 @@ def create_argparse():
     
 if __name__ == "__main__":
     config_opts = create_argparse()
+    print('ok')
+    print(config_opts)
     
