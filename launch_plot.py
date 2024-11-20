@@ -6,6 +6,7 @@ Created on the Wed Nov 20
 @author baclesm
 """
 import argparse
+from script.read_config import config
 
 def create_argparse():
     parser = argparse.ArgumentParser()
@@ -33,4 +34,6 @@ def create_argparse():
     
 if __name__ == "__main__":
     config_opts = create_argparse()
+    config_class = config(config_opts)
+    
     
