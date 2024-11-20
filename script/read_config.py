@@ -1,13 +1,18 @@
+import configparser
+
 class config:
 
-  def __init__(self, config, config_opts):
-    self.config = config
+  def __init__(self, config_opts):
+    if config_opts.cfg is None:
+      raise Exception("The config file is absent")
+    self.config = configparser.ConfigParser()
+    self.config.read(confgig_opts.cfg)  
     self.create_listdate(config_opts)
     
   def create_listdate(self, config_opts):
     if config_opts.listdate is not None:
       self.listdate = config_opts.listdate.split(',')
-    else:https://github.com/31elnomad/Plot_mocage_obs.git
+    else:
       import datetime
       start = datetime.datetime(int(config_opts.start[:4]),
                                 int(config_opts.start[4:6]),
