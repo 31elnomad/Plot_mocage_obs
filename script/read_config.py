@@ -6,7 +6,7 @@ class config:
     if config_opts.cfg is None:
       raise Exception("The config file is absent")
     self.config = configparser.ConfigParser()
-    self.config.read(confgig_opts.cfg)  
+    self.config.read(config_opts.cfg)  
     self.create_listdate(config_opts)
     
   def create_listdate(self, config_opts):
