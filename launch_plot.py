@@ -38,5 +38,6 @@ def create_argparse():
 if __name__ == "__main__":
     config_opts = create_argparse()
     config_class = config(config_opts)
+    print(config_class.__dict__)
     
     
