@@ -10,6 +10,8 @@ class config:
     self.create_listdate(config_opts)
     
   def create_listdate(self, config_opts):
+    if ( config_opts.start is None or config_opts.end is None ) and config_opts.listdate is None:
+      raise Exception("Start or end is/are None and listdate is None")
     if config_opts.listdate is not None:
       self.listdate = config_opts.listdate.split(',')
     else:
