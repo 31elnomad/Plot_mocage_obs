@@ -16,7 +16,7 @@ class config:
       self.listdate = config_opts.listdate.split(',')
     else:
       if len(config_opts.start) != 10 or len(config_opts.end) != 10:
-        raise Exeption("Start and end must be 'YYYYMMDDHH'")
+        raise Exception("Start and end must be 'YYYYMMDDHH'")
       import datetime
       start = datetime.datetime(int(config_opts.start[:4]),
                                 int(config_opts.start[4:6]),
