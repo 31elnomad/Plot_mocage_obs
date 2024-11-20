@@ -31,6 +31,6 @@ def create_argparse():
     config_opts = parser.parse_args()
     return config_opts
     
-if __ name__ == "__main__":
+if __name__ == "__main__":
     config_opts = create_argparse()
     
