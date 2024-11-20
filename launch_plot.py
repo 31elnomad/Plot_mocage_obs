@@ -39,5 +39,6 @@ if __name__ == "__main__":
     config_opts = create_argparse()
     config_class = config(config_opts)
     print(config_class.__dict__)
+    print(config_class.config['global'])
     
     
