@@ -8,7 +8,7 @@ Created on the Wed Nov 20
 import argparse
 import os
 import sys
-sys.append(os.path.abspath("script"))
+sys.path.append(os.path.abspath("script"))
 from .read_config import config
 
 def create_argparse():
