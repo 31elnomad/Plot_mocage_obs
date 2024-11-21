@@ -77,7 +77,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Erreur lors de l'ajout des chemins ou des imports conditionnels : {e}")
         sys.exit(1)
-    plot_class = Plot(config_class)
+
     # Initialise la classe Plot
     try:
         plot_class = Plot(config_class)
