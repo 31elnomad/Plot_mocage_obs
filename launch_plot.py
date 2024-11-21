@@ -84,5 +84,6 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Erreur lors de l'initialisation de PlotMap : {e}")
             sys.exit(1)
+        plot_class.plot_para()
     else:
         raise Exception ("{} not implemented".format(config_class.config["global"]["type_plot"]))
