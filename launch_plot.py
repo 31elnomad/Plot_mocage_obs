@@ -9,8 +9,9 @@ import argparse
 import os
 import sys
 sys.path.append(os.path.abspath("script"))
+sys.path.append(os.path.abspath("script/plotscripts"))
 from read_config import Config
-
+from plot import Plot
 import os
 import sys
 import argparse
@@ -49,10 +50,6 @@ def add_path(config_class):
     """
     Ajoute les chemins nécessaires au PYTHONPATH et importe les modules conditionnels.
     """
-    sys.path.append(os.path.abspath("script/plotscripts"))
-    
-    from plot import Plot  # Assurez-vous que le fichier existe dans le chemin spécifié.
-
     # Vérifie si 'Netcdf' doit être ajouté au PYTHONPATH
     for plot in config_class.config["global"]["plot_list"].split(","):
         if "exp" in config_class.config[plot].get('listexp', ''):
