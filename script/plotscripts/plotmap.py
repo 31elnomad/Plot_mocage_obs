@@ -27,7 +27,7 @@ class PlotMap:
             from read_mocage import Netcdf_mocage
             self.nc_class = Netcdf_mocage(config_class)
         else:
-            self.nc_class = None"""self.plot_list = config_class.config["global"]["plot_list"].split(",")"""
+            self.nc_class = None"""
 
     def number_plot(self):
         print("map, order: {}".format(self.order))
