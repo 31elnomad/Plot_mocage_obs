@@ -11,7 +11,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 from read_config import Config
 
-class Netcdf(Config):
+class Netcdf_mocage(Config):
 
-  def __init__(self):
+  def __init__(self, config_opts):
     Config.__init__(self, config_opts)
