@@ -51,7 +51,8 @@ def add_path(config_class):
     Ajoute les chemins nécessaires au PYTHONPATH et importe les modules conditionnels.
     """
     # Vérifie si 'Netcdf' doit être ajouté au PYTHONPATH
-    for plot in config_class.config["global"]["plot_list"].split(","):
+    plot = config_class.config["global"]["type_plot"]
+    if plot in ["map", "cut"]:
         if "exp" in config_class.config[plot].get('listexp', ''):
             netcdf_path = os.path.abspath("script/Netcdf")
             if netcdf_path not in sys.path:
