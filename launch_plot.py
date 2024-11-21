@@ -73,7 +73,8 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Erreur lors de l'initialisation de Config : {e}")
         sys.exit(1)
-    
+
+    add_path(config_class)
     # Ajoute les chemins et initialise les modules conditionnels
     try:
         add_path(config_class)
