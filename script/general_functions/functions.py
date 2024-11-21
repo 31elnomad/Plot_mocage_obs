@@ -75,7 +75,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
     def listdict_param(case, listvar, listexp, listdate, nligne, ncol, x, y, z):
         if case == 1:
             var1 = 'var'
-            list1 = listvar[z]
+            list1 = [listvar[z]]
             print(len(list1), listvar)
             quit()
             var2 = 'exp'
