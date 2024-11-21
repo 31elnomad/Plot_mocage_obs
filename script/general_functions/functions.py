@@ -58,11 +58,11 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         return n
 
     def param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case):
-        param_plot_dict = {}
+        ouput_dict = {}
         for x in range(list_dim[1]):
             for y in range(list_dim[2]):
                 for z in range(list_dim[0]):
-                    param_plot_dict[str((x+1)*(y+1)*(z+1))] = listdict_param(case,
+                    ouput_dict[str((x+1)*(y+1)*(z+1))] = listdict_param(case,
                                                                              listvar,
                                                                              listexp,
                                                                              listdate,
