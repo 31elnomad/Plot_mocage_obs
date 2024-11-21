@@ -6,8 +6,8 @@ Created on Mon Nov 21
 @author: baclesm
 """
 class Plot:
+    
     def __init__(self, config_class):
-        self.plot_list = config_class.config["global"]["plot_list"].split(",")
         # Initialisation d'un indicateur pour savoir si une expérience est trouvée
         is_experiment_found = any(
             "exp" in config_class.config[plot]['listexp']
