@@ -6,6 +6,7 @@ Created on Mon Nov 21
 @author: baclesm
 """
 import collections
+import numpy as np
 
 def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
 
@@ -49,8 +50,16 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         if len(list) % number > 0:
           n = n + 1
         return n
+
+    def param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol):
+        para_plot_dict = {}
+        for n in range(np.prod(list_dim)):
+            print(n)
+        
     list_dim = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
-    print(list_dim)
+    param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol)
+    
+    return list_dim
 
 
   
