@@ -27,7 +27,10 @@ class PlotMap:
                                                   self.ncol
                                                  )
 
-        print(self.list_dim, self.output)
+    def plot_para(self):
+        print(len(self.output)) 
+
+        
         
 
             
