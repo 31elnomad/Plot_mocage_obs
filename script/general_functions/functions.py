@@ -110,88 +110,19 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         print(output)
         return output
    
-def __listdict_param__(list, i, j):
-    """
-    i: valeur de x ou y
-    j: valeur de ncol ou nligne
-    """
-    if len(list) - i * j == 1:
-        l = [list[j*x]]
-    elif len(list) - i * j <= j:
-        l = list[j*i:]
-    else:
-        l = list[j*i:j*(i+1)]
-    return l
+    def __listdict_param__(list, i, j):
+        """
+        i: valeur de x ou y
+        j: valeur de ncol ou nligne
+        """
+        if len(list) - i * j == 1:
+            l = [list[j*x]]
+        elif len(list) - i * j <= j:
+            l = list[j*i:]
+        else:
+            l = list[j*i:j*(i+1)]
+        return l
 
-            
-            
-            if case == 1:
-                var2 = 'exp'
-                var3 = 'date'
-                if len(listexp) - x * ncol == 1:
-                    list2 = [listexp[ncol*x]]
-                    nsubplot[0] = 1
-                elif len(listexp) - x * ncol <= ncol:
-                    list2 = listexp[ncol*x:]
-                    nsubplot[0] = len(list2)
-                else:
-                    list2 = listexp[ncol*x:ncol*(x+1)]
-                if len(listdate) - y * nligne == 1:
-                    list3 = [listdate[nligne*y]]
-                    nsubplot[1] = 1
-                elif len(listdate) - y * nligne <= nligne:
-                    list3 = listdate[nligne*y:]
-                    nsubplot[1] = len(list3)
-                else:
-                    list3 = listdate[nligne*y:nligne*(y+1)]
-            elif case == 2:
-                var2 = 'date'
-                var3 = 'exp'
-                if len(listdate) - x * ncol == 1:
-                    list2 = [listdate[ncol*x]]
-                    nsubplot[0] = 1
-                elif len(listdate) - x * ncol <= ncol:
-                    list2 = listdate[ncol*x:]
-                    nsubplot[0] = len(list2)
-                else:
-                    list2 = listdate[ncol*x:ncol*(x+1)]
-                if len(listexp) - y * nligne == 1:
-                    list3 = [listexp[nligne*y]]
-                    nsubplot[1] = 1
-                elif len(listexp) - y * nligne <= nligne:
-                    list3 = listexp[nligne*y:]
-                    nsubplot[1] = len(list3)
-                else:
-                    list3 = listexp[nligne*y:nligne*(y+1)]
-                
-        elif case == 3:
-            var1 = 'var'
-            list1 = [listvar[z]]
-            var2 = 'exp'
-            var3 = 'date'
-            if len(listexp) - x * ncol == 1:
-                list2 = [listexp[ncol*x]]
-                nsubplot[0] = 1
-            elif len(listexp) - x * ncol <= ncol:
-                list2 = listexp[ncol*x:]
-                nsubplot[0] = len(list2)
-            else:
-                list2 = listexp[ncol*x:ncol*(x+1)]
-            if len(listdate) - y * nligne == 1:
-                list3 = [listdate[nligne*y]]
-                nsubplot[1] = 1
-            elif len(listdate) - y * nligne <= nligne:
-                list3 = listdate[nligne*y:]
-                nsubplot[1] = len(list3)
-            else:
-                list3 = listdate[nligne*y:nligne*(y+1)]
-        output = [{var1: list1},
-                  {var2: list2},
-                  {var3: list3},
-                 nsubplot]
-        print(output)
-        return output
-        
     list_dim, case = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
     param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
     
