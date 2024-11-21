@@ -123,7 +123,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         return l
 
     list_dim, case = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
-    output, param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
+    output = param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
     
     return list_dim, output
 
