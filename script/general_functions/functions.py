@@ -76,12 +76,12 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         if case == 1:
             var1 = 'var'
             list1 = listvar[z]
+            print(len(list1))
+            quit()
             var2 = 'exp'
             var3 = 'date'
             if len(listexp[ncol*x:]) <= ncol:
                 list2 = listexp[ncol*x:]
-                print(list2)
-                quit()
             else:
                 list2 = listexp[ncol*x:ncol*(x+1)]
             if len(listdate[nligne*y:]) <= nligne:
