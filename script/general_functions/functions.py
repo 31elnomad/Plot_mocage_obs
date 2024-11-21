@@ -106,8 +106,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         output = [{var1: list1},
                   {var2: list2},
                   {var3: list3},
-                 nsubplot]
-        print(output)
+                 nsubplot, case]
         return output
    
     def __listdict_param__(list, i, j):
@@ -124,9 +123,9 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         return l
 
     list_dim, case = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
-    param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
+    output, param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
     
-    return list_dim
+    return list_dim, output
 
 
   
