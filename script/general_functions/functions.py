@@ -71,6 +71,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
                                                                              x,
                                                                              y,
                                                                              z)
+        return ouput_dict
 
     def listdict_param(case, listvar, listexp, listdate, nligne, ncol, x, y, z):
         nsubplot = [ncol, nligne]
@@ -123,9 +124,9 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         return l
 
     list_dim, case = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
-    output = param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
+    ouput_dict = param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
     
-    return list_dim, output
+    return list_dim, ouput_dict
 
 
   
