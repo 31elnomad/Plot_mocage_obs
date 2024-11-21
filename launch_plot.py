@@ -9,7 +9,7 @@ import argparse
 import os
 import sys
 sys.path.append(os.path.abspath("script"))
-from read_config import config
+from read_config import Config
 
 def create_argparse():
     parser = argparse.ArgumentParser()
@@ -37,7 +37,7 @@ def create_argparse():
     
 if __name__ == "__main__":
     config_opts = create_argparse()
-    config_class = config(config_opts)
+    config_class = Config(config_opts)
     print(config_class.__dict__)
     print(config_class.config['global'])
     
