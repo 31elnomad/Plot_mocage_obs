@@ -80,12 +80,14 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
             var3 = 'date'
             if len(listexp[ncol*x:]) <= ncol:
                 list2 = listexp[ncol*x:]
+                print(list2)
+                quit()
             else:
                 list2 = listexp[ncol*x:ncol*(x+1)]
             if len(listdate[nligne*y:]) <= nligne:
-                list3 = listexp[nligne*y:]
+                list3 = listdate[nligne*y:]
             else:
-                list3 = listexp[nligne*y:nligne*(y+1)]
+                list3 = listdate[nligne*y:nligne*(y+1)]
         output = [{var1: list1},
                   {var2: list2},
                   {var3: list3}]
