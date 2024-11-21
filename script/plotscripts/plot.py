@@ -6,13 +6,15 @@ Created on Mon Nov 21
 @author: baclesm
 """
 class Plot:
-
-  def __init__(self, config_class):
-    exp = False
-    for plot in config_class.config["global"]["plot_list"].split(","):
-        if "exp" in config_class.config[plot]['listexp']:
-          from read_mocage import Netcdf_mocage
-          exp = True
-    if exp is True:
-      nc_class = Netcdf_mocage(config_class)
-    
+    def __init__(self, config_class):
+        # Initialisation d'un indicateur pour savoir si une expérience est trouvée
+        is_experiment_found = any(
+            "exp" in config_class.config[plot]['listexp']
+            for plot in config_class.config["global"]["plot_list"].split(",")
+        )
+        if is_experiment_found:
+            # Import conditionnel
+            from read_mocage import Netcdf_mocage
+            self.nc_class = Netcdf_mocage(config_class)
+        else:
+            self.nc_class = None
