@@ -1,6 +1,6 @@
 import configparser
 
-class config:
+class Config:
 
   def __init__(self, config_opts):
     if config_opts.cfg is None:
