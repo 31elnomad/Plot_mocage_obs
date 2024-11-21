@@ -17,6 +17,7 @@ class PlotMap:
         self.listvar = self.config_plot['listvar'].split(',')
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
+        self.listdate = config_class.listdate
 
         list_of_plot(self.order,
                      self.listvar,
