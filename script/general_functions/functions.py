@@ -85,6 +85,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
             list1 = [listdate[z]]
         if case in [1, 6]:
             var2 = 'exp'
+            print(x)
             list2 = __listdict_param__(listexp, x, ncol)
         elif case in [2, 4]:
             var2 = 'date'
