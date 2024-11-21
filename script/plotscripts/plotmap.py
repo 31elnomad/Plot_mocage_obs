@@ -28,7 +28,10 @@ class PlotMap:
                                                  )
 
     def plot_para(self):
-        print(len(self.output)) 
+        for i in range(len(self.output)):
+            param_plot = self.output[str(i+1)]
+            print(param_plot)
+            quit()
 
         
         
