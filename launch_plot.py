@@ -11,44 +11,79 @@ import sys
 sys.path.append(os.path.abspath("script"))
 from read_config import Config
 
+import os
+import sys
+import argparse
+from configparser import ConfigParser
+
+# Importez Config, Plot et Netcdf_mocage uniquement si ces fichiers existent
+# Ajustez les imports si nécessaire pour votre structure de projet.
+
 def create_argparse():
-    parser = argparse.ArgumentParser()
+    """
+    Crée un parseur pour les arguments en ligne de commande.
+    """
+    parser = argparse.ArgumentParser(description="Script pour générer des plots à partir d'une configuration.")
+    
     parser.add_argument('-cfg', '--cfg',
-                        help='config_file',
+                        required=True,  # Le fichier de configuration est obligatoire
+                        help='Chemin vers le fichier de configuration',
                         metavar='cfg')
     parser.add_argument('-start', '--start',
-                         nargs='?', const=None,
-                         help='date du début',
-                         metavar='start')
+                        help="Date de début au format 'YYYYMMDDHH'",
+                        metavar='start')
     parser.add_argument('-end', '--end',
-                        nargs='?', const=None,
-                        help='date de fin',
+                        help="Date de fin au format 'YYYYMMDDHH'",
                         metavar='end')      
     parser.add_argument('-deltat', '--deltat',
-                        nargs='?', const=None,
-                        help='pas de temps',
+                        type=int,
+                        help="Pas de temps en heures (entier)",
                         metavar='deltat')
     parser.add_argument('-listdate', '--listdate',
-                        nargs='?', const=None,
-                        help='list de date',
+                        help="Liste de dates séparées par des virgules",
                         metavar='listdate')
-    config_opts = parser.parse_args()
-    return config_opts
+    
+    return parser.parse_args()
 
 def add_path(config_class):
+    """
+    Ajoute les chemins nécessaires au PYTHONPATH et importe les modules conditionnels.
+    """
     sys.path.append(os.path.abspath("script/plotscripts"))
-    from plot import Plot
+    
+    from plot import Plot  # Assurez-vous que le fichier existe dans le chemin spécifié.
+
+    # Vérifie si 'Netcdf' doit être ajouté au PYTHONPATH
     for plot in config_class.config["global"]["plot_list"].split(","):
-        if "exp" in config_class.config[plot]['listexp']:
-            if os.path.abspath("script/Netcdf") not in sys.path:
-                print("Ajout du répertoire 'Netcdf' au pythonpath")
-                sys.path.append(os.path.abspath("script/Netcdf"))  
+        if "exp" in config_class.config.get(plot, {}).get('listexp', ''):
+            netcdf_path = os.path.abspath("script/Netcdf")
+            if netcdf_path not in sys.path:
+                print("Ajout du répertoire 'Netcdf' au PYTHONPATH")
+                sys.path.append(netcdf_path)
+                # Import conditionnel du module
                 from read_mocage import Netcdf_mocage
-    
+
 if __name__ == "__main__":
+    # Crée et parse les arguments
     config_opts = create_argparse()
-    config_class = Config(config_opts)
-    add_path(config_class)
-    plot_class = Plot(config_class)
     
+    # Initialise la classe Config
+    try:
+        config_class = Config(config_opts)
+    except Exception as e:
+        print(f"Erreur lors de l'initialisation de Config : {e}")
+        sys.exit(1)
     
+    # Ajoute les chemins et initialise les modules conditionnels
+    try:
+        add_path(config_class)
+    except Exception as e:
+        print(f"Erreur lors de l'ajout des chemins ou des imports conditionnels : {e}")
+        sys.exit(1)
+    
+    # Initialise la classe Plot
+    try:
+        plot_class = Plot(config_class)
+    except Exception as e:
+        print(f"Erreur lors de l'initialisation de Plot : {e}")
+        sys.exit(1)
