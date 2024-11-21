@@ -11,7 +11,7 @@ import sys
 sys.path.append(os.path.abspath("script"))
 sys.path.append(os.path.abspath("script/plotscripts"))
 from read_config import Config
-from plot import Plot
+from plotmap import  PlotMap
 import os
 import sys
 import argparse
@@ -58,8 +58,6 @@ def add_path(config_class):
             if netcdf_path not in sys.path:
                 print("Ajout du répertoire 'Netcdf' au PYTHONPATH")
                 sys.path.append(netcdf_path)
-                # Import conditionnel du module
-                from read_mocage import Netcdf_mocage
 
 if __name__ == "__main__":
     # Crée et parse les arguments
@@ -78,10 +76,12 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Erreur lors de l'ajout des chemins ou des imports conditionnels : {e}")
         sys.exit(1)
-
-    # Initialise la classe Plot
-    try:
-        plot_class = Plot(config_class)
-    except Exception as e:
-        print(f"Erreur lors de l'initialisation de Plot : {e}")
-        sys.exit(1)
+    if config_class.config["global"]["type_plot"] == 'map':
+        # Initialise la classe PlotMap
+        try:
+            plot_class = Plot(config_class)
+        except Exception as e:
+            print(f"Erreur lors de l'initialisation de Plot : {e}")
+            sys.exit(1)
+    else:
+        raise Exception ("{} not implemented".format(config_class.config["global"]["type_plot"]))
