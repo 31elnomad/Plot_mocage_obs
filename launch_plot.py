@@ -8,8 +8,8 @@ Created on the Wed Nov 20
 import argparse
 import os
 import sys
-sys.path.append(os.path.abspath("script/Netcdf"))
-from read_mocage import Netcdf_mocage
+sys.path.append(os.path.abspath("script"))
+from read_config import Config
 
 def create_argparse():
     parser = argparse.ArgumentParser()
@@ -34,11 +34,15 @@ def create_argparse():
                         metavar='listdate')
     config_opts = parser.parse_args()
     return config_opts
+
+def add_path(config_class):
+    # exec_path = os.getcwd()
+    for plot in config_class.config["plot_list"].split(","):
+        print(config_class.config[plot]['listexp'])
     
 if __name__ == "__main__":
     config_opts = create_argparse()
-    config_class = Netcdf_mocage(config_opts)
-    print(config_class.__dict__)
-    print(config_class.config['global'])
+    config_class = Config(config_opts)
+    add_path(config_class)
     
     
