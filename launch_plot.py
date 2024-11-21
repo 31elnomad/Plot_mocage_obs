@@ -78,7 +78,6 @@ if __name__ == "__main__":
         sys.exit(1)
     if config_class.config["global"]["type_plot"] == 'map':
         # Initialise la classe PlotMap
-        plot_class = PlotMap(config_class)
         try:
             plot_class = PlotMap(config_class)
         except Exception as e:
