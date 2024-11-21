@@ -7,7 +7,7 @@ Created on Mon Nov 21
 """
 import collections
 
-class Plot:
+class PlotMap:
     
     def __init__(self, config_class):
         self.nligne = int(config_class.config['global']['nligne'])
