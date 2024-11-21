@@ -49,7 +49,8 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
         if len(list) % number > 0:
           n = n + 1
         return n
-    print([plotz, plotx, ploty])
+    list_dim = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
+    print(list_dim)
 
 
   
