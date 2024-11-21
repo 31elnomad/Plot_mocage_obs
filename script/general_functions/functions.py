@@ -53,7 +53,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
 
     def param_per_plot(list_dim, order, listvar, listexp, listdate, nligne, ncol):
         param_plot_dict = {}
-        for z, x, y in zip(np.arange(list_dim[0]), np.arange(list_dim[1]), np.arange(list_dim[2]))
+        for z, x, y in zip(np.arange(list_dim[0]), np.arange(list_dim[1]), np.arange(list_dim[2])):
             print(z, x, y)
         
     list_dim = number_plot(order, listvar, listexp, listdate, nligne, ncol)  
