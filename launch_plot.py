@@ -55,7 +55,7 @@ def add_path(config_class):
 
     # Vérifie si 'Netcdf' doit être ajouté au PYTHONPATH
     for plot in config_class.config["global"]["plot_list"].split(","):
-        if "exp" in config_class.config.get(plot, {}).get('listexp', ''):
+        if "exp" in config_class.config["plot"].get('listexp', ''):
             netcdf_path = os.path.abspath("script/Netcdf")
             if netcdf_path not in sys.path:
                 print("Ajout du répertoire 'Netcdf' au PYTHONPATH")
