@@ -27,7 +27,7 @@ class PlotMap:
                                                   self.ncol
                                                  )
 
-        print(self.listdim, self.output)
+        print(self.list_dim, self.output)
         
 
             
