@@ -33,8 +33,9 @@ class PlotMap:
 
     def number_plot(self):
         print("map, order: {}".format(self.order))
-        list_to_test = ['var', 'exp', 'date']
-        print(collections.Counter(list_to_test) == collections.Counter(self.order))
+        test = collections.Counter(['var', 'exp', 'date']) == collections.Counter(self.order)
+        if len(self.order) != 3 or test is False:
+            raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp' et 'date'.")
        
             
             
