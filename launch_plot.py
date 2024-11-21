@@ -37,7 +37,7 @@ def create_argparse():
 
 def add_path(config_class):
     # exec_path = os.getcwd()
-    for plot in config_class.config["plot_list"].split(","):
+    for plot in config_class.config["global"]["plot_list"].split(","):
         print(config_class.config[plot]['listexp'])
     
 if __name__ == "__main__":
