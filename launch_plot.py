@@ -10,6 +10,7 @@ import os
 import sys
 sys.path.append(os.path.abspath("script"))
 sys.path.append(os.path.abspath("script/plotscripts"))
+sys.path.append(os.path.abspath("script/general_functions"))
 from read_config import Config
 from plotmap import  PlotMap
 import os
