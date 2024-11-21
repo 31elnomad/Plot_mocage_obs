@@ -7,10 +7,11 @@ Created on Mon Nov 21
 """
 class Plot:
     def __init__(self, config_class):
+        self.plot_list = config_class.config["global"]["plot_list"].split(",")
         # Initialisation d'un indicateur pour savoir si une expérience est trouvée
         is_experiment_found = any(
             "exp" in config_class.config[plot]['listexp']
-            for plot in config_class.config["global"]["plot_list"].split(",")
+            for plot in self.plot_list
         )
         if is_experiment_found:
             # Import conditionnel
