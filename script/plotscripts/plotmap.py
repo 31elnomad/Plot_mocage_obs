@@ -19,13 +19,13 @@ class PlotMap:
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
 
-        list_of_plot(self.order,
-                     self.listvar,
-                     self.listexp,
-                     self.listdate,
-                     self.nligne,
-                     self.ncol
-                    )
+        self.list_dim, self.output = list_of_plot(self.order,
+                                                  self.listvar,
+                                                  self.listexp,
+                                                  self.listdate,
+                                                  self.nligne,
+                                                  self.ncol
+                                                 )
         
 
             
