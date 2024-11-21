@@ -36,6 +36,9 @@ class PlotMap:
         test = collections.Counter(['var', 'exp', 'date']) == collections.Counter(self.order)
         if len(self.order) != 3 or test is False:
             raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp' et 'date'.")
+        for element in self.order:
+            idx = self.order.index(element)
+            print(element, idx)
        
             
             
