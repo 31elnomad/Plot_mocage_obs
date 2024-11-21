@@ -74,6 +74,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
 
     def listdict_param(case, listvar, listexp, listdate, nligne, ncol, x, y, z):
         nsubplot = [ncol, nligne]
+        print(len(listdate) - y * nligne)
         if case == 1:
             var1 = 'var'
             list1 = [listvar[z]]
