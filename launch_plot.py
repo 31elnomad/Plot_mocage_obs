@@ -39,7 +39,8 @@ def add_path(config_class):
     # exec_path = os.getcwd()
     for plot in config_class.config["global"]["plot_list"].split(","):
         if "exp" in config_class.config[plot]['listexp']:
-            print(config_class.config[plot]['listexp'])
+            print("Ajout du répertoire 'Netcdf' au pythonpath")
+            sys.path.append(os.path.abspath("script/Netcdf"))            
     
 if __name__ == "__main__":
     config_opts = create_argparse()
