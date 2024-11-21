@@ -73,24 +73,32 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
                                                                              z)
 
     def listdict_param(case, listvar, listexp, listdate, nligne, ncol, x, y, z):
+        nsubplot = [ncol, nligne]
         if case == 1:
             var1 = 'var'
             list1 = [listvar[z]]
-            print(len(list1), listvar)
-            quit()
             var2 = 'exp'
             var3 = 'date'
-            if len(listexp[ncol*x:]) <= ncol:
+            if len(listexp) - x * ncol == 1:
+                list2 = [listexp[ncol*x]]
+                nsubplot[0] = 1
+            elif len(listexp) - x * ncol <= ncol:
                 list2 = listexp[ncol*x:]
+                nsubplot[0] = len(list2)
             else:
                 list2 = listexp[ncol*x:ncol*(x+1)]
-            if len(listdate[nligne*y:]) <= nligne:
+            if len(listdate) - y * nligne == 1:
+                list3 = [listexp[nligne*y]]
+                nsubplot[1] = 1
+            elif len(listdate) - y * nligne <= nligne:
                 list3 = listdate[nligne*y:]
+                nsubplot[1] = len(list3)
             else:
                 list3 = listdate[nligne*y:nligne*(y+1)]
         output = [{var1: list1},
                   {var2: list2},
-                  {var3: list3}]
+                  {var3: list3},
+                 nsubplot]
         print(output)
         return output
         
