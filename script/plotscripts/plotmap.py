@@ -16,6 +16,8 @@ class PlotMap:
         self.listvar = self.config_plot['listvar'].split(',')
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
+
+        self.number_plot()
         
         """# Initialisation d'un indicateur pour savoir si une expérience est trouvée
         is_experiment_found = any(
