@@ -10,6 +10,7 @@ import os
 import sys
 
 class Netcdf_mocage:
-
   def __init__(self, config_class):
-    print('ok')
+    for plot in config_class.config["global"]["plot_list"].split(","):
+      print(config_class.config[plot]["listexp"])
+      
