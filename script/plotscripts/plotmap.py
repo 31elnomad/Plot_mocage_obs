@@ -26,6 +26,8 @@ class PlotMap:
                                                   self.nligne,
                                                   self.ncol
                                                  )
+
+        print(self.listdim, self.output)
         
 
             
