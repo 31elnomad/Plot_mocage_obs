@@ -38,7 +38,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
             elif order[1] == 'exp':
                 plotx = cmp_nplot(listexp, ncol)
                 ploty = cmp_nplot(listvar, nligne)  
-      return [plotz, plotx, ploty]
+        return [plotz, plotx, ploty]
     
     def cmp_nplot(list, number):
         """
