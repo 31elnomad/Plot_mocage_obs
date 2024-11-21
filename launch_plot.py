@@ -36,7 +36,8 @@ def create_argparse():
     return config_opts
 
 def add_path(config_class):
-    # exec_path = os.getcwd()
+    sys.path.append(os.path.abspath("script/plotscripts"))
+    from plot import Plot
     for plot in config_class.config["global"]["plot_list"].split(","):
         if "exp" in config_class.config[plot]['listexp']:
             if os.path.abspath("script/Netcdf") not in sys.path:
@@ -48,5 +49,6 @@ if __name__ == "__main__":
     config_opts = create_argparse()
     config_class = Config(config_opts)
     add_path(config_class)
+    plot_class = Plot(config_class)
     
     
