@@ -79,9 +79,9 @@ if __name__ == "__main__":
     if config_class.config["global"]["type_plot"] == 'map':
         # Initialise la classe PlotMap
         try:
-            plot_class = Plot(config_class)
+            plot_class = PlotMap(config_class)
         except Exception as e:
-            print(f"Erreur lors de l'initialisation de Plot : {e}")
+            print(f"Erreur lors de l'initialisation de PlotMap : {e}")
             sys.exit(1)
     else:
         raise Exception ("{} not implemented".format(config_class.config["global"]["type_plot"]))
