@@ -8,10 +8,8 @@ Created on Mon Nov 21
 
 import os
 import sys
-sys.path.append(os.path.abspath("../")
-from read_config import Config
 
-class Netcdf_mocage(Config):
+class Netcdf_mocage:
 
-  def __init__(self, config_opts):
-    Config.__init__(self, config_opts)
+  def __init__(self, config_class):
+    print('ok')
