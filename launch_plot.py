@@ -41,7 +41,8 @@ def add_path(config_class):
         if "exp" in config_class.config[plot]['listexp']:
             if os.path.abspath("script/Netcdf") not in sys.path:
                 print("Ajout du répertoire 'Netcdf' au pythonpath")
-                sys.path.append(os.path.abspath("script/Netcdf"))            
+                sys.path.append(os.path.abspath("script/Netcdf"))  
+                from read_mocage import Netcdf_mocage
     
 if __name__ == "__main__":
     config_opts = create_argparse()
