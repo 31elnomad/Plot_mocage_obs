@@ -24,6 +24,7 @@ class PlotMap:
                      self.listdate,
                      self.nligne,
                      self.ncol
+                    )
         
 
             
