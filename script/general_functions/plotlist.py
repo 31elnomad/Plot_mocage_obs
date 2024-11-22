@@ -143,6 +143,8 @@ def __listdict_param__(list, i, j):
         l = list[j*i:]
     else:
         l = list[j*i:j*(i+1)]
+    while len(l) < j:
+            l.append(None)
     return l
 
 
