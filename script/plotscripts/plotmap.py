@@ -70,7 +70,8 @@ class PlotMap:
                                     subplot_kw = subplot_kw)
 
     def create_list_param(self):
-        print(self.param_one_plot)
+        for ele1, ele2 in zip(self.param_one_plot[1], self.param_one_plot[2]):
+            print(f"${ele1} for 1 {ele2}")
         quit()
         list_param = np.empty((self.ncol,self.nligne))
         list_param[:] = None
