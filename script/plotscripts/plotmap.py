@@ -111,13 +111,13 @@ class PlotMap:
                 self.exp = List[1]
             elif List[-1] in ['map_3', 'map_4']:
                 self.exp = List[2]
-            if List[-1] in ['map_2', 'map_4]:
+            if List[-1] in ['map_2', 'map_4']:
                 self.date = List[0] 
             elif List[-1] in ['map_1', 'map_3']:
                 self.date = List[1] 
             elif List[-1] in ['map_5', 'map_6']:
                 self.date = List[2]
-            if List[-1] in ['map_3', 'map_5]:
+            if List[-1] in ['map_3', 'map_5']:
                 self.var = List[0] 
             elif List[-1] in ['map_4', 'map_6']:
                 self.var = List[1] 
