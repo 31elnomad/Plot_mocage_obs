@@ -117,7 +117,7 @@ class list_of_plot:
                       {var3: list3},
                       case]
             return output
-        output_dict = param_per_plot()
+        output_dict = param_per_plot(self)
         return output_dict
 
 def cmp_nplot(list, number):
