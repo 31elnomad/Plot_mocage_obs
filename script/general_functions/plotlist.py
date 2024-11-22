@@ -79,9 +79,10 @@ class list_of_plot:
             for x in range(self.list_dim[0]):
                 for y in range(self.list_dim[1]):
                     for z in range(self.list_dim[2]):
-                        ouput_dict[str((x+1)*(y+1)*(z+1))] = self.listdict_param(x,
-                                                                                 y,
-                                                                                 z)
+                        ouput_dict[str((x+1)*(y+1)*(z+1))] = listdict_param(self,
+                                                                            x,
+                                                                            y,
+                                                                            z)
             return output_dict
     
         def listdict_param(self, x, y, z):
