@@ -106,7 +106,7 @@ class PlotMap:
     
                 # Affichage pour vérification
                 print(f"Paramètre ajouté : {list_param_plot}")
-    
+        print(self.param)
         # Quitter proprement si nécessaire
         quit()
 
