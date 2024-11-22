@@ -77,7 +77,7 @@ class PlotMap:
             keys = list(self.param_one_plot[i].keys())[0]
             tmp = self.param_one_plot[i][keys]
             for j in range(len(tmp)):
-                concat.append(tmp)
+                concat.append(tmp[j])
         print(concat)
 
         quit()
