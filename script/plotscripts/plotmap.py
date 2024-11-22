@@ -69,28 +69,48 @@ class PlotMap:
                                     sharey = True,
                                     subplot_kw = subplot_kw)
 
-    def create_list_param(self):
-        keys1 = list(self.param_one_plot[0].keys())[0]
-        keys2 = list(self.param_one_plot[1].keys())[0]
-        keys3 = list(self.param_one_plot[2].keys())[0]
-        if len(self.param_one_plot) == 5:
-            keys4 = list(self.param_one_plot[3].keys())[0]
-        list_param_plot = np.empty_like(self.param_one_plot)
-        list_param_plot[:] = None
-        list_param_plot = list_param_plot.tolist()
-        self.param = []
-        for j in range(self.nligne):
-            for i in range(self.ncol):
-                print(self.param_one_plot[0][keys1][i])
-                list_param_plot[0] = self.param_one_plot[0][keys1][i]
-                list_param_plot[1] = self.param_one_plot[1][keys2][j]
-                list_param_plot[2] = self.param_one_plot[2][keys3][0]
-                list_param_plot[-1] = self.param_one_plot[-1]
-                if len(self.param_one_plot) == 5:
-                    list_param_plot[3] = self.param_one_plot[3][keys4][0]
-                self.param.append(list_param_plot)
-                print(self.param)
-            quit()
+   import numpy as np
+
+def create_list_param(self):
+    # Extraction des clés de chaque dictionnaire
+    keys1 = list(self.param_one_plot[0].keys())[0]
+    keys2 = list(self.param_one_plot[1].keys())[0]
+    keys3 = list(self.param_one_plot[2].keys())[0]
+
+    # Gestion conditionnelle de la 4e clé si nécessaire
+    keys4 = None
+    if len(self.param_one_plot) == 5:
+        keys4 = list(self.param_one_plot[3].keys())[0]
+
+    # Initialisation de self.param
+    self.param = []
+
+    # Boucles pour construire list_param_plot
+    for j in range(self.nligne):
+        for i in range(self.ncol):
+            # Créer une nouvelle liste à chaque itération
+            list_param_plot = [None] * len(self.param_one_plot)
+
+            # Remplissage des paramètres en fonction des indices
+            list_param_plot[0] = self.param_one_plot[0][keys1][i]  # Variable selon 'i'
+            list_param_plot[1] = self.param_one_plot[1][keys2][j]  # Variable selon 'j'
+            list_param_plot[2] = self.param_one_plot[2][keys3][0]  # Premier élément (fixe)
+
+            # Ajout du dernier paramètre commun
+            list_param_plot[-1] = self.param_one_plot[-1]
+
+            # Gestion conditionnelle du 4e paramètre
+            if len(self.param_one_plot) == 5:
+                list_param_plot[3] = self.param_one_plot[3][keys4][0]  # Premier élément (fixe)
+
+            # Ajouter la liste au résultat final
+            self.param.append(list_param_plot)
+
+            # Affichage pour vérification
+            print(f"Paramètre ajouté : {list_param_plot}")
+
+    # Quitter proprement si nécessaire
+    quit()
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
