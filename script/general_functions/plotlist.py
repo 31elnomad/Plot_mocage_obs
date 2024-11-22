@@ -52,7 +52,7 @@ class list_of_plot:
                     plotx = cmp_nplot(self.listdate, self.ncol)
                     ploty = cmp_nplot(self.listexp, self.nligne)  
                     self.case = 2
-            elif order[2] == 'exp':
+            elif self.order[2] == 'exp':
                 plotz = len(self.listexp)
                 if self.order[0] == 'var':
                     plotx = cmp_nplot(self.listvar, self.ncol)
