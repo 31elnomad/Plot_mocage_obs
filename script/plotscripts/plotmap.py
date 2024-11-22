@@ -5,8 +5,10 @@ Created on Mon Nov 21
 
 @author: baclesm
 """
-
-from functions import list_of_plot
+import multiprocessing
+from multiprocessing import Process, Pool, Array
+import numpy as np
+from plotlist import list_of_plot
 
 class PlotMap:
     
@@ -18,19 +20,29 @@ class PlotMap:
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
+        self.boundary = cofig_class.config['map']['boundary'].split('/')
+        self.listlev = self.boundary[2].split(',')
+        if self.listlev[0] == 'None':
+            self.listlev = None
+        elif self.listlev[0] != 'None' and self.listlev[1] == 'None':
+            self.listlev = [int(self.listlev[0]]
+        elif self.listlev[0] != 'None' and self.listlev[1] != 'None':
+            if self.listlev[0] == self.listlev[1]:
+                self.listlev = [int(self.listlev[0]]
+            else:
+                self.listlev = np.arange(int(self.listlev[0]), int(self.listlev[1]))
+        
         self.list_dim, self.output = list_of_plot(self.order,
                                                   self.listvar,
                                                   self.listexp,
                                                   self.listdate,
+                                                  self.listlev,
                                                   self.nligne,
                                                   self.ncol
                                                  )
 
-    def plot_para(self):
-        for i in range(len(self.output)):
-            param_plot = self.output[str(i+1)]
-            print(param_plot)
-            quit()
+
+    
 
         
         
