@@ -101,8 +101,9 @@ class PlotMap:
 
     def plot_para(self, List):
         self.cut_list(List)
-        if self.exp[0] in ['exp']:
-            print(self.exp)
+        if self.exp is not None:
+            if self.exp[0] in ['exp']:
+                print(self.exp)
         
 
     def cut_list(self, List):
