@@ -25,10 +25,10 @@ class PlotMap:
         if self.listlev[0] == 'None':
             self.listlev = None
         elif self.listlev[0] != 'None' and self.listlev[1] == 'None':
-            self.listlev = [int(self.listlev[0]]
+            self.listlev = [int(self.listlev[0])]
         elif self.listlev[0] != 'None' and self.listlev[1] != 'None':
             if self.listlev[0] == self.listlev[1]:
-                self.listlev = [int(self.listlev[0]]
+                self.listlev = [int(self.listlev[0])]
             else:
                 self.listlev = np.arange(int(self.listlev[0]), int(self.listlev[1]))
         
