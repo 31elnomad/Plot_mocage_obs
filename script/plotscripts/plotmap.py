@@ -32,16 +32,19 @@ class PlotMap:
             else:
                 self.listlev = np.arange(int(self.listlev[0]), int(self.listlev[1]))
         
-        param_plot_obj = list_of_plot(self.order,
-                                      self.listvar,
-                                      self.listexp,
-                                      self.listdate,
-                                      self.listlev,
-                                      self.nligne,
-                                      self.ncol,
-                                      'map'
-                                      )
-        print(param_plot_obj.__dict__)
+        self.param_plot_obj = list_of_plot(self.order,
+                                          self.listvar,
+                                          self.listexp,
+                                          self.listdate,
+                                          self.listlev,
+                                          self.nligne,
+                                          self.ncol,
+                                          'map'
+                                          )
+
+    def create_list(self, param_plot_unique):
+        
+       
 
 
     
