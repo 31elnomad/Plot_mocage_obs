@@ -68,11 +68,16 @@ class PlotMap:
                                     sharex = True,
                                     sharey = True,
                                     subplot_kw = subplot_kw)
+
+    def create_list_param(self):
+        print(self.param_one_plot)
             
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
         self.create_fig()
+        self.create_list_param()
+        
 
             
        
