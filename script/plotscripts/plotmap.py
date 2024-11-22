@@ -89,7 +89,7 @@ class PlotMap:
                 if len(self.param_one_plot) == 5:
                     list_param_plot[3] = self.param_one_plot[3][keys4][0]
                 self.param.append(list_param_plot)
-            print(self.param)
+                print(self.param)
             quit()
 
     def __main_plotmap__(self, param_one_plot):
