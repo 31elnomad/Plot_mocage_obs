@@ -70,7 +70,7 @@ class PlotMap:
                                     subplot_kw = subplot_kw)
 
     def create_list_param(self):
-        print(list(self.param_one_plot.keys()))
+        print(self.param_one_plot.keys)
 
         quit()
             
