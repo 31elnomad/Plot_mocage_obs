@@ -72,9 +72,6 @@ class PlotMap:
     def create_list_param(self):
         print(self.param_one_plot)
         quit()
-        for i in range(len(self.param_one_plot[0], self.param_one_plot[2]):
-            print(ele1, ele2)
-        quit()
         list_param = np.empty((self.ncol,self.nligne))
         list_param[:] = None
         concat = []
