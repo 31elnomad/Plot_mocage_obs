@@ -47,7 +47,7 @@ class PlotMap:
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
-        self.create_list
+        self.create_list()
 
             
        
