@@ -78,7 +78,7 @@ class PlotMap:
             keys4 = list(self.param_one_plot[3].keys())[0]
         list_param_plot = np.empty_like(self.param_one_plot)
         list_param_plot[:] = None
-        list_param_plot = list_param_plot.totlist()
+        list_param_plot = list_param_plot.tolist()
         self.param = np.empty(self.nligne*self.ncol)
         self.param = self.param.tolist()
         for j in range(self.nligne):
