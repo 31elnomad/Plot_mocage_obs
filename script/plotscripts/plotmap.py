@@ -71,19 +71,23 @@ class PlotMap:
 
     def create_list_param(self):
         print(self.param_one_plot[0])
-        quit()
-        list_param = np.empty((self.ncol,self.nligne))
-        list_param[:] = None
-        concat = []
-        for i in range(len(self.param_one_plot)-1):
-            keys = list(self.param_one_plot[i].keys())[0]
-            tmp = self.param_one_plot[i][keys]
-            for j in range(len(tmp)):
-                concat.append(tmp[j])
-        print(concat)
-
-        quit()
-            
+        keys1 = list(self.param_one_plot[0].keys())[0]
+        keys2 = list(self.param_one_plot[1].keys())[0]
+        keys3 = list(self.param_one_plot[2].keys())[0]
+        if len(self.param_one_plot) == 5:
+            keys4 = list(self.param_one_plot[3].keys())[0]
+        list_param_plot = np.empty_like(self.param_one_plot)
+        self.param = np.empty(self.nligne*self.ncol)
+        for j in range(self.nligne):
+            for i in range(self.ncol):
+                list_param_plot[0] = self.param_one_plot[0][keys1][i]
+                list_param_plot[1] = self.param_one_plot[1][keys2][j]
+                list_param_plot[2] = self.param_one_plot[2][keys3][0]
+                list_param_plot[-1] = self.param_one_plot[-1]
+                if len(self.param_one_plot) == 5:
+                    list_param_plot[3] = self.param_one_plot[3][keys4][0]
+                self.param[self.ncol*j + i] = list_param_plot
+        print(self.param)
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
