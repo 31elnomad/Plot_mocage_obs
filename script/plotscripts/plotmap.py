@@ -38,7 +38,8 @@ class PlotMap:
                                                   self.listdate,
                                                   self.listlev,
                                                   self.nligne,
-                                                  self.ncol
+                                                  self.ncol,
+                                                  'map'
                                                  )
 
 
