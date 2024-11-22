@@ -42,8 +42,7 @@ class PlotMap:
                                           'map'
                                           )
 
-    def create_list(self, param_plot_unique):
-        
+            
        
 
 
