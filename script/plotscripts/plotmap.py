@@ -78,6 +78,8 @@ class PlotMap:
             keys4 = list(self.param_one_plot[3].keys())[0]
         list_param_plot = np.empty_like(self.param_one_plot)
         self.param = np.empty(self.nligne*self.ncol)
+        self.param[:] = None
+        self.param = self.param.tolist()
         for j in range(self.nligne):
             for i in range(self.ncol):
                 list_param_plot[0] = self.param_one_plot[0][keys1][i]
