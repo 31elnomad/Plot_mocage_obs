@@ -100,7 +100,7 @@ class PlotMap:
                 print(f"Paramètre ajouté : {list_param_plot}")
 
     def plot_para(self, List):
-        self.cut_list()
+        self.cut_list(List)
         print(self.exp, self.date, self.var)
 
     def cut_list(self, List):
