@@ -70,7 +70,6 @@ class PlotMap:
                                     subplot_kw = subplot_kw)
 
     def create_list_param(self):
-        print(self.param_one_plot[0])
         keys1 = list(self.param_one_plot[0].keys())[0]
         keys2 = list(self.param_one_plot[1].keys())[0]
         keys3 = list(self.param_one_plot[2].keys())[0]
@@ -83,9 +82,9 @@ class PlotMap:
         self.param = self.param.tolist()
         for j in range(self.nligne):
             for i in range(self.ncol):
-                print(self.param_one_plot[0][keys1])
-                quit()
                 list_param_plot[0] = self.param_one_plot[0][keys1][i]
+                print(list_param_plot[0], i)
+                quit()
                 list_param_plot[1] = self.param_one_plot[1][keys2][j]
                 list_param_plot[2] = self.param_one_plot[2][keys3][0]
                 list_param_plot[-1] = self.param_one_plot[-1]
