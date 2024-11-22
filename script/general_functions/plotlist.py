@@ -19,7 +19,7 @@ class list_of_plot:
         self.nligne = nligne
         self.ncol = ncol
         self.plot_type = plot_type
-        self.output_dict = self.compute_param_plot()
+        self.list_dim, self.output_dict = self.compute_param_plot()
 
     def compute_param_plot(self):
         print("order: {}".format(self.order))
@@ -72,7 +72,7 @@ class list_of_plot:
                     plotx = cmp_nplot(self.listexp, self.ncol)
                     ploty = cmp_nplot(self.listvar, self.nligne)  
                     self.case = 6
-            list_dim = [plotx, ploty, plotz]
+            self.list_dim = [plotx, ploty, plotz]
     
         def param_per_plot(self):
             ouput_dict = {}
