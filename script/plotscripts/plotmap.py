@@ -70,9 +70,16 @@ class PlotMap:
                                     subplot_kw = subplot_kw)
 
     def create_list_param(self):
+        list_param = np.empty((self.ncol,self.nligne))
+        list_param[:] = None
+        concat = []
         for i in range(len(self.param_one_plot)-1):
             keys = list(self.param_one_plot[i].keys())[0]
-            print(self.param_one_plot[i][keys])
+            tmp = self.param_one_plot[i][keys]
+            for j in range(len(tmp)):
+                concat.append(tmp)
+        concat = np.array(concat)
+        print(concat)
 
         quit()
             
