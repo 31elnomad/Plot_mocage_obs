@@ -82,7 +82,7 @@ class PlotMap:
         self.param = self.param.tolist()
         for j in range(self.nligne):
             for i in range(self.ncol):
-                print(self.param_one_plot[0])
+                print(self.param_one_plot[0][keys1])
                 quit()
                 list_param_plot[0] = self.param_one_plot[0][i]
 
