@@ -75,7 +75,7 @@ class list_of_plot:
             self.list_dim = [plotx, ploty, plotz]
     
         def param_per_plot(self):
-            ouput_dict = {}
+            output_dict = {}
             for x in range(self.list_dim[0]):
                 for y in range(self.list_dim[1]):
                     for z in range(self.list_dim[2]):
