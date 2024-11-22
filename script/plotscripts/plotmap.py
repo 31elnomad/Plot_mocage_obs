@@ -71,7 +71,7 @@ class PlotMap:
 
     def create_list_param(self):
         for i in range(len(self.param_one_plot)):
-            print(list(self.param_one_plot[i].keys))
+            print(list(self.param_one_plot[i].keys()))
 
         quit()
             
