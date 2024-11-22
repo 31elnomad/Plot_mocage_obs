@@ -43,7 +43,8 @@ class PlotMap:
                                           )
 
     def create_list(self):
-        print(self.param_one_plot)
+        print(self.param_one_plot[0])
+        quit()
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
