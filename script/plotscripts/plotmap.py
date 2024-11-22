@@ -18,6 +18,7 @@ from plotlist import list_of_plot
 class PlotMap:
     
     def __init__(self, config_class):
+        self.config_class = config_class
         self.nligne = int(config_class.config['global']['nligne'])
         self.ncol = int(config_class.config['global']['ncol'])
         self.config_plot = config_class.config['map']
@@ -105,7 +106,7 @@ class PlotMap:
         if self.exp is not None:
             if self.exp[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
-                nc_mocage = Netcdf_mocage(config_class,
+                nc_mocage = Netcdf_mocage(self.config_class,
                                           self.exp,
                                           self.date,
                                           self.var)
