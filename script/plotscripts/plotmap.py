@@ -32,7 +32,7 @@ class PlotMap:
             else:
                 self.listlev = np.arange(int(self.listlev[0]), int(self.listlev[1]))
         
-        list_of_plot(self.order,
+        a = list_of_plot(self.order,
                                                   self.listvar,
                                                   self.listexp,
                                                   self.listdate,
