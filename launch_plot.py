@@ -86,6 +86,6 @@ if __name__ == "__main__":
             sys.exit(1)
         param_plot = plot_class.param_plot_obj.output_dict
         for p in range(len(param_plot)):
-            plot_class.create_list(param_plot[str(p+1)])
+            plot_class.__main_plotmap__(param_plot[str(p+1)])
     else:
         raise Exception ("{} not implemented".format(config_class.config["global"]["type_plot"]))
