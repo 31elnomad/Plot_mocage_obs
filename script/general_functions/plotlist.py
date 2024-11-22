@@ -144,7 +144,7 @@ def __listdict_param__(list, i, j):
     else:
         l = list[j*i:j*(i+1)]
     while len(l) < j:
-            l.append(None)
+            l.append('None':'None')
     return l
 
 
