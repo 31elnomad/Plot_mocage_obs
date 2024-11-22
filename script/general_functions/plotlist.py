@@ -116,7 +116,7 @@ class list_of_plot:
             output = [{var1: list1},
                       {var2: list2},
                       {var3: list3},
-                      case]
+                      'map_{}'.format(str(self.case))]
             return output
         number_plot(self)
         output_dict = param_per_plot(self)
