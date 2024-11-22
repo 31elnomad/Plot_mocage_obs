@@ -75,15 +75,14 @@ class list_of_plot:
             self.list_dim = [plotx, ploty, plotz]
     
         def param_per_plot(self):
-            ouput_dict = {}
+            self.ouput_dict = {}
             for x in range(self.list_dim[0]):
                 for y in range(self.list_dim[1]):
                     for z in range(self.list_dim[2]):
-                        ouput_dict[str((x+1)*(y+1)*(z+1))] = listdict_param(self,
+                        self.ouput_dict[str((x+1)*(y+1)*(z+1))] = listdict_param(self,
                                                                             x,
                                                                             y,
                                                                             z)
-            return output_dict
     
         def listdict_param(self, x, y, z):
             if self.case in [1, 2]:
@@ -119,8 +118,7 @@ class list_of_plot:
                       'map_{}'.format(str(self.case))]
             return output
         number_plot(self)
-        output_dict = param_per_plot(self)
-        return output_dict
+        param_per_plot(self)
 
 def cmp_nplot(list, number):
     """
