@@ -45,7 +45,7 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
             if test is False:
                 raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp', 'lev' et 'date'.")
             ####fonction listplot_2d
-        return output_dict
+        return list_dim, output_dict
 
     def __order_length_3__(order, listvar, listexp, listdate, nligne, ncol):  
 
@@ -135,10 +135,10 @@ def list_of_plot(order, listvar, listexp, listdate, nligne, ncol):
             
         list_dim, case = number_plot_3(order, listvar, listexp, listdate, nligne, ncol)  
         ouput_dict = param_per_plot_3(list_dim, order, listvar, listexp, listdate, nligne, ncol, case)
-        return output_dict
+        return list_dim, output_dict
         
-    output_dict = number_plot(order, listvar, listexp, listdate, nligne, ncol)
-    return ouput_dict
+    output_dict, list_dim = number_plot(order, listvar, listexp, listdate, nligne, ncol)
+    return list_dim, ouput_dict
 
 
   
