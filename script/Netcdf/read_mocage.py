@@ -11,6 +11,6 @@ import sys
 
 class Netcdf_mocage:
 
-    def __init__(self, config_class, param_plot):
+    def __init__(self, config_class, exp, date, var):
       print(config_class.config['exp'][self.exp])
     
