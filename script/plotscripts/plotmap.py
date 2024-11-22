@@ -86,12 +86,10 @@ class PlotMap:
                 list_param_plot[1] = self.param_one_plot[1][keys2][j]
                 list_param_plot[2] = self.param_one_plot[2][keys3][0]
                 list_param_plot[-1] = self.param_one_plot[-1]
-                print(list_param_plot)
-                quit()
                 if len(self.param_one_plot) == 5:
                     list_param_plot[3] = self.param_one_plot[3][keys4][0]
                 self.param[self.ncol*j + i] = list_param_plot
-        print(self.param)
+                print(self.ncol*j + i, self.param)
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
