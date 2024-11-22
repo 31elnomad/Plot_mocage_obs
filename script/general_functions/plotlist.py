@@ -19,9 +19,9 @@ class list_of_plot:
         self.nligne = nligne
         self.ncol = ncol
         self.plot_type = plot_type
-        self.output_dict = self.list_of_plot()
+        self.output_dict = self.compute_param_plot()
 
-    def list_of_plot(self):
+    def compute_param_plot(self):
         print("order: {}".format(self.order))
         if self.plot_type in ['map']:
             if len(self.order) == 3:
