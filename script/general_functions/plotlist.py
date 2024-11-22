@@ -72,7 +72,7 @@ class list_of_plot:
                     plotx = cmp_nplot(self.listexp, self.ncol)
                     ploty = cmp_nplot(self.listvar, self.nligne)  
                     self.case = 6
-            self.list_dim = [plotx, ploty, plotz]
+            list_dim = [plotx, ploty, plotz]
     
         def param_per_plot(self):
             ouput_dict = {}
@@ -117,6 +117,7 @@ class list_of_plot:
                       {var3: list3},
                       case]
             return output
+        number_plot(self)
         output_dict = param_per_plot(self)
         return output_dict
 
