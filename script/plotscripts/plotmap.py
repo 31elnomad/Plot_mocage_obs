@@ -78,7 +78,6 @@ class PlotMap:
             tmp = self.param_one_plot[i][keys]
             for j in range(len(tmp)):
                 concat.append(tmp)
-        concat = np.array(concat)
         print(concat)
 
         quit()
