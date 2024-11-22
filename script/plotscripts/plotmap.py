@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 from plotlist import list_of_plot
 
+
 class PlotMap:
     
     def __init__(self, config_class):
@@ -103,7 +104,11 @@ class PlotMap:
         self.cut_list(List)
         if self.exp is not None:
             if self.exp[0] in ['exp']:
-                print(self.exp)
+                from read_mocage import Netcdf_mocage
+                nc_mocage = Netcdf_mocage(config_class,
+                                          self.exp,
+                                          self.date,
+                                          self.var)
         
 
     def cut_list(self, List):
