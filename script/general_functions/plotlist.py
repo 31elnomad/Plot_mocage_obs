@@ -25,12 +25,12 @@ class list_of_plot:
         print("order: {}".format(self.order))
         if self.plot_type in ['map']:
             if len(self.order) == 3:
-                test = collections.Counter(['var', 'exp', 'date']) == collections.Counter(order)
+                test = collections.Counter(['var', 'exp', 'date']) == collections.Counter(self.order)
                 if test is False:
                     raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp' et 'date'.")
                 output_dcict = self.__order_len_3_map__()
             elif len(order) == 4:
-                test = collections.Counter(['var', 'exp', 'date', 'lev']) == collections.Counter(order)
+                test = collections.Counter(['var', 'exp', 'date', 'lev']) == collections.Counter(self.order)
                 if test is False:
                     raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp', 'lev' et 'date'.")
                 raise Exception ("{} n'est pas implémenté dans la fonction list_of_plot (script/general_functions/plotlist.py)".format(self.order))
