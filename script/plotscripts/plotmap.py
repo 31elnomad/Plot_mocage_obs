@@ -100,8 +100,33 @@ class PlotMap:
                 print(f"Paramètre ajouté : {list_param_plot}")
 
     def plot_para(self, List):
-        print(List)
-        return 'ok'
+        self.cut_list()
+        print(self.exp, self.date, self.var)
+
+    def cut_list(self, List):
+        if len(List) == 4:
+            if List[-1] in ['map_1', 'map_6']:
+                self.exp = List[0]
+            elif List[-1] in ['map_2', 'map_5']:
+                self.exp = List[1]
+            elif List[-1] in ['map_3', 'map_4']:
+                self.exp = List[2]
+            if List[-1] in ['map_2', 'map_4]:
+                self.date = List[0] 
+            elif List[-1] in ['map_1', 'map_3']:
+                self.date = List[1] 
+            elif List[-1] in ['map_5', 'map_6']:
+                self.date = List[2]
+            if List[-1] in ['map_3', 'map_5]:
+                self.var = List[0] 
+            elif List[-1] in ['map_4', 'map_6']:
+                self.var = List[1] 
+            elif List[-1] in ['map_1', 'map_2']:
+                self.var = List[2] 
+        else:
+            raise Exception("List avec 5 éléments pas encore codé dnas plotmap.py")
+
+
         
 
     def __main_plotmap__(self, param_one_plot):
