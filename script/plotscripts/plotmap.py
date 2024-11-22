@@ -20,7 +20,7 @@ class PlotMap:
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
-        self.boundary = cofig_class.config['map']['boundary'].split('/')
+        self.boundary = config_class.config['map']['boundary'].split('/')
         self.listlev = self.boundary[2].split(',')
         if self.listlev[0] == 'None':
             self.listlev = None
