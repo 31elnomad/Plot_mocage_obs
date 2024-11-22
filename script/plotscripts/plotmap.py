@@ -11,6 +11,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
 from plotlist import list_of_plot
 
 class PlotMap:
