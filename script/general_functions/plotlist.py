@@ -29,7 +29,7 @@ class list_of_plot:
                 if test is False:
                     raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp' et 'date'.")
                 output_dcict = self.__order_len_3_map__()
-            elif len(order) == 4:
+            elif len(self.order) == 4:
                 test = collections.Counter(['var', 'exp', 'date', 'lev']) == collections.Counter(self.order)
                 if test is False:
                     raise Exception("Problème avec la variable order dans la section map. Doit contenir 'var', 'exp', 'lev' et 'date'.")
