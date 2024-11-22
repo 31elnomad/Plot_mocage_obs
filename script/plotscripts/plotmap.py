@@ -8,6 +8,9 @@ Created on Mon Nov 21
 import multiprocessing
 from multiprocessing import Process, Pool, Array
 import numpy as np
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 from plotlist import list_of_plot
 
 class PlotMap:
@@ -20,7 +23,7 @@ class PlotMap:
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
-        self.boundary = config_class.config['map']['boundary'].split('/')
+        self.boundary = self.config_plot['boundary'].split('/')
         self.listlev = self.boundary[2].split(',')
         if self.listlev[0] == 'None':
             self.listlev = None
@@ -42,13 +45,33 @@ class PlotMap:
                                           'map'
                                           )
 
-    def create_list(self):
-        print(self.param_one_plot[0])
-        quit()
+    def create_fig(self):
+        figsize = self.config_plot['figsize'].split(',')
+        figsize = (int(figsize[0]), int(figsize[1]))
+        self.proj = self.config_plot['projection'].split(':')
+        if self.proj[0] in ['PlateCarree']:
+            subplot_kw = {'projection': ccrs.PlateCarree(
+                            central_longitude=float(self.proj[1]))
+                        }
+        elif self.proj[0] in ['Orthographic']:
+            subplot_kw={'projection': ccrs.Orthographic(
+                            central_longitude=float(self.proj[1].split('/')[0]),
+                            central_latitude=float(self.proj[1].split('/')[1]))
+                        }
+        else:
+            raise Exception("{} projection is unknown".format(self.proj[0]))
+        self.fig, self.axs = plt.subplots(
+                                    ncols = self.ncol,
+                                    nrows = self.nligne,
+                                    figsize = figsize,
+                                    sharex = True,
+                                    sharey = True,
+                                    subplot_kw = subplot_kw)
+            
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
-        self.create_list()
+        self.create_fig()
 
             
        
