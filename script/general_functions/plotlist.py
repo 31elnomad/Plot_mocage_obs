@@ -19,7 +19,7 @@ class list_of_plot:
         self.nligne = nligne
         self.ncol = ncol
         self.plot_type = plot_type
-        self.list_dim, self.output_dict = self.compute_param_plot()
+        self.output_dict = self.compute_param_plot()
 
     def compute_param_plot(self):
         print("order: {}".format(self.order))
