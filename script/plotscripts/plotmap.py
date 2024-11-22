@@ -69,8 +69,6 @@ class PlotMap:
                                     sharey = True,
                                     subplot_kw = subplot_kw)
 
-   import numpy as np
-
 def create_list_param(self):
     # Extraction des clés de chaque dictionnaire
     keys1 = list(self.param_one_plot[0].keys())[0]
