@@ -78,8 +78,7 @@ class PlotMap:
         list_param_plot = np.empty_like(self.param_one_plot)
         list_param_plot[:] = None
         list_param_plot = list_param_plot.tolist()
-        self.param = np.empty(self.nligne*self.ncol)
-        self.param = self.param.tolist()
+        self.param = []
         for j in range(self.nligne):
             for i in range(self.ncol):
                 print(self.param_one_plot[0][keys1][i])
@@ -89,7 +88,7 @@ class PlotMap:
                 list_param_plot[-1] = self.param_one_plot[-1]
                 if len(self.param_one_plot) == 5:
                     list_param_plot[3] = self.param_one_plot[3][keys4][0]
-                self.param[self.ncol*j + i] = list_param_plot
+                self.param.append(list_param_plot)
             print(self.param)
             quit()
 
