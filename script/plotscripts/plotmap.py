@@ -101,7 +101,9 @@ class PlotMap:
 
     def plot_para(self, List):
         self.cut_list(List)
-        print(self.exp, self.date, self.var)
+        if self.exp[0] in ['exp']:
+            print(self.exp)
+        
 
     def cut_list(self, List):
         if len(List) == 4:
@@ -125,6 +127,17 @@ class PlotMap:
                 self.var = List[2] 
         else:
             raise Exception("List avec 5 éléments pas encore codé dnas plotmap.py")
+        if self.exp != "None":
+            self.exp = self.exp.split(':')
+        else:
+            self.exp = None
+        if self.date == "None":
+            self.date = None
+        if self.var != "None":
+            self.var = self.var.split(':')
+        else:
+            self.var = None
+        
 
 
         
