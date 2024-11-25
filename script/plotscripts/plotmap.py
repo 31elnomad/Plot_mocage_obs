@@ -110,9 +110,7 @@ class PlotMap:
                                           self.pseudo,
                                           self.date,
                                           self.var)
-                nc_mocage.create_filename()
-                nc_mocage.getfile(self.config_class)
-        
+                nc_mocage.process_netcdf(self.config_class)        
 
     def cut_list(self, List):
         if len(List) == 4:
