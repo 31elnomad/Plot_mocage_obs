@@ -79,7 +79,7 @@ class Netcdf_mocage:
                 self.filename1 = f'grid.mocage-forecast.{self.domain.lower()}+{str(echeance).zfill(4)}:00.netcdf'
 
     def getfile(self, config_class):
-        print(self.nameexp, self.date, self.indir, self.filename1)
+        print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
         self.dirhost = self.indir
         self.indir = config_class.config['global']['tmp_repository'].split('/')
         self.indir.append(self.pseudo)
@@ -126,7 +126,7 @@ class Netcdf_mocage:
                     # Quit the FTP session
                     f.quit()
                 except:
-                    print("Repository {} is absent".format(self.indir))
+                    print("Repository {} is absent".format(self.dirhost))
             else:
                 raise Exception("La récupération des données sur {} n'est pas implémenté".format(HOST))
 
