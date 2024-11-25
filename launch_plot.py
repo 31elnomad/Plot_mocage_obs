@@ -51,7 +51,7 @@ def add_path(config_class):
     """
     Ajoute les chemins nécessaires au PYTHONPATH et importe les modules conditionnels.
     """
-    ext_package = config_class['global']['ext_package'].split(',')
+    ext_package = config_class.config['global']['ext_package'].split(',')
     for pack in ext_package:
         path = pack.split(':')
         if path[1] not in sys.path:
