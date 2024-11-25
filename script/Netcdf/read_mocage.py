@@ -23,6 +23,7 @@ class Netcdf_mocage:
         self.domain = self.config_nc['domain']
         self.user = self.config_nc['user']
         self.tree = self.config_nc['tree']
+        self.type_file = self.config_nc['type_file']
         if self.tree not in ['script']:
             self.conf = self.config_nc['conf']
             self.nameexp = self.config_nc['nameexp']
@@ -32,7 +33,6 @@ class Netcdf_mocage:
             self.echeance = int(self.config_nc['echeance'])
         elif self.tree in ['script']:
             self.type_exp = self.config_nc['typeexp'].lower()
-            self.type_file = self.config_nc['type_file']
             self.wlength = None
             if self.type_exp.lower() not in ['direct']:
                 self.wlength = int(self.config_nc['wlength'])
