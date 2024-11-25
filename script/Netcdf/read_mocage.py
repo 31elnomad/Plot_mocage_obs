@@ -47,7 +47,7 @@ class Netcdf_mocage:
             self.indir += self.reseau.zfill(4) + self.suffix + '/' + self.group
         elif self.tree.upper() in ['OPER', 'MIRR', 'DBLE']:
             self.indir = f'/chaine/mxpt/mxpt001/vortex/mocage/{self.conf}/{self.tree.upper()}/'
-            self.indir += f {self.datet.year}/{str(self.date.month).zfill(2)}/'
+            self.indir += f'{self.datet.year}/{str(self.date.month).zfill(2)}/'
             self.indir += f'{str(self.date.day).zfill(2)}/T'
             self.indir += self.reseau.zfill(4) + self.suffix + '/' + self.group
         else:
