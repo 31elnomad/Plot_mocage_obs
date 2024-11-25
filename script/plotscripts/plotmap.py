@@ -110,6 +110,8 @@ class PlotMap:
                                           self.pseudo,
                                           self.date,
                                           self.var)
+                nc_mocage.create_filename()
+                nc_mocage.getfile()
         
 
     def cut_list(self, List):
@@ -144,10 +146,6 @@ class PlotMap:
             self.var = self.var.split(':')
         else:
             self.var = None
-        
-
-
-        
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
