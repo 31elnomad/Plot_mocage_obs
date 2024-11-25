@@ -96,6 +96,8 @@ class Netcdf_mocage:
         if not os.path.exists(self.filename1):
             HOST = self.config_nc['host']
             if HOST.lower() in ['hendrix', 'hendrix.meteo.fr']:
+                import netrc
+                import ftplib
                 # Retrieve FTP credentials from a .netrc file
                 netrccfg = netrc.netrc(os.path.join(os.getenv('HOME'), '.netrc'))
                 l, a, p = netrccfg.authenticators(HOST)
