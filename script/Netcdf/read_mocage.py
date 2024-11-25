@@ -89,8 +89,8 @@ class Netcdf_mocage:
             else:
                 suffix = self.suffix
             self.dirtmp.append(suffix)
-            
-        print(os.path.join(*self.dirtmp))
+        self.dirtmp = '/' +  os.path.join(*self.dirtmp)   
+        print(self.dirtmp)
         quit()
                                    
         
