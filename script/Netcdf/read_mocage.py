@@ -43,7 +43,7 @@ class Netcdf_mocage:
         elif self.tree in ['vortex']:
             self.indir = f'/home/{self.user}/vortex/mocage/{self.conf}/{self.nameexp}.upper()/'
             d = self.date - datetime.timedelta(hours=self.echeance)
-            self.indir += d.strftime("%Y%m%d') + 'T'
+            self.indir += d.strftime("%Y%m%d") + 'T'
             self.indir += self.reseau.zfill(4) + self.suffix + '/' + self.group
         elif self.tree.upper() in ['OPER', 'MIRR', 'DBLE']:
             self.indir = f'/chaine/mxpt/mxpt001/vortex/mocage/{self.conf}/{self.tree.upper()}/'
