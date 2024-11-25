@@ -81,7 +81,7 @@ class Netcdf_mocage:
     def getfile(self, config_class):
         print(self.nameexp, self.date, self.indir, self.filename1)
         self.dirtmp = config_class.config['global']['tmp_repository'].split('/')
-        print(self.dirtmp)
+        print(os.path.join(*self.dirtmp))
         quit()
                                    
         
