@@ -78,9 +78,12 @@ class Netcdf_mocage:
                 echeance = int(self.date.hour) + self.echeance
                 self.filename1 = f'grid.mocage-forecast.{self.domain.lower()} + {str(echeance).zfill(4)}:00.netcdf'
 
-    def getfile(self):
+    def getfile(self, config_class):
         print(self.namexp, self.Date, self.indir, self.filename1)
-        os.chdir('/cnrm/plasma/Users/bacles/NO_SAVE/tmp')
+        self.dirtmp = config_class.config['global']['tmp_repository'].split('/')
+        print(self.dirtmp)
+        quit()
+                                   
         
                         
 
