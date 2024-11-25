@@ -76,22 +76,66 @@ class Netcdf_mocage:
                     raise Exception('{} is not implemented'.format(self.type_exp))
             else:
                 echeance = int(self.date.hour) + self.echeance
-                self.filename1 = f'grid.mocage-forecast.{self.domain.lower()} + {str(echeance).zfill(4)}:00.netcdf'
+                self.filename1 = f'grid.mocage-forecast.{self.domain.lower()}+{str(echeance).zfill(4)}:00.netcdf'
 
     def getfile(self, config_class):
         print(self.nameexp, self.date, self.indir, self.filename1)
-        self.dirtmp = config_class.config['global']['tmp_repository'].split('/')
-        self.dirtmp.append(self.pseudo)
-        self.dirtmp.append(self.date.strftime('%Y%m%d'))
+        self.indir = config_class.config['global']['tmp_repository'].split('/')
+        self.indir.append(self.pseudo)
+        self.indir.append(self.date.strftime('%Y%m%d'))
         if self.tree not in ['script']:
             if self.suffix == 'P' and self.group == 'analyse':
                 suffix = 'A'
             else:
                 suffix = self.suffix
-            self.dirtmp.append(suffix)
-        self.dirtmp = '/' +  os.path.join(*self.dirtmp)   
-        print(self.dirtmp)
-        quit()
+            self.indir.append(suffix)
+        self.indir = '/' +  os.path.join(*self.dirtmp)   
+        if not os.path.exists(self.indir):
+            os.makedirs(self.indir)
+        os.chdir(self.indir)
+        if not os.path.exists(self.filename1):
+            HOST = self.config_nc['host']
+            if HOST.lower() in ['hendrix', 'hendrix.meteo.fr']:
+                # Retrieve FTP credentials from a .netrc file
+                netrccfg = netrc.netrc(os.path.join(os.getenv('HOME'), '.netrc'))
+                l, a, p = netrccfg.authenticators(HOST)
+                # Connect to the FTP server and change to the specified directory
+                try:
+                    f = ftplib.FTP(HOST)
+                    f.login(l, p, a)
+                    f.cwd(self.indir)
+    
+                    # Create a list of filenames to try for retrieval
+                    filenames_to_try = [self.filename1, self.filename2, self.filename3, self.filename4]
+                    
+                    # Try to retrieve each filename until one is successfully retrieved
+                    for filename in filenames_to_try:
+                        if filename is not None and not os.path.exists(filename):
+                            try:
+                                f.retrbinary('RETR ' + filename, open(filename, 'wb').write)
+                                print("File successfully retrieved")
+                                break  # Stop the loop if the file is successfully retrieved
+                            except ftplib.error_perm:
+                                pass  # Move to the next filename if retrieval fails
+                        else:
+                            print("{}, File {} already exists".format(self.Date.strftime('%Y%m%d'), filename))
+    
+                    # Quit the FTP session
+                    f.quit()
+                except:
+                    print("Repository {} is absent".format(self.indir))
+            else:
+                raise Exception("La récupération des données sur {} n'est pas implémenté".format(HOST))
+
+    def process_netcdf(self, config_class):
+        self.create_filename()
+        if config_class.config[self.pseudo]['get_file'].upper() in ['TRUE', 'T']:
+            self.getfile(config_class)
+        else:
+            raise Exception("le cas get_file is False n'est pas implémenté")
+            
+        
+                
                                    
         
                         
