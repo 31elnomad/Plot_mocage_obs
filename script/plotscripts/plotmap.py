@@ -103,11 +103,11 @@ class PlotMap:
 
     def plot_para(self, List):
         self.cut_list(List)
-        if self.exp is not None:
-            if self.exp[0] in ['exp']:
+        if self.pseudo is not None:
+            if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
                 nc_mocage = Netcdf_mocage(self.config_class,
-                                          self.exp,
+                                          self.pseudo,
                                           self.date,
                                           self.var)
         
@@ -115,11 +115,11 @@ class PlotMap:
     def cut_list(self, List):
         if len(List) == 4:
             if List[-1] in ['map_1', 'map_6']:
-                self.exp = List[0]
+                self.pseudo = List[0]
             elif List[-1] in ['map_2', 'map_5']:
-                self.exp = List[1]
+                self.pseudo = List[1]
             elif List[-1] in ['map_3', 'map_4']:
-                self.exp = List[2]
+                self.pseudo = List[2]
             if List[-1] in ['map_2', 'map_4']:
                 self.date = List[0] 
             elif List[-1] in ['map_1', 'map_3']:
@@ -134,10 +134,10 @@ class PlotMap:
                 self.var = List[2] 
         else:
             raise Exception("List avec 5 éléments pas encore codé dnas plotmap.py")
-        if self.exp != "None":
-            self.exp = self.exp.split(':')
+        if self.pseudo != "None":
+            self.pseudo = self.pseudo.split(':')
         else:
-            self.exp = None
+            self.pseudo = None
         if self.date == "None":
             self.date = None
         if self.var != "None":
