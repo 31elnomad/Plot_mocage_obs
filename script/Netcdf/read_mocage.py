@@ -80,6 +80,7 @@ class Netcdf_mocage:
 
     def getfile(self, config_class):
         print(self.nameexp, self.date, self.indir, self.filename1)
+        self.dirhost = self.indir
         self.indir = config_class.config['global']['tmp_repository'].split('/')
         self.indir.append(self.pseudo)
         self.indir.append(self.date.strftime('%Y%m%d'))
@@ -105,7 +106,7 @@ class Netcdf_mocage:
                 try:
                     f = ftplib.FTP(HOST)
                     f.login(l, p, a)
-                    f.cwd(self.indir)
+                    f.cwd(self.dirhost)
     
                     # Create a list of filenames to try for retrieval
                     filenames_to_try = [self.filename1, self.filename2, self.filename3, self.filename4]
