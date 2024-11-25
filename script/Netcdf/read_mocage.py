@@ -67,15 +67,21 @@ class Netcdf_mocage:
                     w_exp = f'+{self.type_exp.upper()}"_W{str(nwind).zfill(2)}.nc'
                     self.filename1 = filename + w_exp
                     if self.wlength != 1:
-                        raise Exception('{} is not implemented'.format(str(self.wlength)))
+                        w_exp = f'+{self.type_exp.upper()}"_W{str(nwind1).zfill(2)}.nc'
+                        self.filename2 = filename + w_exp
                     if self.type_exp.upper() == 'ANA':
-                        self.filename2 = filename + f'+BKG_W{str(nwind).zfill(2)}.nc'
-                        self.filename3 = filename + f'+BKG_W{str(nwind1).zfill(2)}.nc'
+                        self.filename3 = filename + f'+BKG_W{str(nwind).zfill(2)}.nc'
+                        self.filename4 = filename + f'+BKG_W{str(nwind1).zfill(2)}.nc'
                 else:
                     raise Exception('{} is not implemented'.format(self.type_exp))
             else:
                 echeance = int(self.date.hour) + self.echeance
                 self.filename1 = f'grid.mocage-forecast.{self.domain.lower()} + {str(echeance).zfill(4)}:00.netcdf'
+
+    def getfile(self):
+        print(self.namexp, self.Date, self.indir, self.filename1)
+        os.chdir('/cnrm/plasma/Users/bacles/NO_SAVE/tmp')
+        
                         
 
 def compute_nwind(wlength, hour):
