@@ -13,7 +13,7 @@ import datetime
 class Netcdf_mocage:
 
     def __init__(self, config_class, pseudo, date, var):
-        self.pseudo = pseudo.split(':')[1]
+        self.pseudo = pseudo[1]
         self.config_nc = config_class.config[pseudo]
         self.date = datetime.datetime(int(date[:4]),
                                       int(date[4:6]),
