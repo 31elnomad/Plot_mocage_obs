@@ -81,6 +81,15 @@ class Netcdf_mocage:
     def getfile(self, config_class):
         print(self.nameexp, self.date, self.indir, self.filename1)
         self.dirtmp = config_class.config['global']['tmp_repository'].split('/')
+        self.dirtmp.append(self.pseudo)
+        self.dirtmp.append(self.date.strftime('%Y%m%d'))
+        if self.tree not in ['script']:
+            if self.suffix == 'P' and self.group == 'analyse':
+                suffix = 'A'
+            else:
+                suffix = self.suffix
+            self.dirtmp.append(suffix)
+            
         print(os.path.join(*self.dirtmp))
         quit()
                                    
