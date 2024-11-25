@@ -55,6 +55,7 @@ class Netcdf_mocage:
 
     def create_filename(self):
         self.create_directory()
+        self.filename2, self.filename3, self.filename4 = None, None, None
         if self.type_file in ['PPS1']:
             self.filename1 = f'ppstats.mocage-first_level.{self.domain}+0024.netcdf'
         elif self.type_file in ['HMnc']:
