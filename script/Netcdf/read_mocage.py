@@ -104,8 +104,7 @@ class Netcdf_mocage:
                 netrccfg = netrc.netrc(os.path.join(os.getenv('HOME'), '.netrc'))
                 l, a, p = netrccfg.authenticators(HOST)
                 # Connect to the FTP server and change to the specified directory
-                r = 1
-                if r == 1:
+                try:
                     f = ftplib.FTP(HOST)
                     f.login(l, p, a)
                     f.cwd(self.dirhost)
@@ -127,10 +126,13 @@ class Netcdf_mocage:
     
                     # Quit the FTP session
                     f.quit()
-                #except:
-                #    print("Repository {} is absent".format(self.dirhost))
+                except:
+                    print("Repository {} is absent".format(self.dirhost))
             else:
                 raise Exception("La récupération des données sur {} n'est pas implémenté".format(HOST))
+
+    def open_netcdf(self):
+        
 
     def process_netcdf(self, config_class):
         self.create_filename()
