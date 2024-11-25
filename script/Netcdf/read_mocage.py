@@ -90,7 +90,7 @@ class Netcdf_mocage:
                 suffix = self.suffix
             self.indir.append(suffix)
         self.indir = '/' +  os.path.join(*self.indir)   
-        if not os.path.exists(self.indir):
+        if not os.path.isdir(self.indir):
             os.makedirs(self.indir)
         os.chdir(self.indir)
         if not os.path.exists(self.filename1):
