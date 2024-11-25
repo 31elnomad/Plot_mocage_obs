@@ -103,7 +103,7 @@ class PlotMap:
 
     def plot_para(self, List):
         self.cut_list(List)
-        if self.pseudo is not None:
+        if self.pseudo is not None or self.var is not None or self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
                 nc_mocage = Netcdf_mocage(self.config_class,
