@@ -111,7 +111,7 @@ class PlotMap:
                                           self.date,
                                           self.var)
                 nc_mocage.create_filename()
-                nc_mocage.getfile()
+                nc_mocage.getfile(self.config_class)
         
 
     def cut_list(self, List):
