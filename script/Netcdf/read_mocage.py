@@ -41,7 +41,7 @@ class Netcdf_mocage:
         if self.tree in ['scripts']:
             self.indir = f'/home/{self.user}/MOCAGEHM/{self.nameexp}/'
         elif self.tree in ['vortex']:
-            self.indir = f'/home/{self.user}/vortex/mocage/{self.conf}/{self.nameexp}.upper()/'
+            self.indir = f'/home/{self.user}/vortex/mocage/{self.conf}/{self.nameexp.upper()}/'
             d = self.date - datetime.timedelta(hours=self.echeance)
             self.indir += d.strftime("%Y%m%d") + 'T'
             self.indir += self.reseau.zfill(4) + self.suffix + '/' + self.group
