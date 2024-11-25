@@ -79,7 +79,7 @@ class Netcdf_mocage:
                 self.filename1 = f'grid.mocage-forecast.{self.domain.lower()} + {str(echeance).zfill(4)}:00.netcdf'
 
     def getfile(self, config_class):
-        print(self.nameexp, self.Date, self.indir, self.filename1)
+        print(self.nameexp, self.date, self.indir, self.filename1)
         self.dirtmp = config_class.config['global']['tmp_repository'].split('/')
         print(self.dirtmp)
         quit()
