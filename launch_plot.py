@@ -56,7 +56,7 @@ def add_path(config_class):
         path = pack.split(':')
         if path[1] not in sys.path:
             print("Ajout de {} à sys.apth".format(path[1]))
-            sys.path.append(netcdf_path)
+            sys.path.append(path[1])
     # Vérifie si 'Netcdf' doit être ajouté au PYTHONPATH
     plot = config_class.config["global"]["type_plot"]
     if plot in ["map", "cut"]:
