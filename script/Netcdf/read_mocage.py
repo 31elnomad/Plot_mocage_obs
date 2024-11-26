@@ -213,7 +213,7 @@ class Netcdf_mocage:
         if self.config_nc['getfile'].lower() in ['t', 'true']:
             ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
         self.nblev = ds.attrs['levels']
-        print(ds.coord['lon'])
+        print(ds.coords['lon'])
         #ds = ds[self.var[0]].squeeze()
         #print(ds)
        
