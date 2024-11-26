@@ -57,7 +57,6 @@ class Netcdf_mocage:
         else:
             raise Exception('{} is not implemented'.format(self.type_exp))
 
-
     def getfile(self, config_class):
         HOST = self.config_nc['host']
         self.dirtmp = None
@@ -135,7 +134,6 @@ class Netcdf_mocage:
             raise Exception("{} est inconnu ou non implémenté".format(self.tree))
         return ds
             
-            
     def __get_file__(self, return_dataset, HOST, listvar, **kwargs):
         if self.tree in ['vortex']:
             from get_data import get_mocage
@@ -179,18 +177,14 @@ class Netcdf_mocage:
                 r.close()
                 ds = None
         return ds
-        
-        
 
     def process_netcdf(self, config_class):
-        if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
-            ds = self.getfile(config_class)
-            print(ds)
-        """self.create_filename()
-        if config_class.config[self.pseudo]['get_file'].upper() in ['TRUE', 'T']:
-            self.getfile(config_class)
-        else:
-            raise Exception("le cas get_file is False n'est pas implémenté")"""
+        ds = self.getfile(config_class)
+        if self.config_nc['getfile'].lower() in ['t', 'true']:
+            ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
+        ds = ds[self.var[0]].squeeze()
+        print(ds)
+       
             
         
                 
