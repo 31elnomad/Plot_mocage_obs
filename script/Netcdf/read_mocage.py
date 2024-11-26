@@ -94,7 +94,7 @@ class Netcdf_mocage:
                        cutoff=self.reseau,
                        output_dir='./',
                        post_process=post_process,
-                       kepts_vars=self.var[0],
+                       kept_vars=self.var[0],
                        vortex_dir=None,
                        ext='netcdf',
                        return_dataset=True,
