@@ -189,21 +189,51 @@ class Netcdf_mocage:
 
     def cmp_boundaries(self):
         self.boundary = self.config_nc['boundary']
-        self.levbnd = [1, self.nblev]
-        if self.domain.lower() in ['glob11', 'glob05']:
-            self.lonbnd = [-180., 180.]
-            self.latbnd = [-90., 90.]
-            
-
-            
-        
         if self.boudary[0] != 'None':
             if len(self.boundary[0].split(',')) == 1:
-                self.lonmin = float(self.boundary[0][0])
-                self.lonmax = float(self.boundary[0][0])
+                tmp = self.boundary[0].split(',').astype(float)
+                if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1]:
+                    self.lonbnd = [tmp[0], tmp[0]]
+                else:
+                    raise Exception("La longitude donnée dans [plot][boudary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[0].split(',')) == 2:
-                self.lonmin = float(self.boundary[0][0])
-                self.lonmax = float(self.boundary[0][1])
+                tmp = self.boundary[0].split(',').astype(float)
+                if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.lonbnd[0] and tmp[1] <= self.lonbnd[1]:
+                    self.lonbnd = [tmp[0], tmp[1]]
+                else:
+                    raise Exception("Les longitudes données dans [plot][boudary] sont en dehors du domain {}".format(self.domain.lower()))
+            else:
+                raise Exception('Probleme, il y a 3 longitudes données dans boundary')
+        if self.boudary[1] != 'None':
+            if len(self.boundary[1].split(',')) == 1:
+                tmp = self.boundary[1].split(',').astype(float)
+                if tmp[0] >= self.latbnd[0] and tmp[0] <= self.latbnd[1]:
+                    self.latbnd = [tmp[0], tmp[0]]
+                else:
+                    raise Exception("La latitude donnée dans [plot][boudary] est en dehors du domain {}".format(self.domain.lower()))
+            elif len(self.boundary[1].split(',')) == 2:
+                tmp = self.boundary[1].split(',').astype(float)
+                if tmp[0] >= self.latbnd[0] and tmp[0] <= self.latbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.latbnd[0] and tmp[1] <= self.latbnd[1]:
+                    self.latbnd = [tmp[0], tmp[1]]
+                else:
+                    raise Exception("Les latitudes données dans [plot][boudary] sont en dehors du domain {}".format(self.domain.lower()))
+            else:
+                raise Exception('Probleme, il y a 3 latitudes données dans boundary')
+        if self.boudary[2] != 'None':
+            if len(self.boundary[2].split(',')) == 1:
+                tmp = self.boundary[2].split(',').astype(float)
+                if tmp[0] >= self.levbnd[0] and tmp[0] <= self.levbnd[1]:
+                    self.levbnd = [tmp[0], tmp[0]]
+                else:
+                    raise Exception("Le level donnée dans [plot][boudary] est en dehors du domain {}".format(self.domain.lower()))
+            elif len(self.boundary[2].split(',')) == 2:
+                tmp = self.boundary[2].split(',').astype(float)
+                if tmp[0] >= self.levbnd[0] and tmp[0] <= self.levbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.levbnd[0] and tmp[1] <= self.levbnd[1]:
+                    self.levbnd = [tmp[0], tmp[1]]
+                else:
+                    raise Exception("Les levels données dans [plot][boudary] sont en dehors du domain {}".format(self.domain.lower()))
+            else:
+                raise Exception('Probleme, il y a 3 levels données dans boundary')
     
             
         
@@ -212,11 +242,14 @@ class Netcdf_mocage:
         ds = self.getfile(config_class)
         if self.config_nc['getfile'].lower() in ['t', 'true']:
             ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
-        self.nblev = ds.attrs['levels']
-        print(ds.coords['lon'].values)
-        #ds = ds[self.var[0]].squeeze()
-        #print(ds)
-       
+        self.levbnd = [ds.coords['lev'].values[0],
+                       ds.coords['lev'].values[-1]]
+        self.lonbnd = [ds.coords['lon'].values[0],
+                       ds.coords['lon'].values[-1]]
+        self.latbnd = [ds.coords['lat'].values[0],
+                       ds.coords['lat'].values[-1]]
+        self.cmp_boundaries()
+        print(self.lonbnd)      
             
         
                 
