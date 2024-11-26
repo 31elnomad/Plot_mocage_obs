@@ -60,7 +60,7 @@ class Netcdf_mocage:
 
     def getfile(self, config_class):
         HOST = self.config_nc['host']
-        return_dataset = True
+        self.dirtmp = None
         if self.config_nc['getfile'].lower() in ['t', 'true']:
             return_dataset = False
             out_file_name = "{exp}_{dom}_{dt}00-{hhh}.{ext}"
