@@ -121,7 +121,7 @@ class Netcdf_mocage:
                                 pres_var = list(ds.keys())
                                 if self.var[0] not in pres_var:
                                     pres_var.append(self.var[0])
-                                    os.remove(os.path.join(self.dirtmp, self.outfile_name)
+                                    os.remove(os.path.join(self.dirtmp, self.outfile_name))
                                     out_file = self.__get_file__(False, HOST, pres_var)
                                 else:
                                     print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
