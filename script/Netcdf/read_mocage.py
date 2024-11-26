@@ -66,7 +66,7 @@ class Netcdf_mocage:
             self.dirtmp = config_class.config['global']['dirtmp'].split('/')
             self.dirtmp.append(self.pseudo)
             if self.tree in ['vortex']:
-                self.outfile_name = outfile_name.format(
+                self.outfile_name = out_file_name.format(
                         exp=self.nameexp,
                         dom=self.domain.lower(),
                         dt=self.date.strftime('%Y%m%d'),
@@ -77,7 +77,7 @@ class Netcdf_mocage:
                 else:
                     self.dirtmp.append('P')
             elif self.tree in ['script']:
-                self.outfile_name = outfile_name.format(
+                self.outfile_name = out_file_name.format(
                         exp=self.pseudo,
                         dom=self.domain.lower(),
                         dt=self.date.strftime('%Y%m%d'),
