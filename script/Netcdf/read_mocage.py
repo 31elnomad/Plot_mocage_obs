@@ -97,7 +97,7 @@ class Netcdf_mocage:
                                   output_dir='./',
                                   post_process=post_process,
                                   kept_vars=self.var[0],
-                                  vortex_dir=self.indir,
+                                  vortex_dir=self.group,
                                   ext='netcdf',
                                   return_dataset=True,
                                   host=HOST,
