@@ -193,6 +193,7 @@ class Netcdf_mocage:
         if self.boundary[0] != 'None':
             if len(self.boundary[0].split(',')) == 1:
                 tmp = self.boundary[0].split(',')
+                print(tmp)
                 tmp = [float(i) for i in tmp]
                 if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1]:
                     self.lonbnd = [tmp[0], tmp[0]]
