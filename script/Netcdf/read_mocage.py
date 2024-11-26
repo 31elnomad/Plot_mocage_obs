@@ -9,6 +9,7 @@ Created on Mon Nov 21
 import os
 import sys
 import datetime
+import xarray as xr
 
 class Netcdf_mocage:
 
@@ -64,113 +65,118 @@ class Netcdf_mocage:
         if self.config_nc['getfile'].lower() in ['t', 'true']:
             return_dataset = False
             out_file_name = "{exp}_{dom}_{dt}00-{hhh}.{ext}"
-            if self.tree in ['vortex']:
-                outfile_name = outfile_name.format(
-                    exp=self.nameexp,
-                    dom=self.domain.lower(),
-                    dt=self.date.strftime('%Y%m%d'),
-                    hhh=str(int(self.date.strftime('%H')) + self.echeance).zfill(3),
-                    ext='netcdf')
-            elif self.tree in ['script]:
-                outfile_name = outfile_name.format(
-                    exp=self.pseudo,
-                    dom=self.domain.lower(),
-                    dt=self.date.strftime('%Y%m%d'),
-                    hhh=str(int(self.date.strftime('%H')) + self.echeance).zfill(3),
-                    ext='netcdf')
             self.dirtmp = config_class.config['global']['dirtmp'].split('/')
             self.dirtmp.append(self.pseudo)
             if self.tree in ['vortex']:
+                self.outfile_name = outfile_name.format(
+                        exp=self.nameexp,
+                        dom=self.domain.lower(),
+                        dt=self.date.strftime('%Y%m%d'),
+                        hhh=str(int(self.date.strftime('%H')) + self.echeance).zfill(3),
+                        ext='netcdf')
                 if self.group in ['analyse']:
                     self.dirtmp.append('A')
                 else:
                     self.dirtmp.append('P')
+            elif self.tree in ['script]:
+                self.outfile_name = outfile_name.format(
+                        exp=self.pseudo,
+                        dom=self.domain.lower(),
+                        dt=self.date.strftime('%Y%m%d'),
+                        hhh=str(int(self.date.strftime('%H')) + self.echeance).zfill(3),
+                        ext='netcdf')
             self.dirtmp = '/' +  os.path.join(*self.dirtmp)   
             if not os.path.isdir(self.dirtmp):
                 os.makedirs(self.dirtmp)
-        
         if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
             if self.type_file in ['daily', 'min', 'max', 'hourly', 'post_cams', 'post_prevair']:
                 post_process = self.type_file
             else:
                 post_process = False
+            
+            if self.config_nc['getfile'].lower() in ['t', 'true']:
+                if not os.path.exists(os.path.join(self.dirtmp, out_filename)):
+                    out_file = self.__get_file__(False, HOST, [self.var[0]])
+                else:
+                    ds = xr.open_dataset(outfile_name)
+                    pres_var = list(ds.keys()))
+                    if self.var[0] not in pres_var:
+                        pres_var.append(self.var[0])
+                        out_file = self.__get_file__(False, HOST, pres_var)
+                    else:
+                        print('File {} already contains {}'.format(outfile_name, self.var[0]))
+            else:
+                 out_file = __get_file__(self, True, HOST, None)    
+        elif self.tree.lower() in ['script', 'scripts']:
+            self.create_filename()
+            err = 1
+            for filename in [self.filename1, self.filename2, self.filename3, self.filename4]:
+                if err == 1:
+                    try:
+                        if self.config_nc['getfile'].lower() in ['t', 'true']:
+                            if not os.path.exists(os.path.join(self.dirtmp, self.out_filename)):
+                                out_file = self.__get_file__(False, HOST, [self.var[0]])
+                            else:
+                                ds = xr.open_dataset(os.path.join(self.dirtmp, self.out_filename))
+                                pres_var = list(ds.keys()))
+                                if self.var[0] not in pres_var:
+                                    pres_var.append(self.var[0])
+                                    os.remove(os.path.join(self.dirtmp, self.outfile_name)
+                                    out_file = self.__get_file__(False, HOST, pres_var)
+                                else:
+                                    print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
+                        else:
+                             out_file = __get_file__(self, True, HOST, None) 
+                        err = 0
+                    except:
+                        pass
+            if err == 1:
+                raise Exception("Aucun fichier 'script' n'a été trouvé")
+        else:
+            raise Exception("{} est inconnu ou non implémenté".format(self.tree))
+            
+            
+    def __get_file__(self, return_dataset, HOST, listvar, **kwargs):
+        if self.tree in ['vortex']:
             from get_data import get_mocage
             out_file = get_mocage(exp=self.nameexp,
                                   vconf=self.conf,
                                   date=self.date,
                                   domain=self.domain.lower(),
-                                  term=self.echeance,
+                                  term=self.echeance+int(self.date.strftime('%H')),
                                   cutoff=self.suffix,
                                   output_dir=self.dirtmp,
                                   post_process=post_process,
-                                  kept_vars=None,
+                                  kept_vars=listvar,
                                   vortex_dir=self.group,
                                   ext='netcdf',
                                   return_dataset=return_dataset,
                                   host=HOST,
-                                  user=self.user)      
-        elif self.tree.lower() in ['script', 'scripts']:
-            from get_data import get_login_info, ftp_get_buffer
-            self.create_filename()
-            login_info = get_login_info(HOST)
-            ftp_get_buffer(remote_file, HOST, login_info=login_info)
-
+                                  user=self.user) 
+            print(out_file)
         else:
-            raise Exception("{} est inconnu ou non implémenté".format(self.tree))
-            
-            
-        """print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
-        self.dirhost = self.indir
-        self.indir = config_class.config['global']['tmp_repository'].split('/')
-        self.indir.append(self.pseudo)
-        self.indir.append(self.date.strftime('%Y%m%d'))
-        if self.tree not in ['script']:
-            if self.suffix == 'P' and self.group == 'analyse':
-                suffix = 'A'
+            try:
+                remote_file = os.path.join(self.dirhost, kwargs['filename'])
+            except:
+                raise Exception("kwargs['filename'] doit être défini") 
+            from get_data import get_login_info, ftp_get_buffer
+            login_info = get_login_info(HOST)
+            r = ftp_get_buffer(remote_file, HOST, login_info)
+            if return_dataset is True:
+                ds = xr.load_dataset(r)
+                r.close()
             else:
-                suffix = self.suffix
-            self.indir.append(suffix)
-        self.indir = '/' +  os.path.join(*self.indir)   
-        if not os.path.isdir(self.indir):
-            os.makedirs(self.indir)
-        os.chdir(self.indir)
-        if not os.path.exists(self.filename1):
-            HOST = self.config_nc['host']
-            if HOST.lower() in ['hendrix', 'hendrix.meteo.fr']:
-                import netrc
-                import ftplib
-                # Retrieve FTP credentials from a .netrc file
-                netrccfg = netrc.netrc(os.path.join(os.getenv('HOME'), '.netrc'))
-                l, a, p = netrccfg.authenticators(HOST)
-                # Connect to the FTP server and change to the specified directory
-                try:
-                    f = ftplib.FTP(HOST)
-                    f.login(l, p, a)
-                    f.cwd(self.dirhost)
-    
-                    # Create a list of filenames to try for retrieval
-                    filenames_to_try = [self.filename1, self.filename2, self.filename3, self.filename4]
-                    
-                    # Try to retrieve each filename until one is successfully retrieved
-                    for filename in filenames_to_try:
-                        if filename is not None and not os.path.exists(filename):
-                            try:
-                                f.retrbinary('RETR ' + filename, open(filename, 'wb').write)
-                                print("File successfully retrieved")
-                                break  # Stop the loop if the file is successfully retrieved
-                            except ftplib.error_perm:
-                                pass  # Move to the next filename if retrieval fails
-                        else:
-                            print("{}, File {} already exists".format(self.Date.strftime('%Y%m%d'), filename))
-    
-                    # Quit the FTP session
-                    f.quit()
-                except:
-                    print("Repository {} is absent".format(self.dirhost))
-            else:
-                raise Exception("La récupération des données sur {} n'est pas implémenté".format(HOST))
-
-    def open_netcdf(self):"""
+                out_file = os.path.join(self.dirtmp, self.out_file_name)
+                ds = xr.open_dataset(r)
+                ds = ds[kept_vars]
+                ds.to_netcdf(
+                    out_file,
+                    encoding={var: {"zlib": True} for var in kept_vars},
+                )
+                r.close()
+                ds = None
+            
+        return ds
         
         
 
