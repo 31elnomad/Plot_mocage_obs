@@ -81,7 +81,8 @@ class Netcdf_mocage:
 
     def getfile(self, config_class):
         HOST = self.config_nc['host']
-        if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:   
+        if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
+            self.create_directory()
             if self.type_file in ['daily', 'min', 'max', 'hourly', 'post_cams', 'post_prevair']:
                 post_process = self.type_file
             else:
@@ -96,7 +97,7 @@ class Netcdf_mocage:
                        output_dir='./',
                        post_process=post_process,
                        kept_vars=self.var[0],
-                       vortex_dir=None,
+                       vortex_dir=self.indir,
                        ext='netcdf',
                        return_dataset=True,
                        host=HOST,
