@@ -240,9 +240,7 @@ class Netcdf_mocage:
                 else:
                     raise Exception("Les levels données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
-                raise Exception('Probleme, il y a 3 levels données dans boundary')
-
-    def select_data(self):
+                raise Exception('Probleme, il y a 3 levels données dans boundary'):
     
             
         
