@@ -125,7 +125,7 @@ class Netcdf_mocage:
                                 else:
                                     print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
                         else:
-                             out_file = __get_file__(self, True, HOST, './') 
+                             out_file = __get_file__(self, True, HOST, None) 
                         err = 0
                     except:
                         pass
@@ -138,6 +138,8 @@ class Netcdf_mocage:
     def __get_file__(self, return_dataset, HOST, listvar, **kwargs):
         if self.tree in ['vortex']:
             from get_data import get_mocage
+            if return_dataset is False:
+                self.dirtmp = './'
             out_file = get_mocage(exp=self.nameexp,
                                   vconf=self.conf,
                                   date=self.date,
