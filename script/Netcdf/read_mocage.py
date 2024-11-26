@@ -138,7 +138,7 @@ class Netcdf_mocage:
     def __get_file__(self, return_dataset, HOST, listvar, **kwargs):
         if self.tree in ['vortex']:
             from get_data import get_mocage
-            if return_dataset is False:
+            if return_dataset is True:
                 self.dirtmp = './'
             out_file = get_mocage(exp=self.nameexp,
                                   vconf=self.conf,
