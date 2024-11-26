@@ -189,6 +189,7 @@ class Netcdf_mocage:
 
     def cmp_boundaries(self):
         self.boundary = self.config_nc['boundary']
+        self.levbnd = [1, self.nblev]
         if self.domain.lower() in ['glob11', 'glob05']:
             self.lonbnd = [-180., 180.]
             self.latbnd = [-90., 90.]
@@ -211,7 +212,8 @@ class Netcdf_mocage:
         ds = self.getfile(config_class)
         if self.config_nc['getfile'].lower() in ['t', 'true']:
             ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
-        print(ds.attrs['levels'])
+        self.nblev = ds.attrs['levels']
+        print(ds.coord['lon'])
         #ds = ds[self.var[0]].squeeze()
         #print(ds)
        
