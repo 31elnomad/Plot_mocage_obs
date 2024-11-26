@@ -95,12 +95,16 @@ class Netcdf_mocage:
             
             if self.config_nc['getfile'].lower() in ['t', 'true']:
                 if not os.path.exists(os.path.join(self.dirtmp, self.outfile_name)):
-                    ds = self.__get_file__(False, HOST, [self.var[0]])
+                    ds = self.__get_file__(False, HOST, [self.var[0], 'a_hybr_coord', 'b_hybr_coord'])
                 else:
                     ds = xr.open_dataset(self.outfile_name)
                     pres_var = list(ds.keys())
                     if self.var[0] not in pres_var:
                         pres_var.append(self.var[0])
+                        if 'a_hybr_coord' not in pres_var:
+                            pres_var.append('a_hybr_coord')
+                        if 'b_hybr_coord' not in pres_var:    
+                            pres_var.append('b_hybr_coord')
                         ds = self.__get_file__(False, HOST, pres_var)
                     else:
                         print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
@@ -114,12 +118,16 @@ class Netcdf_mocage:
                     try:
                         if self.config_nc['getfile'].lower() in ['t', 'true']:
                             if not os.path.exists(os.path.join(self.dirtmp, self.out_filename)):
-                                ds = self.__get_file__(False, HOST, [self.var[0]])
+                                ds = self.__get_file__(False, HOST, [self.var[0], 'a_hybr_coord', 'b_hybr_coord'])
                             else:
                                 ds = xr.open_dataset(os.path.join(self.dirtmp, self.out_filename))
                                 pres_var = list(ds.keys())
                                 if self.var[0] not in pres_var:
                                     pres_var.append(self.var[0])
+                                    if 'a_hybr_coord' not in pres_var:
+                                        pres_var.append('a_hybr_coord')
+                                    if 'b_hybr_coord' not in pres_var:    
+                                        pres_var.append('b_hybr_coord')
                                     os.remove(os.path.join(self.dirtmp, self.outfile_name))
                                     ds = self.__get_file__(False, HOST, pres_var)
                                 else:
