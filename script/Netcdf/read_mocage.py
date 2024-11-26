@@ -125,7 +125,7 @@ class Netcdf_mocage:
                                 else:
                                     print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
                         else:
-                             out_file = __get_file__(self, True, HOST, None) 
+                             out_file = __get_file__(self, True, HOST, './') 
                         err = 0
                     except:
                         pass
