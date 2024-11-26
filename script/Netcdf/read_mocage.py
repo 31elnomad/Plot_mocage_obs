@@ -105,7 +105,7 @@ class Netcdf_mocage:
                     else:
                         print('File {} already contains {}'.format(outfile_name, self.var[0]))
             else:
-                 out_file = self.__get_file__(True, HOST, None)    
+                 out_file = self.__get_file__(True, HOST, 'all')    
         elif self.tree.lower() in ['script', 'scripts']:
             self.create_filename()
             err = 1
@@ -125,7 +125,7 @@ class Netcdf_mocage:
                                 else:
                                     print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
                         else:
-                             out_file = __get_file__(self, True, HOST, None) 
+                             out_file = __get_file__(self, True, HOST, 'all') 
                         err = 0
                     except:
                         pass
