@@ -96,7 +96,7 @@ class Netcdf_mocage:
                        output_dir=post_process,
                        kepts_vars=self.var.split(':')[0],
                        vortex_dir=None,
-                       ext='netcdf'
+                       ext='netcdf',
                        return_dataset=True,
                        host=HOST,
                        user=self.user)            
