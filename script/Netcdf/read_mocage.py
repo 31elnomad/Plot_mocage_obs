@@ -101,7 +101,9 @@ class Netcdf_mocage:
                                   ext='netcdf',
                                   return_dataset=True,
                                   host=HOST,
-                                  user=self.user)            
+                                  user=self.user)      
+            print(out_file)
+            
         """print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
         self.dirhost = self.indir
         self.indir = config_class.config['global']['tmp_repository'].split('/')
