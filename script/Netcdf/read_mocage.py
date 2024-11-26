@@ -189,7 +189,7 @@ class Netcdf_mocage:
 
     def cmp_boundaries(self, config_class):
         plot = config_class.config['global']['type_plot']
-        self.boundary = self.config_class.config[plot]['boundary']
+        self.boundary = config_class.config[plot]['boundary']
         if self.boundary[0] != 'None':
             if len(self.boundary[0].split(',')) == 1:
                 tmp = self.boundary[0].split(',').astype(float)
