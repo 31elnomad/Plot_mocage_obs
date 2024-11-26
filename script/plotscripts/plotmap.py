@@ -26,6 +26,9 @@ class PlotMap:
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
+        self.boundary = self.config_plot['boundary'].split('/')
+        if self.boundary[2] == 'None':
+            self.listlev = None
         self.param_plot_obj = list_of_plot(self.order,
                                           self.listvar,
                                           self.listexp,
