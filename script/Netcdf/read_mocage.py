@@ -90,6 +90,7 @@ class Netcdf_mocage:
             get_mocage(exp=self.nameexp,
                        vconf=self.conf,
                        date=self.date,
+                       domain=self.domain.lower(),
                        term=self.echeance,
                        cutoff=self.reseau,
                        output_dir='./',
