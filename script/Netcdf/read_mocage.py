@@ -95,17 +95,17 @@ class Netcdf_mocage:
             
             if self.config_nc['getfile'].lower() in ['t', 'true']:
                 if not os.path.exists(os.path.join(self.dirtmp, out_filename)):
-                    out_file = self.__get_file__(False, HOST, [self.var[0]])
+                    ds = self.__get_file__(False, HOST, [self.var[0]])
                 else:
                     ds = xr.open_dataset(outfile_name)
                     pres_var = list(ds.keys())
                     if self.var[0] not in pres_var:
                         pres_var.append(self.var[0])
-                        out_file = self.__get_file__(False, HOST, pres_var)
+                        ds = self.__get_file__(False, HOST, pres_var)
                     else:
                         print('File {} already contains {}'.format(outfile_name, self.var[0]))
             else:
-                 out_file = self.__get_file__(True, HOST, 'all')    
+                 ds = self.__get_file__(True, HOST, 'all')    
         elif self.tree.lower() in ['script', 'scripts']:
             self.create_filename()
             err = 1
@@ -114,18 +114,18 @@ class Netcdf_mocage:
                     try:
                         if self.config_nc['getfile'].lower() in ['t', 'true']:
                             if not os.path.exists(os.path.join(self.dirtmp, self.out_filename)):
-                                out_file = self.__get_file__(False, HOST, [self.var[0]])
+                                ds = self.__get_file__(False, HOST, [self.var[0]])
                             else:
                                 ds = xr.open_dataset(os.path.join(self.dirtmp, self.out_filename))
                                 pres_var = list(ds.keys())
                                 if self.var[0] not in pres_var:
                                     pres_var.append(self.var[0])
                                     os.remove(os.path.join(self.dirtmp, self.outfile_name))
-                                    out_file = self.__get_file__(False, HOST, pres_var)
+                                    ds = self.__get_file__(False, HOST, pres_var)
                                 else:
                                     print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
                         else:
-                             out_file = __get_file__(self, True, HOST, 'all') 
+                             ds = __get_file__(self, True, HOST, 'all') 
                         err = 0
                     except:
                         pass
@@ -133,6 +133,7 @@ class Netcdf_mocage:
                 raise Exception("Aucun fichier 'script' n'a été trouvé")
         else:
             raise Exception("{} est inconnu ou non implémenté".format(self.tree))
+        return ds
             
             
     def __get_file__(self, return_dataset, HOST, listvar, **kwargs):
@@ -140,7 +141,7 @@ class Netcdf_mocage:
             from get_data import get_mocage
             if return_dataset is True:
                 self.dirtmp = './'
-            out_file = get_mocage(exp=self.nameexp,
+            ds = get_mocage(exp=self.nameexp,
                                   vconf=self.conf,
                                   date=self.date,
                                   domain=self.domain.lower(),
@@ -154,7 +155,8 @@ class Netcdf_mocage:
                                   return_dataset=return_dataset,
                                   host=HOST,
                                   user=self.user) 
-            print(out_file)
+            if return_dataset is False:
+                ds = None
         else:
             try:
                 remote_file = os.path.join(self.dirhost, kwargs['filename'])
@@ -176,15 +178,14 @@ class Netcdf_mocage:
                 )
                 r.close()
                 ds = None
-            
         return ds
         
         
 
     def process_netcdf(self, config_class):
         if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
-            out_file = self.getfile(config_class)
-            print(out_file)
+            ds = self.getfile(config_class)
+            print(ds)
         """self.create_filename()
         if config_class.config[self.pseudo]['get_file'].upper() in ['TRUE', 'T']:
             self.getfile(config_class)
