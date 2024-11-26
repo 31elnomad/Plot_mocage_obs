@@ -89,9 +89,9 @@ class Netcdf_mocage:
                 os.makedirs(self.dirtmp)
         if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
             if self.type_file in ['daily', 'min', 'max', 'hourly', 'post_cams', 'post_prevair']:
-                post_process = self.type_file
+                self.post_process = self.type_file
             else:
-                post_process = False
+                self.post_process = False
             
             if self.config_nc['getfile'].lower() in ['t', 'true']:
                 if not os.path.exists(os.path.join(self.dirtmp, out_filename)):
@@ -145,7 +145,7 @@ class Netcdf_mocage:
                                   term=self.echeance+int(self.date.strftime('%H')),
                                   cutoff=self.suffix,
                                   output_dir=self.dirtmp,
-                                  post_process=post_process,
+                                  post_process=self.post_process,
                                   kept_vars=listvar,
                                   vortex_dir=self.group,
                                   ext='netcdf',
