@@ -93,7 +93,7 @@ class Netcdf_mocage:
                        term=self.echeance,
                        cutoff=self.reseau,
                        output_dir='./',
-                       output_dir=post_process,
+                       post_process=post_process,
                        kepts_vars=self.var.split(':')[0],
                        vortex_dir=None,
                        ext='netcdf',
