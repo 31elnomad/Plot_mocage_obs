@@ -99,7 +99,7 @@ class Netcdf_mocage:
                     out_file = self.__get_file__(False, HOST, [self.var[0]])
                 else:
                     ds = xr.open_dataset(outfile_name)
-                    pres_var = list(ds.keys()))
+                    pres_var = list(ds.keys())
                     if self.var[0] not in pres_var:
                         pres_var.append(self.var[0])
                         out_file = self.__get_file__(False, HOST, pres_var)
