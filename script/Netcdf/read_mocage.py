@@ -88,21 +88,20 @@ class Netcdf_mocage:
             else:
                 post_process = False
             from get_data import get_mocage
-            get_mocage(exp=self.nameexp,
-                       vconf=self.conf,
-                       date,self.date,
-                       domain=self.domain.lower(),
-                       term=self.echeance,
-                       cutoff=self.suffix,
-                       output_dir='./',
-                       post_process=post_process,
-                       kept_vars=self.var[0],
-                       vortex_dir=self.indir,
-                       ext='netcdf',
-                       return_dataset=True,
-                       host=HOST,
-                       user=self.user
-                      )            
+            out_file = get_mocage(exp=self.nameexp,
+                                  vconf=self.conf,
+                                  date,self.date,
+                                  domain=self.domain.lower(),
+                                  term=self.echeance,
+                                  cutoff=self.suffix,
+                                  output_dir='./',
+                                  post_process=post_process,
+                                  kept_vars=self.var[0],
+                                  vortex_dir=self.indir,
+                                  ext='netcdf',
+                                  return_dataset=True,
+                                  host=HOST,
+                                  user=self.user)            
         """print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
         self.dirhost = self.indir
         self.indir = config_class.config['global']['tmp_repository'].split('/')
