@@ -26,18 +26,6 @@ class PlotMap:
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
-        self.boundary = self.config_plot['boundary'].split('/')
-        self.listlev = self.boundary[2].split(',')
-        if self.listlev[0] == 'None':
-            self.listlev = None
-        elif self.listlev[0] != 'None' and self.listlev[1] == 'None':
-            self.listlev = [int(self.listlev[0])]
-        elif self.listlev[0] != 'None' and self.listlev[1] != 'None':
-            if self.listlev[0] == self.listlev[1]:
-                self.listlev = [int(self.listlev[0])]
-            else:
-                self.listlev = np.arange(int(self.listlev[0]), int(self.listlev[1]))
-        
         self.param_plot_obj = list_of_plot(self.order,
                                           self.listvar,
                                           self.listexp,
