@@ -187,8 +187,8 @@ class Netcdf_mocage:
                 ds = None
         return ds
 
-    def cmp_boundaries(self):
-        plot = self.config_class.config['global']['type_plot']
+    def cmp_boundaries(self, config_class):
+        plot = sconfig_class.config['global']['type_plot']
         self.boundary = self.config_class.config[plot]['boundary']
         if self.boundary[0] != 'None':
             if len(self.boundary[0].split(',')) == 1:
@@ -249,7 +249,7 @@ class Netcdf_mocage:
                        ds.coords['lon'].values[-1]]
         self.latbnd = [ds.coords['lat'].values[0],
                        ds.coords['lat'].values[-1]]
-        self.cmp_boundaries()
+        self.cmp_boundaries(config_class)
         print(self.lonbnd)      
             
         
