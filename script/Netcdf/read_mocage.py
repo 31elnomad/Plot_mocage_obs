@@ -81,6 +81,8 @@ class Netcdf_mocage:
 
     def getfile(self, config_class):
         HOST = self.config_nc['host']
+        print(self.var)
+        quit()
         if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:   
             if self.type_file in ['daily', 'min', 'max', 'hourly', 'post_cams', 'post_prevair']:
                 post_process = self.type_file
