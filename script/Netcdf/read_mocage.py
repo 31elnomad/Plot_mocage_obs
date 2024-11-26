@@ -80,7 +80,27 @@ class Netcdf_mocage:
                 self.filename1 = f'grid.mocage-forecast.{self.domain.lower()}+{str(echeance).zfill(4)}:00.netcdf'
 
     def getfile(self, config_class):
-        print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
+        HOST = self.config_nc['host']
+        if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:   
+            if self.type_file in ['daily', 'min', 'max', 'hourly', 'post_cams', 'post_prevair']:
+                post_process = self.type_file
+            else:
+                post_process = False
+            from get_data import get_mocage
+            get_mocage(exp=self.nameexp,
+                       vconf=self.conf,
+                       date=self.date,
+                       term=self.echeance,
+                       cutoff=self.reseau,
+                       output_dir='./',
+                       output_dir=post_process,
+                       kepts_vars=self.var.split(':')[0],
+                       vortex_dir=None,
+                       ext='netcdf'
+                       return_dataset=True,
+                       host=HOST,
+                       user=self.user)            
+        """print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
         self.dirhost = self.indir
         self.indir = config_class.config['global']['tmp_repository'].split('/')
         self.indir.append(self.pseudo)
@@ -131,15 +151,19 @@ class Netcdf_mocage:
             else:
                 raise Exception("La récupération des données sur {} n'est pas implémenté".format(HOST))
 
-    def open_netcdf(self):
+    def open_netcdf(self):"""
+        
         
 
     def process_netcdf(self, config_class):
-        self.create_filename()
+        if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
+            out_file = self.getfile(config_class)
+            print(out_file)
+        """self.create_filename()
         if config_class.config[self.pseudo]['get_file'].upper() in ['TRUE', 'T']:
             self.getfile(config_class)
         else:
-            raise Exception("le cas get_file is False n'est pas implémenté")
+            raise Exception("le cas get_file is False n'est pas implémenté")"""
             
         
                 
