@@ -90,7 +90,7 @@ class Netcdf_mocage:
             from get_data import get_mocage
             out_file = get_mocage(exp=self.nameexp,
                                   vconf=self.conf,
-                                  date,self.date,
+                                  date=self.date,
                                   domain=self.domain.lower(),
                                   term=self.echeance,
                                   cutoff=self.suffix,
