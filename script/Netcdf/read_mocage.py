@@ -30,7 +30,6 @@ class Netcdf_mocage:
             self.nameexp = self.config_nc['nameexp']
             self.suffix = self.config_nc['suffix']
             self.group = self.config_nc['group']
-            self.reseau = self.config_nc['reseau']
             self.echeance = int(self.config_nc['echeance'])
         elif self.tree in ['script']:
             self.type_exp = self.config_nc['typeexp'].lower()
