@@ -181,7 +181,7 @@ class Netcdf_mocage:
 
     def cmp_boundaries(self):
         self.boundary = self.config_nc['boundary']
-        if self.domain.lower() in ['glob11', 'glob05']
+        if self.domain.lower() in ['glob11', 'glob05']:
             self.lonbnd = [-180., 180.]
             self.latbnd = [-90., 90.]
             
