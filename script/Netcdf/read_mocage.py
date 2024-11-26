@@ -192,13 +192,15 @@ class Netcdf_mocage:
         self.boundary = config_class.config[plot]['boundary']
         if self.boundary[0] != 'None':
             if len(self.boundary[0].split(',')) == 1:
-                tmp = self.boundary[0].split(',').astype(float)
+                tmp = self.boundary[0].split(',')
+                tmp = [float(i) for i in tmp]
                 if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1]:
                     self.lonbnd = [tmp[0], tmp[0]]
                 else:
                     raise Exception("La longitude donnée dans [plot][boundary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[0].split(',')) == 2:
-                tmp = self.boundary[0].split(',').astype(float)
+                tmp = self.boundary[0].split(',')
+                tmp = [float(i) for i in tmp]
                 if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.lonbnd[0] and tmp[1] <= self.lonbnd[1]:
                     self.lonbnd = [tmp[0], tmp[1]]
                 else:
@@ -207,13 +209,15 @@ class Netcdf_mocage:
                 raise Exception('Probleme, il y a 3 longitudes données dans boundary')
         if self.boundary[1] != 'None':
             if len(self.boundary[1].split(',')) == 1:
-                tmp = self.boundary[1].split(',').astype(float)
+                tmp = self.boundary[1].split(',')
+                tmp = [float(i) for i in tmp]
                 if tmp[0] >= self.latbnd[0] and tmp[0] <= self.latbnd[1]:
                     self.latbnd = [tmp[0], tmp[0]]
                 else:
                     raise Exception("La latitude donnée dans [plot][boundary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[1].split(',')) == 2:
-                tmp = self.boundary[1].split(',').astype(float)
+                tmp = self.boundary[1].split(',')
+                tmp = [float(i) for i in tmp]
                 if tmp[0] >= self.latbnd[0] and tmp[0] <= self.latbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.latbnd[0] and tmp[1] <= self.latbnd[1]:
                     self.latbnd = [tmp[0], tmp[1]]
                 else:
@@ -222,13 +226,15 @@ class Netcdf_mocage:
                 raise Exception('Probleme, il y a 3 latitudes données dans boundary')
         if self.boundary[2] != 'None':
             if len(self.boundary[2].split(',')) == 1:
-                tmp = self.boundary[2].split(',').astype(float)
+                tmp = self.boundary[2].split(',')
+                tmp = [int(i) for i in tmp]
                 if tmp[0] >= self.levbnd[0] and tmp[0] <= self.levbnd[1]:
                     self.levbnd = [tmp[0], tmp[0]]
                 else:
                     raise Exception("Le level donnée dans [plot][boundary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[2].split(',')) == 2:
-                tmp = self.boundary[2].split(',').astype(float)
+                tmp = self.boundary[2].split(',')
+                tmp = [int(i) for i in tmp]
                 if tmp[0] >= self.levbnd[0] and tmp[0] <= self.levbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.levbnd[0] and tmp[1] <= self.levbnd[1]:
                     self.levbnd = [tmp[0], tmp[1]]
                 else:
