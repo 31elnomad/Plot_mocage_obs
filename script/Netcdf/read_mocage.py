@@ -189,49 +189,49 @@ class Netcdf_mocage:
 
     def cmp_boundaries(self):
         self.boundary = self.config_nc['boundary']
-        if self.boudary[0] != 'None':
+        if self.boundary[0] != 'None':
             if len(self.boundary[0].split(',')) == 1:
                 tmp = self.boundary[0].split(',').astype(float)
                 if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1]:
                     self.lonbnd = [tmp[0], tmp[0]]
                 else:
-                    raise Exception("La longitude donnée dans [plot][boudary] est en dehors du domain {}".format(self.domain.lower()))
+                    raise Exception("La longitude donnée dans [plot][boundary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[0].split(',')) == 2:
                 tmp = self.boundary[0].split(',').astype(float)
                 if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.lonbnd[0] and tmp[1] <= self.lonbnd[1]:
                     self.lonbnd = [tmp[0], tmp[1]]
                 else:
-                    raise Exception("Les longitudes données dans [plot][boudary] sont en dehors du domain {}".format(self.domain.lower()))
+                    raise Exception("Les longitudes données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
                 raise Exception('Probleme, il y a 3 longitudes données dans boundary')
-        if self.boudary[1] != 'None':
+        if self.boundary[1] != 'None':
             if len(self.boundary[1].split(',')) == 1:
                 tmp = self.boundary[1].split(',').astype(float)
                 if tmp[0] >= self.latbnd[0] and tmp[0] <= self.latbnd[1]:
                     self.latbnd = [tmp[0], tmp[0]]
                 else:
-                    raise Exception("La latitude donnée dans [plot][boudary] est en dehors du domain {}".format(self.domain.lower()))
+                    raise Exception("La latitude donnée dans [plot][boundary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[1].split(',')) == 2:
                 tmp = self.boundary[1].split(',').astype(float)
                 if tmp[0] >= self.latbnd[0] and tmp[0] <= self.latbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.latbnd[0] and tmp[1] <= self.latbnd[1]:
                     self.latbnd = [tmp[0], tmp[1]]
                 else:
-                    raise Exception("Les latitudes données dans [plot][boudary] sont en dehors du domain {}".format(self.domain.lower()))
+                    raise Exception("Les latitudes données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
                 raise Exception('Probleme, il y a 3 latitudes données dans boundary')
-        if self.boudary[2] != 'None':
+        if self.boundary[2] != 'None':
             if len(self.boundary[2].split(',')) == 1:
                 tmp = self.boundary[2].split(',').astype(float)
                 if tmp[0] >= self.levbnd[0] and tmp[0] <= self.levbnd[1]:
                     self.levbnd = [tmp[0], tmp[0]]
                 else:
-                    raise Exception("Le level donnée dans [plot][boudary] est en dehors du domain {}".format(self.domain.lower()))
+                    raise Exception("Le level donnée dans [plot][boundary] est en dehors du domain {}".format(self.domain.lower()))
             elif len(self.boundary[2].split(',')) == 2:
                 tmp = self.boundary[2].split(',').astype(float)
                 if tmp[0] >= self.levbnd[0] and tmp[0] <= self.levbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.levbnd[0] and tmp[1] <= self.levbnd[1]:
                     self.levbnd = [tmp[0], tmp[1]]
                 else:
-                    raise Exception("Les levels données dans [plot][boudary] sont en dehors du domain {}".format(self.domain.lower()))
+                    raise Exception("Les levels données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
                 raise Exception('Probleme, il y a 3 levels données dans boundary')
     
