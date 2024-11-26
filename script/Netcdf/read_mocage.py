@@ -35,54 +35,61 @@ class Netcdf_mocage:
             self.type_exp = self.config_nc['typeexp'].lower()
             self.wlength = None
             if self.type_exp.lower() not in ['direct']:
-                self.wlength = int(self.config_nc['wlength'])
-
-    def create_directory(self):
-        if self.tree in ['scripts']:
-            self.indir = f'/home/{self.user}/MOCAGEHM/{self.nameexp}/'
-        elif self.tree in ['vortex']:
-            self.indir = f'/home/{self.user}/vortex/mocage/{self.conf}/{self.nameexp.upper()}/'
-            d = self.date - datetime.timedelta(hours=self.echeance)
-            self.indir += d.strftime("%Y%m%d") + 'T'
-            self.indir += self.reseau.zfill(4) + self.suffix + '/' + self.group
-        elif self.tree.upper() in ['OPER', 'MIRR', 'DBLE']:
-            self.indir = f'/chaine/mxpt/mxpt001/vortex/mocage/{self.conf}/{self.tree.upper()}/'
-            self.indir += f'{self.datet.year}/{str(self.date.month).zfill(2)}/'
-            self.indir += f'{str(self.date.day).zfill(2)}/T'
-            self.indir += self.reseau.zfill(4) + self.suffix + '/' + self.group
-        else:
-            raise Exception("{} est inconnu ou non implémenté".format(self.tree))
+                self.wlength = int(self.config_nc['wlength'])       
 
     def create_filename(self):
-        self.create_directory()
+        self.dirhost = f'/home/{self.user}/MOCAGEHM/{self.nameexp}/'
         self.filename2, self.filename3, self.filename4 = None, None, None
-        if self.type_file in ['PPS1']:
-            self.filename1 = f'ppstats.mocage-first_level.{self.domain}+0024.netcdf'
-        elif self.type_file in ['HMnc']:
-            if self.tree in ['script']:
-                if self.type_exp.lower() in ['direct']:
-                    self.filename1 = f'HM{self.domain.upper()} + {self.date.strftime('%Y%m%d%H')}.nc'
-                elif self.type_exp.upper() in ['ANA', 'DRY', 'BKG']:
-                    nwind, nwind1 = compyte_nwind(self.wlength, int(self.date.hour))
-                    filename = f'HM{self.domain.upper()}+{self.date.strftime("%Y%m%d%H")}'
-                    w_exp = f'+{self.type_exp.upper()}"_W{str(nwind).zfill(2)}.nc'
-                    self.filename1 = filename + w_exp
-                    if self.wlength != 1:
-                        w_exp = f'+{self.type_exp.upper()}"_W{str(nwind1).zfill(2)}.nc'
-                        self.filename2 = filename + w_exp
-                    if self.type_exp.upper() == 'ANA':
-                        self.filename3 = filename + f'+BKG_W{str(nwind).zfill(2)}.nc'
-                        self.filename4 = filename + f'+BKG_W{str(nwind1).zfill(2)}.nc'
-                else:
-                    raise Exception('{} is not implemented'.format(self.type_exp))
-            else:
-                echeance = int(self.date.hour) + self.echeance
-                self.filename1 = f'grid.mocage-forecast.{self.domain.lower()}+{str(echeance).zfill(4)}:00.netcdf'
+        
+        if self.type_exp.lower() in ['direct']:
+            self.filename1 = f'HM{self.domain.upper()} + {self.date.strftime('%Y%m%d%H')}.nc'
+        elif self.type_exp.upper() in ['ANA', 'DRY', 'BKG']:
+            nwind, nwind1 = compyte_nwind(self.wlength, int(self.date.hour))
+            filename = f'HM{self.domain.upper()}+{self.date.strftime("%Y%m%d%H")}'
+            w_exp = f'+{self.type_exp.upper()}"_W{str(nwind).zfill(2)}.nc'
+            self.filename1 = filename + w_exp
+            if self.wlength != 1:
+                w_exp = f'+{self.type_exp.upper()}"_W{str(nwind1).zfill(2)}.nc'
+                self.filename2 = filename + w_exp
+            if self.type_exp.upper() == 'ANA':
+                self.filename3 = filename + f'+BKG_W{str(nwind).zfill(2)}.nc'
+                self.filename4 = filename + f'+BKG_W{str(nwind1).zfill(2)}.nc'
+        else:
+            raise Exception('{} is not implemented'.format(self.type_exp))
+
 
     def getfile(self, config_class):
         HOST = self.config_nc['host']
+        return_dataset = True
+        if self.config_nc['getfile'].lower() in ['t', 'true']:
+            return_dataset = False
+            out_file_name = "{exp}_{dom}_{dt}00-{hhh}.{ext}"
+            if self.tree in ['vortex']:
+                outfile_name = outfile_name.format(
+                    exp=self.nameexp,
+                    dom=self.domain.lower(),
+                    dt=self.date.strftime('%Y%m%d'),
+                    hhh=str(int(self.date.strftime('%H')) + self.echeance).zfill(3),
+                    ext='netcdf')
+            elif self.tree in ['script]:
+                outfile_name = outfile_name.format(
+                    exp=self.pseudo,
+                    dom=self.domain.lower(),
+                    dt=self.date.strftime('%Y%m%d'),
+                    hhh=str(int(self.date.strftime('%H')) + self.echeance).zfill(3),
+                    ext='netcdf')
+            self.dirtmp = config_class.config['global']['dirtmp'].split('/')
+            self.dirtmp.append(self.pseudo)
+            if self.tree in ['vortex']:
+                if self.group in ['analyse']:
+                    self.dirtmp.append('A')
+                else:
+                    self.dirtmp.append('P')
+            self.dirtmp = '/' +  os.path.join(*self.dirtmp)   
+            if not os.path.isdir(self.dirtmp):
+                os.makedirs(self.dirtmp)
+        
         if self.tree.lower() in ['vortex', 'oper', 'dble', 'mirr']:  
-            self.create_directory()
             if self.type_file in ['daily', 'min', 'max', 'hourly', 'post_cams', 'post_prevair']:
                 post_process = self.type_file
             else:
@@ -94,15 +101,23 @@ class Netcdf_mocage:
                                   domain=self.domain.lower(),
                                   term=self.echeance,
                                   cutoff=self.suffix,
-                                  output_dir='./',
+                                  output_dir=self.dirtmp,
                                   post_process=post_process,
-                                  kept_vars=self.var[0],
+                                  kept_vars=None,
                                   vortex_dir=self.group,
                                   ext='netcdf',
-                                  return_dataset=True,
+                                  return_dataset=return_dataset,
                                   host=HOST,
                                   user=self.user)      
-            print(out_file)
+        elif self.tree.lower() in ['script', 'scripts']:
+            from get_data import get_login_info, ftp_get_buffer
+            self.create_filename()
+            login_info = get_login_info(HOST)
+            ftp_get_buffer(remote_file, HOST, login_info=login_info)
+
+        else:
+            raise Exception("{} est inconnu ou non implémenté".format(self.tree))
+            
             
         """print(self.nameexp, self.date, os.path.join(self.indir, self.filename1))
         self.dirhost = self.indir
