@@ -25,6 +25,7 @@ class Netcdf_mocage:
         self.user = self.config_nc['user']
         self.tree = self.config_nc['tree']
         self.type_file = self.config_nc['type_file']
+        self.plot_type = config_class.config['global']['type_plot']
         if self.tree not in ['script']:
             self.conf = self.config_nc['conf']
             self.nameexp = self.config_nc['nameexp']
@@ -178,12 +179,33 @@ class Netcdf_mocage:
                 ds = None
         return ds
 
+    def cmp_boundaries(self):
+        self.boundary = self.config_nc['boundary']
+        if self.domain.lower() in ['glob11', 'glob05']
+            self.lonbnd = [-180., 180.]
+            self.latbnd = [-90., 90.]
+            
+
+            
+        
+        if self.boudary[0] != 'None':
+            if len(self.boundary[0].split(',')) == 1:
+                self.lonmin = float(self.boundary[0][0])
+                self.lonmax = float(self.boundary[0][0])
+            elif len(self.boundary[0].split(',')) == 2:
+                self.lonmin = float(self.boundary[0][0])
+                self.lonmax = float(self.boundary[0][1])
+    
+            
+        
+
     def process_netcdf(self, config_class):
         ds = self.getfile(config_class)
         if self.config_nc['getfile'].lower() in ['t', 'true']:
             ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
-        ds = ds[self.var[0]].squeeze()
-        print(ds)
+        print(ds.attrs('levels')
+        #ds = ds[self.var[0]].squeeze()
+        #print(ds)
        
             
         
