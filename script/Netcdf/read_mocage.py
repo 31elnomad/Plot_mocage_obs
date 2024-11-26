@@ -78,7 +78,7 @@ class Netcdf_mocage:
                     self.dirtmp.append('A')
                 else:
                     self.dirtmp.append('P')
-            elif self.tree in ['script]:
+            elif self.tree in ['script']:
                 self.outfile_name = outfile_name.format(
                         exp=self.pseudo,
                         dom=self.domain.lower(),
