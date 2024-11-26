@@ -88,13 +88,7 @@ class Netcdf_mocage:
             else:
                 post_process = False
             from get_data import get_mocage
-            get_mocage(exp=self.nameexp,
-                       vconf=self.conf,
-                       date=self.date,
-                       domain=self.domain.lower(),
-                       term=self.echeance,
-                       cutoff=self.suffix,
-                       output_dir='./',
+            get_mocage(output_dir='./',
                        post_process=post_process,
                        kept_vars=self.var[0],
                        vortex_dir=self.indir,
