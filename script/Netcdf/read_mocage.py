@@ -93,7 +93,7 @@ class Netcdf_mocage:
                 self.post_process = False
             
             if self.config_nc['getfile'].lower() in ['t', 'true']:
-                if not os.path.exists(os.path.join(self.dirtmp, out_filename)):
+                if not os.path.exists(os.path.join(self.dirtmp, self.outfile_name)):
                     ds = self.__get_file__(False, HOST, [self.var[0]])
                 else:
                     ds = xr.open_dataset(outfile_name)
@@ -102,7 +102,7 @@ class Netcdf_mocage:
                         pres_var.append(self.var[0])
                         ds = self.__get_file__(False, HOST, pres_var)
                     else:
-                        print('File {} already contains {}'.format(outfile_name, self.var[0]))
+                        print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
             else:
                  ds = self.__get_file__(True, HOST, 'all')    
         elif self.tree.lower() in ['script', 'scripts']:
