@@ -92,7 +92,7 @@ class Netcdf_mocage:
                        date=self.date,
                        domain=self.domain.lower(),
                        term=self.echeance,
-                       cutoff=self.reseau,
+                       cutoff=self.suffix,
                        output_dir='./',
                        post_process=post_process,
                        kept_vars=self.var[0],
