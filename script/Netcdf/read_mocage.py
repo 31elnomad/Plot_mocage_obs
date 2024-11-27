@@ -245,7 +245,8 @@ class Netcdf_mocage:
 
     def selectdata(self, ds):
         self.lon = ds['lon'].values
-        self.lat =ds['lat'].values
+        self.lat = ds['lat'].values
+        self.lev = ds['lev'].values
         if self.lonbnd[0] != self.lonbnd[1]:
             masklon = ds['lon'].values >= self.lonbnd[0]
             masklon2 = ds['lon'].values <= self.lonbnd[1]
@@ -256,7 +257,32 @@ class Netcdf_mocage:
             tmp = list(np.abs(self.lon - self.lonbnd[0]))
             idx = np.argmin(tmp)
             masklon[idx] = True
-        print(self.lon[masklon])
+        if self.latbnd[0] != self.latbnd[1]:
+            masklat = ds['lat'].values >= self.latbnd[0]
+            masklat2 = ds['lat'].values <= self.latbnd[1]
+            masklat *= masklat2
+        else:
+            masklat = np.empty(len(self.lat)).astype(bool)
+            masklat[:] = False
+            tmp = list(np.abs(self.lat - self.latbnd[0]))
+            idx = np.argmin(tmp)
+            masklat[idx] = True
+
+        if self.levbnd[0] != self.levbnd[1]:
+            masklev = ds['lev'].values >= self.levbnd[0]
+            masklev2 = ds['lev'].values <= self.levbnd[1]
+            masklev *= masklev2
+        else:
+            masklev = np.empty(len(self.lev)).astype(bool)
+            masklev[:] = False
+            tmp = list(np.abs(self.lev - self.levbnd[0]))
+            idx = np.argmin(tmp)
+            masklev[idx] = True
+        print(ds[self.var[0]])
+        quit()
+        self.lon = self.lon[masklon]
+        self.lat = self.lat[masklat]
+        self.lev = self.lev[masklev]
     
             
         
