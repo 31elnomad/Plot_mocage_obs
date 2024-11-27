@@ -241,6 +241,9 @@ class Netcdf_mocage:
                     raise Exception("Les levels données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
                 raise Exception('Probleme, il y a 3 levels données dans boundary')
+
+    def selectdata(self, ds):
+        print(ds)
     
             
         
@@ -255,8 +258,8 @@ class Netcdf_mocage:
                        ds.coords['lon'].values[-1]]
         self.latbnd = [ds.coords['lat'].values[0],
                        ds.coords['lat'].values[-1]]
-        self.cmp_boundaries(config_class)
-        print(self.lonbnd)      
+        self.cmp_boundaries(config_class)    
+        print(ds)
             
         
                 
