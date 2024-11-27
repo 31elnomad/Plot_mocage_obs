@@ -259,7 +259,7 @@ class Netcdf_mocage:
         self.latbnd = [ds.coords['lat'].values[0],
                        ds.coords['lat'].values[-1]]
         self.cmp_boundaries(config_class)    
-        print(ds)
+        print(ds.coord)
             
         
                 
