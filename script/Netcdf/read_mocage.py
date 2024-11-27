@@ -278,7 +278,7 @@ class Netcdf_mocage:
             tmp = list(np.abs(self.lev - self.levbnd[0]))
             idx = np.argmin(tmp)
             masklev[idx] = True
-        print(ds[self.var[0]].values.shape)
+        print(ds[self.var[0]].squeeze().values.shape)
         quit()
         self.lon = self.lon[masklon]
         self.lat = self.lat[masklat]
