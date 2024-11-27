@@ -251,7 +251,7 @@ class Netcdf_mocage:
             masklon2 = ds['lon'].values <= self.lonbnd[1]
             masklon *= masklon2
         else:
-            masklon = np.empty(len(self.lon))
+            masklon = np.empty(len(self.lon)).astype(bool)
             masklon[:] = False
             tmp = list(np.abs(self.lon - self.lonbnd[0]))
             idx = np.argmin(tmp)
