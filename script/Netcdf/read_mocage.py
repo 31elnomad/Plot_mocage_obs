@@ -243,7 +243,7 @@ class Netcdf_mocage:
                 raise Exception('Probleme, il y a 3 levels données dans boundary')
 
     def selectdata(self, ds):
-        print(ds['lon'].values)
+        print(ds['lon'].values>= self.lonbnd[0])
     
             
         
