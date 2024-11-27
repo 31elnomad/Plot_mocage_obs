@@ -30,7 +30,7 @@ class PlotMap:
         if self.boundary[2] == 'None':
             self.listlev = None
         else:
-            self.listlev = self.boundary.split(',')
+            self.listlev = self.boundary[2].split(',')
         self.param_plot_obj = list_of_plot(self.order,
                                           self.listvar,
                                           self.listexp,
