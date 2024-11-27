@@ -246,7 +246,7 @@ class Netcdf_mocage:
         masklon1 = ds['lon'].values >= self.lonbnd[0]
         masklon2 = ds['lon'].values <= self.lonbnd[1]
         masklon1 *= masklon2
-        print(ds['lon'].values[masklon2])
+        print(ds['lon'].values[masklon1])
     
             
         
