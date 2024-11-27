@@ -252,6 +252,7 @@ class Netcdf_mocage:
         self.lat = ds['lat'].values
         self.lev = ds['lev'].values
         self.data = ds[self.var[0]].squeeze().values
+        print(self.data.shape, '1')
         self.psurf = ds['air_pressure_at_surface'].squeeze().values
         self.a = ds['a_hybr_coord'].values
         self.b = ds['b_hybr_coord'].values
@@ -278,7 +279,7 @@ class Netcdf_mocage:
             else:
                 self.data = self.data[:,idx_lon1]
             self.psurf = self.psurf[:, idx_lon1]
-        print(self.data)
+        print(self.data.shape, '2')
         quit()
         if self.latbnd[0] != self.latbnd[1]:
             tmp = list(np.abs(self.lat - self.latbnd[1]))
