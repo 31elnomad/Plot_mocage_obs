@@ -279,7 +279,7 @@ class Netcdf_mocage:
             else:
                 self.data = self.data[:,idx_lon1]
             self.psurf = self.psurf[:, idx_lon1]
-        print(self.data.shape, '2')
+        print(self.data.shape, '2', idx_lon1, idx_lon2)
         quit()
         if self.latbnd[0] != self.latbnd[1]:
             tmp = list(np.abs(self.lat - self.latbnd[1]))
