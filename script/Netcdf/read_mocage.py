@@ -243,7 +243,7 @@ class Netcdf_mocage:
                 raise Exception('Probleme, il y a 3 levels données dans boundary')
 
     def selectdata(self, ds):
-        print(ds.coord)
+        print(ds['lon'].values)
     
             
         
@@ -258,8 +258,8 @@ class Netcdf_mocage:
                        ds.coords['lon'].values[-1]]
         self.latbnd = [ds.coords['lat'].values[0],
                        ds.coords['lat'].values[-1]]
-        self.cmp_boundaries(config_class)    
-        print(ds['lon'])
+        self.cmp_boundaries(config_class)
+        self.selectdate(ds)
             
         
                 
