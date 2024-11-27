@@ -255,47 +255,61 @@ class Netcdf_mocage:
         self.psurf = ds['air_pressure_at_surface'].squeeze().values
         self.a = ds['a_hybr_coord'].values
         self.b = ds['b_hybr_coord'].values
+        tmp = list(np.abs(self.lon - self.lonbnd[0]))
+        idx_lon1 = np.argmin(tmp)
+        tmp = list(np.abs(self.lat - self.latbnd[0]))
+        idx_lat1 = np.argmin(tmp)
+        tmp = list(np.abs(self.lev - self.levbnd[0]))
+        idx_lev1 = np.argmin(tmp)
+        
         if self.lonbnd[0] != self.lonbnd[1]:
-            masklon = ds['lon'].values >= self.lonbnd[0]
-            masklon2 = ds['lon'].values <= self.lonbnd[1]
-            masklon *= masklon2
+            tmp = list(np.abs(self.lon - self.lonbnd[1]))
+            idx_lon2 = np.argmin(tmp)
+            self.lon = self.lon[idx_lon1:idx_lon2]
+            if len(self.data.shape) == 3:
+                self.data = self.data[:, :, idx_lon1:idx_lon2]
+            else:
+                self.data = self.data[:, idx_lon1:idx_lon2]
+            self.psurf = self.psurf[:, idx_lon1:idx_lon2]
         else:
-            masklon = np.empty(len(self.lon)).astype(bool)
-            masklon[:] = False
-            tmp = list(np.abs(self.lon - self.lonbnd[0]))
-            idx = np.argmin(tmp)
-            masklon[idx] = True
-        if self.latbnd[0] != self.latbnd[1]:
-            masklat = ds['lat'].values >= self.latbnd[0]
-            masklat2 = ds['lat'].values <= self.latbnd[1]
-            masklat *= masklat2
-        else:
-            masklat = np.empty(len(self.lat)).astype(bool)
-            masklat[:] = False
-            tmp = list(np.abs(self.lat - self.latbnd[0]))
-            idx = np.argmin(tmp)
-            masklat[idx] = True
+            self.lon = self.lon[idx_lon1]
+            if len(self.data.shape) == 3:
+                self.data = self.data[:, :, idx_lon1]
+            else:
+                self.data = self.data[:,idx_lon1]
+            self.psurf = self.psurf[:, idx_lon1]
 
-        if self.levbnd[0] != self.levbnd[1]:
-            masklev = ds['lev'].values >= self.levbnd[0]
-            masklev2 = ds['lev'].values <= self.levbnd[1]
-            masklev *= masklev2
+        if self.latbnd[0] != self.latbnd[1]:
+            tmp = list(np.abs(self.lat - self.latbnd[1]))
+            idx_lat2 = np.argmin(tmp)
+            self.lat = self.lat[idx_lat1:idx_lat2]
+            if len(self.data.shape) == 3:
+                self.data = self.data[:, idx_lat1:idx_lat2, :]
+            else:
+                self.data = self.data[idx_lat1:idx_lat2, :]
+            self.psurf = self.psurf[idx_lat1:idx_lat2, :]
         else:
-            masklev = np.empty(len(self.lev)).astype(bool)
-            masklev[:] = False
-            tmp = list(np.abs(self.lev - self.levbnd[0]))
-            idx = np.argmin(tmp)
-            masklev[idx] = True
-        if len(self.data.shape) == 2:
-            self.data = self.data[masklat, masklon]
-        elif len(self.data.shape) == 3:
-            self.data = self.data[masklev, masklat, masklon]
-        self.a = self.a[masklev]
-        self.b = self.b[masklev]
-        self.psurf = self.psurf[masklat, masklon]
-        self.lon = self.lon[masklon]
-        self.lat = self.lat[masklat]
-        self.lev = self.lev[masklev]
+            self.lat = self.lat[idx_lat1]
+            if len(self.data.shape) == 3:
+                self.data = self.data[:, idx_lat1, :]
+            else:
+                self.data = self.data[idx_lat1, :]
+            self.psurf = self.psurf[idx_lat1, :]
+            
+        if self.levbnd[0] != self.levbnd[1]:
+            tmp = list(np.abs(self.lev - self.levbnd[1]))
+            idx_lev2 = np.argmin(tmp)
+            self.lev = self.lev[idx_lev1:idx_lev2]
+            if len(self.data.shape) == 3:
+                self.data = self.data[idx_lev1:idx_lev2, :, :]
+            self.a = self.a[idx_lev1:idx_lev2]
+            self.b = self.b[idx_lev1:idx_lev2]
+        else:
+            self.lev = self.lev[idx_lev1]
+            if len(self.data.shape) == 3:
+                self.data = self.data[idx_lev1, :, :]
+            self.a = self.a[idx_lev1]
+            self.b = self.b[idx_lev1]
         print(self.data)
     
             
