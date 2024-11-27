@@ -10,6 +10,7 @@ import os
 import sys
 import datetime
 import xarray as xr
+import numpy as np
 
 class Netcdf_mocage:
 
