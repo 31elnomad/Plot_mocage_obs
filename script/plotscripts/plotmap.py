@@ -109,7 +109,10 @@ class PlotMap:
             ax = self.axs[List[-2]]
         else:
             ax = self.axs[List[-2], List[-3]]"""
-        fig, ax = plt.subplots(1, 1, self.subplot_kw)
+        fig, ax = plt.subplots(ncols = 1,
+                               nrows = 1,
+                               subplot_kw = self.subplot_kw)
+
         if self.pseudo is not None and self.var is not None and self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
