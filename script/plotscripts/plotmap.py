@@ -174,7 +174,7 @@ class PlotMap:
         self.param_one_plot = param_one_plot
         self.create_fig()
         self.create_list_param()
-        with Pool(1) as p:
+        with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
         from concat_plot import __concat_plot__
         __concat_plot__(self.fig, self.axs, results, 'a')
