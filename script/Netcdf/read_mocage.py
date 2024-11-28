@@ -384,7 +384,7 @@ class Netcdf_mocage:
             self.data[self.data < vmin] = np.nan
             if self.config_plot['maskmax'].lower() not in ['true', 't']:
                 self.extend = 'max'
-         if self.config_plot['maskmax'].lower() in ['true', 't']:
+        if self.config_plot['maskmax'].lower() in ['true', 't']:
             vmax = float(self.config_plot['vmax'])
             self.data[self.data > vmax] = np.nan
             if self.config_plot['maskmin'].lower() not in ['true', 't']:
