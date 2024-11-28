@@ -126,7 +126,7 @@ class PlotMap:
                                       self.var)
             nc_mocage.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
-        ax.pcolormesh([], [], [], transform=ccrs.Platecarree())
+        ax.pcolormesh([], [], [], transform=ccrs.PlateCarree())
 
     def cut_list(self, List):
         if len(List) == 6:
