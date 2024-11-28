@@ -171,7 +171,7 @@ class PlotMap:
         #    results = p.map(self.plot_para, self.param)
         print(self.param)
         quit()
-        self.plot_para(self.param)
+        self.plot_para(self.param[0])
         plt.savefig('test.png')
         plt.close()
         
