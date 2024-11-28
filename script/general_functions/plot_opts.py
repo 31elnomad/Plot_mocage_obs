@@ -17,9 +17,15 @@ def process_res(results):
         var = var[0]
     return filenames, sc, obj_data, var, unit
 
-def add_plot(ax, col, ligne, order, var, date, pseudo):
+def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, **kwargs):
     if order[0] == 'exp':
         title = pseudo[1]
+    if order[1] == 'date':
+        txt = date
     if ligne == 0:
         ax.set_title(title, fontsize=20)
+    loc_h = ylim[1] - 0.2*abs(ylim[1]-ylim[0])
+    loc = xlim[1] - 0.2*abs(xlim[1]-xlim[0])
+    if col == 0:
+        ax.text(loc, loc_h, txt, fontsize=16, color='white', bbox=dict(facecolor='black'), fontweight='bold')
         
