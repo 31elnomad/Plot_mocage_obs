@@ -359,14 +359,16 @@ class Netcdf_mocage:
                     raise Exception("Problème avec la dimension de la variable dans le netcdf") 
 
     def convert_data(self, ds):
+        unit = ds[self.var[0]].units
         if self.var[1] != '1':
-            unit = ds[self.var[0]].units
             if self.var[1] == 'DU' and self.var[0][-3:] =='_tc':
                 self.unit = self.var[1]
                 if unit == 'molec m-2':
                     self.data = self.data / 2.6867e20
             else:
                 raise Exception ("Convert {} n'est pas implémenté")
+        else:
+            self.unit = unit
 
     def cmp_vert_press(self):
         self.press = np.empty_like(self.lev)
