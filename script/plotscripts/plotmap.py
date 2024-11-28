@@ -131,10 +131,10 @@ class PlotMap:
         else:
             self.var = None
 
-    def __contourf__(self, ax):
+    def __contourf__(self, ax, nc_obj):
         cmap = self.config_plot['cmap']
         nlevs = int(self.config_plot['plot_opt'].split(':')[1])
-        ax.contourf(self.lon, self.lat, self.data, levels, **kwargs)
+        ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, levels, **kwargs)
         return x
 
     def plot_para(self, List):
@@ -162,7 +162,7 @@ class PlotMap:
                 nc_mocage.process_netcdf(self.config_class)  
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
                 if self.config_plot['plot_opt'] in ['contourf']:
-                    ax = __contourf__(self, ax)
+                    ax = __contourf__(self, ax, nc_mocage)
         else:
             from read_mocage import Netcdf_mocage
             nc_mocage = Netcdf_mocage(self.config_class,
