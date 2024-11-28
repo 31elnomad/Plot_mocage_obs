@@ -366,7 +366,7 @@ class Netcdf_mocage:
                        ds.coords['lat'].values[-1]]
         self.cmp_boundaries(config_class)
         self.selectdata(ds)
-        self.convert_data(self, ds)
+        self.convert_data(ds)
         print(self.data.shape)
             
         
