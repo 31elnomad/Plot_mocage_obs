@@ -21,7 +21,7 @@ class Netcdf_mocage:
             self.pseudo = pseudo[1]
         if self.pseudo is not None:
             self.config_nc = config_class.config[self.pseudo]
-        if date is not None:
+        if date is None:
             self.date = None
         else:
             self.date = datetime.datetime(int(date[:4]),
