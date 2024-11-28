@@ -152,35 +152,35 @@ class PlotMap:
         if self.pseudo is not None and self.var is not None and self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
-                nc_mocage = Netcdf_mocage(self.config_class,
-                                          self.pseudo,
-                                          self.date,
-                                          self.var)
-                nc_mocage.process_netcdf(self.config_class)  
-                ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2], idx)
+                self.obj_data = Netcdf_mocage(self.config_class,
+                                              self.pseudo,
+                                              self.date,
+                                              self.var)
+                self.obj_data.process_netcdf(self.config_class)  
+                ax = _set_cartopy_(self, self.obj_data, ax, List[-3], List[-2], idx)
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
                     from plot2d import __contourf__, __print_colorbar__
                     pas = float(self.config_plot['plot_opt'].split(':')[1])
                     vmin = float(self.config_plot['vmin'])
                     vmax = float(self.config_plot['vmax'])
-                    ax, sc = __contourf__(ax, nc_mocage, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
+                    ax, sc = __contourf__(ax, self.obj_data, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
                     if 'var' in self.order[:2] or 'lev' in self.order[:2]:
-                        __print_colorbar__(fig, sc, nc_mocage, self.config_plot)
+                        __print_colorbar__(fig, sc, self.obj_data, self.config_plot)
         else:
             from read_mocage import Netcdf_mocage
-            nc_mocage = Netcdf_mocage(self.config_class,
+            self.obj_data = Netcdf_mocage(self.config_class,
                                       self.pseudo,
                                       self.date,
                                       self.var)
-            nc_mocage.process_netcdf(self.config_class)  
-            ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2], idx)
+            self.obj_data.process_netcdf(self.config_class)  
+            ax = _set_cartopy_(self, self.obj_data, ax, List[-3], List[-2], idx)
             sc = None
             
         
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
-        return filename, sc
+        return filename, sc, self.obj_data
         
 
 
@@ -191,10 +191,14 @@ class PlotMap:
         self.create_list_param()
         with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
-        print(len(results))
-        quit()
+        sc = None
+        for r in results:
+            if sc is None and r[1] is not None:
+                sc = r[1]
         from concat_plot import __concat_plot__
-        __concat_plot__(self.fig, self.axs, results, 'a')
+        from plot2d import __print_colorbar__
+        self.axs = __concat_plot__(self.fig, self.axs, results, 'a')
+        __print_colorbar__(self.fig, sc, self.obj_data, self.config_plot)
         
         
 
