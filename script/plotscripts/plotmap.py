@@ -169,7 +169,7 @@ class PlotMap:
         self.create_list_param()
         #with Pool(5) as p:
         #    results = p.map(self.plot_para, self.param)
-        self.plot_para(self, self.param)
+        self.plot_para(self.param)
         plt.savefig('test.png')
         plt.close()
         
