@@ -1,4 +1,4 @@
-def __contourf__(self, ax, nc_obj, **kwargs):
+def __contourf__(ax, nc_obj, **kwargs):
         print(nc_obj.data)
         print('ok')
         cmap = self.config_plot['cmap']
