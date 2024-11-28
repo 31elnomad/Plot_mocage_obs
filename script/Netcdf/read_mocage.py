@@ -342,6 +342,13 @@ class Netcdf_mocage:
                     self.data = self.data[idx_lev1]
                 else:
                     raise Exception("Problème avec la dimension de la variable dans le netcdf") 
+
+    def convert_data(self, ds):
+        print('ok', ds[self.var[0]].units)
+        if self.var[1] == 'DU' and self.var[0][-3:] =='_tc' :
+            print('ok')
+        
+            
         
     
             
@@ -359,6 +366,7 @@ class Netcdf_mocage:
                        ds.coords['lat'].values[-1]]
         self.cmp_boundaries(config_class)
         self.selectdata(ds)
+        self.convert_data(self, ds)
         print(self.data.shape)
             
         
