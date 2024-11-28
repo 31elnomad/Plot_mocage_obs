@@ -19,7 +19,8 @@ class Netcdf_mocage:
             self.pseudo = None
         else:
             self.pseudo = pseudo[1]
-        self.config_nc = config_class.config[self.pseudo]
+        if self.pseudo is not None:
+            self.config_nc = config_class.config[self.pseudo]
         if date is not None:
             self.date = None
         else:
