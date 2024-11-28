@@ -360,7 +360,7 @@ class Netcdf_mocage:
 
     def convert_data(self, ds):
         if self.var[1] != '1':
-            unit = ds[self.var[0]].units
+            self.unit = ds[self.var[0]].units
             if self.var[1] == 'DU' and self.var[0][-3:] =='_tc':
                 if unit == 'molec m-2':
                     self.data = self.data / 2.6867e20
