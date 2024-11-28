@@ -123,8 +123,6 @@ class Netcdf_mocage:
                             pres_var.append('b_hybr_coord')
                         if 'air_pressure_at_surface' not in pres_var:
                             pres_var.append('air_pressure_at_surface')
-                        print(pres_var)
-                        quit()
                         ds = self.__get_file__(False, HOST, pres_var)
                     else:
                         print('File {} already contains {}'.format(self.outfile_name, self.var[0]))
