@@ -167,7 +167,7 @@ class PlotMap:
                     cbar_ax = fig.add_axes([0.84,0.12,0.02, 0.7])
                     cbar = fig.colorbar(sc, 
                                     cax=cbar_ax,
-                                    orientation="vertical"
+                                    orientation="vertical",
                                     extend=nc_mocage.extend
                                     )
                     print(nc_mocage.extend)
