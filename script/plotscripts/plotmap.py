@@ -99,37 +99,37 @@ class PlotMap:
                 print(f"Paramètre ajouté : {list_param_plot}")
 
         def cut_list(self, List):
-        if len(List) == 6:
-            if List[-1] in ['map_1', 'map_6']:
-                self.pseudo = List[0]
-            elif List[-1] in ['map_2', 'map_5']:
-                self.pseudo = List[1]
-            elif List[-1] in ['map_3', 'map_4']:
-                self.pseudo = List[2]
-            if List[-1] in ['map_2', 'map_4']:
-                self.date = List[0] 
-            elif List[-1] in ['map_1', 'map_3']:
-                self.date = List[1] 
-            elif List[-1] in ['map_5', 'map_6']:
-                self.date = List[2]
-            if List[-1] in ['map_3', 'map_5']:
-                self.var = List[0] 
-            elif List[-1] in ['map_4', 'map_6']:
-                self.var = List[1] 
-            elif List[-1] in ['map_1', 'map_2']:
-                self.var = List[2] 
-        else:
-            raise Exception("List avec 7 éléments pas encore codé dnas plotmap.py")
-        if self.pseudo != "None":
-            self.pseudo = self.pseudo.split(':')
-        else:
-            self.pseudo = None
-        if self.date == "None":
-            self.date = None
-        if self.var != "None":
-            self.var = self.var.split(':')
-        else:
-            self.var = None
+            if len(List) == 6:
+                if List[-1] in ['map_1', 'map_6']:
+                    self.pseudo = List[0]
+                elif List[-1] in ['map_2', 'map_5']:
+                    self.pseudo = List[1]
+                elif List[-1] in ['map_3', 'map_4']:
+                    self.pseudo = List[2]
+                if List[-1] in ['map_2', 'map_4']:
+                    self.date = List[0] 
+                elif List[-1] in ['map_1', 'map_3']:
+                    self.date = List[1] 
+                elif List[-1] in ['map_5', 'map_6']:
+                    self.date = List[2]
+                if List[-1] in ['map_3', 'map_5']:
+                    self.var = List[0] 
+                elif List[-1] in ['map_4', 'map_6']:
+                    self.var = List[1] 
+                elif List[-1] in ['map_1', 'map_2']:
+                    self.var = List[2] 
+            else:
+                raise Exception("List avec 7 éléments pas encore codé dnas plotmap.py")
+            if self.pseudo != "None":
+                self.pseudo = self.pseudo.split(':')
+            else:
+                self.pseudo = None
+            if self.date == "None":
+                self.date = None
+            if self.var != "None":
+                self.var = self.var.split(':')
+            else:
+                self.var = None
 
     def __contourf__(self, ax):
         cmap = self.config_plot['cmap']
