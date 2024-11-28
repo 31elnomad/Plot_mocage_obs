@@ -375,7 +375,7 @@ class Netcdf_mocage:
 
     def mask_data(self):
         self.extend = 'both'
-        if float(self.config_plot['vmin']) == 0. or (self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']):
+        if float(self.config_plot['vmin']) == 0. or (self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['false', 'f']):
             self.extend = 'max'
         elif self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']:
             self.extend = None
