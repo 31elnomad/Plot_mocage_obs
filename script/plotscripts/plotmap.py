@@ -135,6 +135,7 @@ class PlotMap:
         self.cut_list(List)
         idx = List[-3] + List[-2]*self.ncol
         from set_cartopy import _set_cartopy_
+        from plot_opts import add_plot
         fig, ax = plt.subplots(ncols = 1,
                                nrows = 1,
                                subplot_kw = self.subplot_kw)
@@ -166,6 +167,7 @@ class PlotMap:
             obj_data.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
             sc = None
+        add_plot(ax, List[-3], List[-2], self.order, self.var[0], self.date, self.pseudo)
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
