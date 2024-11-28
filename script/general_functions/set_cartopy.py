@@ -17,10 +17,10 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
     resol = '50m'
     land_color = '#D3D3D3'
     sea_color = '#D3D3D3'
-    if obj.obj_plot[0] == 'PlateCarree':
+    if obj_plot[0] == 'PlateCarree':
         central_longitude = float(obj_plot.proj[1])
     else:
-        raise Exception("La projection {} nest pas implémenté".format(self.proj[0]))
+        raise Exception("La projection {} nest pas implémenté".format(obj_plot.proj[0]))
     ax.add_feature(
         cfeature.NaturalEarthFeature(
             'physical',
