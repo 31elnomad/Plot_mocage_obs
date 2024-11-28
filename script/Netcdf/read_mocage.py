@@ -355,7 +355,7 @@ class Netcdf_mocage:
     def cmp_vert_press(self):
         self.press = np.empty_like(self.lev)
         for i in range(len(self.lev)):
-            self.press[i] = np.mean(self.psurf[:,:])*b[i] + a[i]
+            self.press[i] = np.mean(self.psurf[:,:])*self.b[i] + self.a[i]
         self.vert = np.log(101325 / self.press) / 0.00012
         
         
