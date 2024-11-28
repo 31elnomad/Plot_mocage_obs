@@ -405,6 +405,7 @@ class Netcdf_mocage:
             self.selectdata(ds)
             self.cmp_vert_press()
             self.convert_data(ds)
+            self.mask_data()
         else:
             self.levbnd = [1, 60]
             self.lonbnd = [-180., 180.]
