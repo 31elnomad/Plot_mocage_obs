@@ -48,14 +48,14 @@ class PlotMap:
         figsize = (int(figsize[0]), int(figsize[1]))
         self.proj = self.config_plot['projection'].split(':')
         if self.proj[0] in ['PlateCarree']:
-            self.subplot_kw = {'projection': ccrs.PlateCarree(
+            self.mapproj = ccrs.PlateCarree(
                             central_longitude=float(self.proj[1]))
-                        }
+            self.subplot_kw = {'projection': self.mapproj}
         elif self.proj[0] in ['Orthographic']:
-            self.subplot_kw={'projection': ccrs.Orthographic(
+            self.mapproj = ccrs.Orthographic(
                             central_longitude=float(self.proj[1].split('/')[0]),
                             central_latitude=float(self.proj[1].split('/')[1]))
-                        }
+            self.subplot_kw={'projection': self.mapproj}
         else:
             raise Exception("{} projection is unknown".format(self.proj[0]))
         self.fig, self.axs = plt.subplots(
@@ -131,13 +131,7 @@ class PlotMap:
         else:
             self.var = None
 
-    def __contourf__(self, ax, nc_obj):
-        print(nc_obj.data)
-        print('ok')
-        cmap = self.config_plot['cmap']
-        nlevs = int(self.config_plot['plot_opt'].split(':')[1])
-        ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, nlevs, cmap=cmap, **kwargs)
-        return x
+    
 
     def plot_para(self, List):
         self.cut_list(List)
@@ -164,7 +158,8 @@ class PlotMap:
                 nc_mocage.process_netcdf(self.config_class)  
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
-                    ax = __contourf__(self, ax, nc_mocage)
+                    from contourf import __contourf__
+                    ax = __contourf__(ax, nc_mocage, transform=self.mapproj)
         else:
             from read_mocage import Netcdf_mocage
             nc_mocage = Netcdf_mocage(self.config_class,
