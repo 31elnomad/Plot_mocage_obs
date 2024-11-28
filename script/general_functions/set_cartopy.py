@@ -70,12 +70,12 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
         gl.bottom_labels = True
     gl.xlabel_style = {'size': 20, 'color': 'black'}
     gl.ylabel_style = {'size': 20, 'color': 'black'}
-    if obj_plot.lonbnd[0] > obj_plot.lonbnd[1]:
+    if nc_obj.lonbnd[0] > nc_obj.lonbnd[1]:
         raise Exception ("Cas où lonbnd[0] > lonbnd[1] n'est pas implémenté")
-    ax.set_extent([obj_plot.lonbnd[0],
-                   obj_plot.lonbnd[1],
-                   obj_plot.latbnd[0],
-                   obj_plot.latbnd[1]],
+    ax.set_extent([nc_obj.lonbnd[0],
+                   nc_obj.lonbnd[1],
+                   nc_obj.latbnd[0],
+                   nc_obj.latbnd[1]],
                   crs=obj_plot.proj[0])
     return ax
         
