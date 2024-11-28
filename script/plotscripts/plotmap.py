@@ -98,46 +98,7 @@ class PlotMap:
                 # Affichage pour vérification
                 print(f"Paramètre ajouté : {list_param_plot}")
 
-    def plot_para(self, List):
-        self.cut_list(List)
-        from set_cartopy import _set_cartopy_
-        """if self.nligne == 1 and self.ncol == 1:
-            ax = self.axs
-        elif (self.nligne == 1 and self.ncol > 1):   
-            ax = self.axs[List[-3]]
-        elif (self.nligne > 1 and self.ncol == 1):
-            ax = self.axs[List[-2]]
-        else:
-            ax = self.axs[List[-2], List[-3]]"""
-        fig, ax = plt.subplots(ncols = 1,
-                               nrows = 1,
-                               subplot_kw = self.subplot_kw)
-
-        if self.pseudo is not None and self.var is not None and self.date is not None:
-            if self.pseudo[0] in ['exp']:
-                from read_mocage import Netcdf_mocage
-                nc_mocage = Netcdf_mocage(self.config_class,
-                                          self.pseudo,
-                                          self.date,
-                                          self.var)
-                nc_mocage.process_netcdf(self.config_class)  
-                ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
-        else:
-            from read_mocage import Netcdf_mocage
-            nc_mocage = Netcdf_mocage(self.config_class,
-                                      self.pseudo,
-                                      self.date,
-                                      self.var)
-            nc_mocage.process_netcdf(self.config_class)  
-            ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
-        idx = List[-3] + List[-2]*self.ncol
-        filename = f"subplot_{idx}.png"
-        plt.savefig(filename)
-        plt.close()
-        return filename
-        
-
-    def cut_list(self, List):
+        def cut_list(self, List):
         if len(List) == 6:
             if List[-1] in ['map_1', 'map_6']:
                 self.pseudo = List[0]
@@ -169,6 +130,56 @@ class PlotMap:
             self.var = self.var.split(':')
         else:
             self.var = None
+
+    def __contourf__(self, ax):
+        cmap = self.config_plot['cmap']
+        nlevs = int(self.config_plot['plot_opt'].split(':')[1])
+        ax.contourf(self.lon, self.lat, self.data, levels, **kwargs)
+        return x
+
+    def plot_para(self, List):
+        self.cut_list(List)
+        from set_cartopy import _set_cartopy_
+        """if self.nligne == 1 and self.ncol == 1:
+            ax = self.axs
+        elif (self.nligne == 1 and self.ncol > 1):   
+            ax = self.axs[List[-3]]
+        elif (self.nligne > 1 and self.ncol == 1):
+            ax = self.axs[List[-2]]
+        else:
+            ax = self.axs[List[-2], List[-3]]"""
+        fig, ax = plt.subplots(ncols = 1,
+                               nrows = 1,
+                               subplot_kw = self.subplot_kw)
+
+        if self.pseudo is not None and self.var is not None and self.date is not None:
+            if self.pseudo[0] in ['exp']:
+                from read_mocage import Netcdf_mocage
+                nc_mocage = Netcdf_mocage(self.config_class,
+                                          self.pseudo,
+                                          self.date,
+                                          self.var)
+                nc_mocage.process_netcdf(self.config_class)  
+                ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
+                if self.config_plot['plot_opt'] in ['contourf']:
+                    ax = __contourf__(self, ax)
+        else:
+            from read_mocage import Netcdf_mocage
+            nc_mocage = Netcdf_mocage(self.config_class,
+                                      self.pseudo,
+                                      self.date,
+                                      self.var)
+            nc_mocage.process_netcdf(self.config_class)  
+            ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
+            
+        idx = List[-3] + List[-2]*self.ncol
+        filename = f"subplot_{idx}.png"
+        plt.savefig(filename)
+        plt.close()
+        return filename
+        
+
+
 
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
