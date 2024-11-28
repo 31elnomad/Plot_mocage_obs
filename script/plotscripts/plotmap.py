@@ -135,6 +135,7 @@ class PlotMap:
 
     def plot_para(self, List):
         self.cut_list(List)
+        idx = List[-3] + List[-2]*self.ncol
         from set_cartopy import _set_cartopy_
         """if self.nligne == 1 and self.ncol == 1:
             ax = self.axs
@@ -156,7 +157,7 @@ class PlotMap:
                                           self.date,
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)  
-                ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
+                ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2], idx)
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
                     from contourf import __contourf__
                     pas = float(self.config_plot['plot_opt'].split(':')[1])
@@ -178,9 +179,9 @@ class PlotMap:
                                       self.date,
                                       self.var)
             nc_mocage.process_netcdf(self.config_class)  
-            ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
+            ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2], idx)
             
-        idx = List[-3] + List[-2]*self.ncol
+        
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
