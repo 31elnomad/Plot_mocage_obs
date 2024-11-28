@@ -202,8 +202,10 @@ class PlotMap:
                 obj_data = r[2]
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
-        self.axs = __concat_plot__(self.fig, self.axs, filenames, 'a')
-        __print_colorbar__(self.fig, sc, obj_data, self.config_plot)
+        self.axs = __concat_plot__(self.fig, self.axs, filenames)
+        if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
+            __print_colorbar__(self.fig, sc, obj_data, self.config_plot)
+        plt.thight_layout()
         plt.savefig('test.png')
         plt.close()
         
