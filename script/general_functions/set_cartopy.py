@@ -2,7 +2,7 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeLocator, LatitudeLocator, LongitudeFormatter, LatitudeFormatter
 
-def _set_cartopy_(obj, ax, ligne, col):
+def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
     """
     Set up Cartopy projection and features on a given axis.
 
@@ -17,8 +17,8 @@ def _set_cartopy_(obj, ax, ligne, col):
     resol = '50m'
     land_color = '#D3D3D3'
     sea_color = '#D3D3D3'
-    if obj.proj[0] == 'PlateCarree':
-        central_longitude = float(obj.proj[1])
+    if obj.obj_plot[0] == 'PlateCarree':
+        central_longitude = float(obj_plot.proj[1])
     else:
         raise Exception("La projection {} nest pas implémenté".format(self.proj[0]))
     ax.add_feature(
@@ -48,7 +48,7 @@ def _set_cartopy_(obj, ax, ligne, col):
         linewidth=2
     )
     gl = ax.gridlines(
-        crs=obj.proj[0],
+        crs=obj_plot.proj[0],
         draw_labels=True,
         linewidth=0.5,
         color='k',
@@ -56,9 +56,9 @@ def _set_cartopy_(obj, ax, ligne, col):
         linestyle='--',
         zorder=12
     )
-    gl.xlocator = LongitudeLocator(nbins=int(float(obj.grid[0])))
+    gl.xlocator = LongitudeLocator(nbins=int(float(obj_plot.grid[0])))
     gl.xformatter = LongitudeFormatter(auto_hide=False)
-    gl.ylocator = LatitudeLocator(nbins=int(float(obj.grid[1])))
+    gl.ylocator = LatitudeLocator(nbins=int(float(obj_plot.grid[1])))
     gl.yformatter = LatitudeFormatter(auto_hide=False) 
     gl.top_labels = False
     gl.left_labels = False
@@ -70,9 +70,13 @@ def _set_cartopy_(obj, ax, ligne, col):
         gl.bottom_labels = True
     gl.xlabel_style = {'size': 20, 'color': 'black'}
     gl.ylabel_style = {'size': 20, 'color': 'black'}
-    if obj.lonbnd[0] > obj.lonbnd[1]:
+    if obj_plot.lonbnd[0] > obj_plot.lonbnd[1]:
         raise Exception ("Cas où lonbnd[0] > lonbnd[1] n'est pas implémenté")
-    ax.set_extent([obj.lonbnd[0], obj.lonbnd[1], obj.latbnd[0], obj.latbnd[1]], crs=obj.projection[0])
+    ax.set_extent([obj_plot.lonbnd[0],
+                   obj_plot.lonbnd[1],
+                   obj_plot.latbnd[0],
+                   obj_plot.latbnd[1]],
+                  crs=obj_plot.projection[0])
     return ax
         
           
