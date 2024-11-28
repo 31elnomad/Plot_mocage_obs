@@ -108,7 +108,7 @@ class PlotMap:
         elif (self.nligne > 1 and self.ncol == 1):
             ax = self.axs[List[-2]]
         else:
-            ax = self.axs[List[-3], List[-2]]
+            ax = self.axs[List[-2], List[-3]]
         if self.pseudo is not None and self.var is not None and self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
