@@ -163,7 +163,7 @@ class PlotMap:
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)  
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
-                if self.config_plot['plot_opt'] in ['contourf']:
+                if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
                     ax = __contourf__(self, ax, nc_mocage)
         else:
             from read_mocage import Netcdf_mocage
