@@ -10,7 +10,7 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
     sc = ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, levels, kwargs=kwargs)
     return ax, sc
 
-def __print_colorbar__(fig, sc, config_plot):
+def __print_colorbar__(fig, sc, config_plot, obj_data):
     print('ok1')
     colorbar = config_plot['colorbar'].split(':')
     print(colorbar)
@@ -28,6 +28,6 @@ def __print_colorbar__(fig, sc, config_plot):
         cbar = fig.colorbar(sc, 
                         cax=cbar_ax,
                         orientation=orientation,
-                        extend=nc_mocage.extend
+                        extend=obj_data.extend
                         )
     print('ok2')
