@@ -203,10 +203,11 @@ class PlotMap:
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
         self.axs = __concat_plot__(self.fig, self.axs, filenames)
+        plt.tight_layout()
         if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
             print(sc)
             __print_colorbar__(self.fig, sc, self.config_plot)
-        plt.tight_layout()
+        
         plt.savefig('test.png')
         plt.close()
         
