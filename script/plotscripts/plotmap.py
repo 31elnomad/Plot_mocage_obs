@@ -25,7 +25,7 @@ class PlotMap:
         self.listvar = self.config_plot['listvar'].split(',')
         self.listexp = self.config_plot['listexp'].split(',')
         self.order = self.config_plot['order'].split(',')
-        self.grid = self.config_plot['grid'].split(,)
+        self.grid = self.config_plot['grid'].split(',')
         self.listdate = config_class.listdate
         self.boundary = self.config_plot['boundary'].split('/')
         self.proj = self.config_plot['projection'].split(':')
