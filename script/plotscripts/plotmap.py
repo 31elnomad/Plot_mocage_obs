@@ -118,7 +118,6 @@ class PlotMap:
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)  
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
-                ax.pcolormesh(nc_mocage.lon, nc_mocage.lat, nc_mocage.data, transform=ccrs.PlateCarree())
         else:
             from read_mocage import Netcdf_mocage
             nc_mocage = Netcdf_mocage(self.config_class,
