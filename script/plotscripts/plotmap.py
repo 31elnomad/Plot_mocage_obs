@@ -79,13 +79,15 @@ class PlotMap:
         for j in range(self.nligne):
             for i in range(self.ncol):
                 # Créer une nouvelle liste à chaque itération
-                list_param_plot = [None] * len(self.param_one_plot)
+                list_param_plot = [None] * (len(self.param_one_plot)+2)
                 # Remplissage des paramètres en fonction des indices
                 list_param_plot[0] = self.param_one_plot[0][keys1][i]  # Variable selon 'i'
                 list_param_plot[1] = self.param_one_plot[1][keys2][j]  # Variable selon 'j'
                 list_param_plot[2] = self.param_one_plot[2][keys3][0]  # Premier élément (fixe)
                 # Ajout du dernier paramètre commun
                 list_param_plot[-1] = self.param_one_plot[-1]
+                list_param_plot[-2] = j # ligne
+                list_param_plot[-3] = i # col
                 # Gestion conditionnelle du 4e paramètre
                 if len(self.param_one_plot) == 5:
                     list_param_plot[3] = self.param_one_plot[3][keys4][0]  # Premier élément (fixe)
