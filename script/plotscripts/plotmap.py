@@ -137,14 +137,6 @@ class PlotMap:
         self.cut_list(List)
         idx = List[-3] + List[-2]*self.ncol
         from set_cartopy import _set_cartopy_
-        """if self.nligne == 1 and self.ncol == 1:
-            ax = self.axs
-        elif (self.nligne == 1 and self.ncol > 1):   
-            ax = self.axs[List[-3]]
-        elif (self.nligne > 1 and self.ncol == 1):
-            ax = self.axs[List[-2]]
-        else:
-            ax = self.axs[List[-2], List[-3]]"""
         fig, ax = plt.subplots(ncols = 1,
                                nrows = 1,
                                subplot_kw = self.subplot_kw)
@@ -165,7 +157,8 @@ class PlotMap:
                     vmax = float(self.config_plot['vmax'])
                     ax, sc = __contourf__(ax, obj_data, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
                     if 'var' in self.order[:2] or 'lev' in self.order[:2]:
-                        __print_colorbar__(fig, sc, self.config_plot, obj_data)
+                        cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data)
+                        cbar.set_label("{} ({})".format(var, unit))
         else:
             from read_mocage import Netcdf_mocage
             obj_data = Netcdf_mocage(self.config_class,
@@ -180,7 +173,7 @@ class PlotMap:
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
-        return filename, sc, obj_data
+        return filename, sc, obj_data, self.var, self.units
         
 
 
@@ -191,23 +184,15 @@ class PlotMap:
         self.create_list_param()
         with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
-        sc = None
-        obj_data = None
-        filenames = []
-        for r in results:
-            filenames.append(r[0])
-            if sc is None and r[1] is not None:
-                sc = r[1]
-            if obj_data is None and r[2] is not None:
-                obj_data = r[2]
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
+        from plot_opts import process_res
+        filenames, sc, obj_data, ver, units = process_res(results)
         self.axs = __concat_plot__(self.fig, self.axs, filenames)
         plt.tight_layout()
         if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
-            print(sc)
-            __print_colorbar__(self.fig, sc, self.config_plot, obj_data)
-        
+            cbar = __print_colorbar__(self.fig, sc, self.config_plot, obj_data)
+            cbar.set_label("{} ({})".format(var, unit))
         plt.savefig('test.png')
         plt.close()
         
