@@ -48,11 +48,11 @@ class PlotMap:
         figsize = (int(figsize[0]), int(figsize[1]))
         self.proj = self.config_plot['projection'].split(':')
         if self.proj[0] in ['PlateCarree']:
-            subplot_kw = {'projection': ccrs.PlateCarree(
+            self.subplot_kw = {'projection': ccrs.PlateCarree(
                             central_longitude=float(self.proj[1]))
                         }
         elif self.proj[0] in ['Orthographic']:
-            subplot_kw={'projection': ccrs.Orthographic(
+            self.subplot_kw={'projection': ccrs.Orthographic(
                             central_longitude=float(self.proj[1].split('/')[0]),
                             central_latitude=float(self.proj[1].split('/')[1]))
                         }
@@ -64,7 +64,7 @@ class PlotMap:
                                     figsize = figsize,
                                     sharex = True,
                                     sharey = True,
-                                    subplot_kw = subplot_kw)
+                                    subplot_kw = self.subplot_kw)
 
     def create_list_param(self):
         # Extraction des clés de chaque dictionnaire
@@ -101,14 +101,15 @@ class PlotMap:
     def plot_para(self, List):
         self.cut_list(List)
         from set_cartopy import _set_cartopy_
-        if self.nligne == 1 and self.ncol == 1:
+        """if self.nligne == 1 and self.ncol == 1:
             ax = self.axs
         elif (self.nligne == 1 and self.ncol > 1):   
             ax = self.axs[List[-3]]
         elif (self.nligne > 1 and self.ncol == 1):
             ax = self.axs[List[-2]]
         else:
-            ax = self.axs[List[-2], List[-3]]
+            ax = self.axs[List[-2], List[-3]]"""
+        fig, ax = plt.subplots(self.subplot_kw)
         if self.pseudo is not None and self.var is not None and self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
@@ -126,7 +127,11 @@ class PlotMap:
                                       self.var)
             nc_mocage.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
-        return ax
+        idx = List[-3] + List[-2]*self.ncol
+        filename = f"subplot_{idx}.png"
+        plt.savefig(filename)
+        plt.close()
+        return filename
         
 
     def cut_list(self, List):
