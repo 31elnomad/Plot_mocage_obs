@@ -2,9 +2,6 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeLocator, LatitudeLocator, LongitudeFormatter, LatitudeFormatter
 
-import matplotlib
-matplotlib.use('agg')
-import matplotlib.pyplot as plt
 
 def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
     """
@@ -26,9 +23,6 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
         mapproj = ccrs.PlateCarree(central_longitude=central_longitude)
     else:
         raise Exception("La projection {} nest pas implémenté".format(obj_plot.proj[0]))
-    plt.savefig('test.png')
-    plt.close()
-    quit()
     ax.add_feature(
         cfeature.NaturalEarthFeature(
             'physical',
