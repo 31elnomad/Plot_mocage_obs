@@ -26,4 +26,6 @@ def __print_colorbar__(fig, sc, config_plot, obj_data):
                         orientation=orientation,
                         extend=obj_data.extend
                         )
+        cbar.set_label(label, fontsize=20) #24)
+        cbar.ax.tick_params(labelsize=20)
     return cbar
