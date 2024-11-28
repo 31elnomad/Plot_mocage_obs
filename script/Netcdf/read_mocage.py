@@ -15,13 +15,22 @@ import numpy as np
 class Netcdf_mocage:
 
     def __init__(self, config_class, pseudo, date, var):
-        self.pseudo = pseudo[1]
+        if pseudo is None:
+            self.pseudo = None
+        else:
+            self.pseudo = pseudo[1]
         self.config_nc = config_class.config[self.pseudo]
-        self.date = datetime.datetime(int(date[:4]),
-                                      int(date[4:6]),
-                                      int(date[6:8]),
-                                      int(date[8:10])) # 2024010100
-        self.var = var #SO_2_tc:DU,SO_2:1e9
+        if date is not None:
+            self.date = None
+        else:
+            self.date = datetime.datetime(int(date[:4]),
+                                          int(date[4:6]),
+                                          int(date[6:8]),
+                                          int(date[8:10])) # 2024010100
+        if var is None:
+            self.var = None
+        else:
+            self.var = var #SO_2_tc:DU,SO_2:1e9
         self.domain = self.config_nc['domain']
         self.user = self.config_nc['user']
         self.tree = self.config_nc['tree']
@@ -358,27 +367,29 @@ class Netcdf_mocage:
             self.press[i] = np.mean(self.psurf[:,:])*self.b[i] + self.a[i]
         self.vert = np.log(101325 / self.press) / 0.00012
         
-        
-            
-        
-    
-            
-        
-
     def process_netcdf(self, config_class):
-        ds = self.getfile(config_class)
-        if self.config_nc['getfile'].lower() in ['t', 'true']:
-            ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
-        self.levbnd = [ds.coords['lev'].values[0],
-                       ds.coords['lev'].values[-1]]
-        self.lonbnd = [ds.coords['lon'].values[0],
-                       ds.coords['lon'].values[-1]]
-        self.latbnd = [ds.coords['lat'].values[0],
-                       ds.coords['lat'].values[-1]]
-        self.cmp_boundaries(config_class)
-        self.selectdata(ds)
-        self.cmp_vert_press()
-        self.convert_data(ds)
+        if self.var is not None and self.date is not None and self.pseudo is not None:
+            ds = self.getfile(config_class)
+            if self.config_nc['getfile'].lower() in ['t', 'true']:
+                ds = xr.open_dataset(os.path.join(self.dirtmp, self.outfile_name))
+            self.levbnd = [ds.coords['lev'].values[0],
+                           ds.coords['lev'].values[-1]]
+            self.lonbnd = [ds.coords['lon'].values[0],
+                           ds.coords['lon'].values[-1]]
+            self.latbnd = [ds.coords['lat'].values[0],
+                           ds.coords['lat'].values[-1]]
+            self.cmp_boundaries(config_class)
+            self.selectdata(ds)
+            self.cmp_vert_press()
+            self.convert_data(ds)
+        else:
+            self.levbnd = [1,
+                           60]
+            self.lonbnd = [-180.,
+                           180.
+            self.latbnd = [-90.,
+                           90.]
+            self.cmp_boundaries(config_class)
 
 def compute_nwind(wlength, hour):
     if hour == 0:
