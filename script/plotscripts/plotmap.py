@@ -165,7 +165,7 @@ class PlotMap:
                     vmax = float(self.config_plot['vmax'])
                     ax, sc = __contourf__(ax, obj_data, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
                     if 'var' in self.order[:2] or 'lev' in self.order[:2]:
-                        __print_colorbar__(fig, sc, self.config_plot)
+                        __print_colorbar__(fig, sc, self.config_plot, obj_data)
         else:
             from read_mocage import Netcdf_mocage
             obj_data = Netcdf_mocage(self.config_class,
@@ -206,7 +206,7 @@ class PlotMap:
         plt.tight_layout()
         if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
             print(sc)
-            __print_colorbar__(self.fig, sc, self.config_plot)
+            __print_colorbar__(self.fig, sc, self.config_plot, obj_data)
         
         plt.savefig('test.png')
         plt.close()
