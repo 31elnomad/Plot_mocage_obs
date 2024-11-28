@@ -383,12 +383,9 @@ class Netcdf_mocage:
             self.cmp_vert_press()
             self.convert_data(ds)
         else:
-            self.levbnd = [1,
-                           60]
-            self.lonbnd = [-180.,
-                           180.
-            self.latbnd = [-90.,
-                           90.]
+            self.levbnd = [1, 60]
+            self.lonbnd = [-180., 180.]
+            self.latbnd = [-90., 90.]
             self.cmp_boundaries(config_class)
 
 def compute_nwind(wlength, hour):
