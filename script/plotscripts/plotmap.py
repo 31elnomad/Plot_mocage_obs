@@ -166,9 +166,10 @@ class PlotMap:
                     fig.subplots_adjust(right=0.8)
                     cbar_ax = fig.add_axes([0.84,0.12,0.02, 0.7])
                     cbar = fig.colorbar(sc, 
-                                    cax=cbar_ax, 
-                                    extend=nc_mocage.extend, 
-                                    orientation="vertical")
+                                    cax=cbar_ax,
+                                    orientation="vertical"
+                                    extend=nc_mocage.extend
+                                    )
                     print(nc_mocage.extend)
         else:
             from read_mocage import Netcdf_mocage
