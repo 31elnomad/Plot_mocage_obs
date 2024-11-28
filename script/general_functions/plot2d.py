@@ -10,7 +10,7 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
     sc = ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, levels, kwargs=kwargs)
     return ax, sc
 
-def print_colorbar(fig, sc, nc_obj, config_plot):
+def __print_colorbar__(fig, sc, nc_obj, config_plot):
     colorbar = config_plot['colorbar'].split(':')
     if colorbar[0].lower() not in ['t', 'true']:
         if colorbar[1].lower() in ['v']:
