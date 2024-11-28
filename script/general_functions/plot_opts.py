@@ -13,5 +13,6 @@ def process_res(results):
         if var is not None and r[3] is not None:
             var = r[3]
             unit = r[4]
-    print(r)
-    return filenames, sc, obj_data, var[0], unit
+    if var not is None:
+        var = var[0]
+    return filenames, sc, obj_data, var, unit
