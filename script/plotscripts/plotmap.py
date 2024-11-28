@@ -105,6 +105,7 @@ class PlotMap:
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)   
                 print(nc_mocage.__dict__)
+                print(List)
 
     def cut_list(self, List):
         if len(List) == 4:
