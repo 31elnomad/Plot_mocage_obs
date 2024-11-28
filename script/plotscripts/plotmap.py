@@ -103,7 +103,8 @@ class PlotMap:
                                           self.pseudo,
                                           self.date,
                                           self.var)
-                nc_mocage.process_netcdf(self.config_class)        
+                nc_mocage.process_netcdf(self.config_class)   
+                print(nc_mocage.__dict__)
 
     def cut_list(self, List):
         if len(List) == 4:
