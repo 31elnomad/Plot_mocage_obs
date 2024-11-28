@@ -21,6 +21,8 @@ class Netcdf_mocage:
             self.pseudo = pseudo[1]
         if self.pseudo is not None:
             self.config_nc = config_class.config[self.pseudo]
+        else:
+            self.config_nc = None
         if date is None:
             self.date = None
         else:
@@ -32,22 +34,23 @@ class Netcdf_mocage:
             self.var = None
         else:
             self.var = var #SO_2_tc:DU,SO_2:1e9
-        self.domain = self.config_nc['domain']
-        self.user = self.config_nc['user']
-        self.tree = self.config_nc['tree']
-        self.type_file = self.config_nc['type_file']
-        self.plot_type = config_class.config['global']['type_plot']
-        if self.tree not in ['script']:
-            self.conf = self.config_nc['conf']
-            self.nameexp = self.config_nc['nameexp']
-            self.suffix = self.config_nc['suffix']
-            self.group = self.config_nc['group']
-            self.echeance = int(self.config_nc['echeance'])
-        elif self.tree in ['script']:
-            self.type_exp = self.config_nc['typeexp'].lower()
-            self.wlength = None
-            if self.type_exp.lower() not in ['direct']:
-                self.wlength = int(self.config_nc['wlength'])       
+        if self.config_nc is not None:
+            self.domain = self.config_nc['domain']
+            self.user = self.config_nc['user']
+            self.tree = self.config_nc['tree']
+            self.type_file = self.config_nc['type_file']
+            self.plot_type = config_class.config['global']['type_plot']
+            if self.tree not in ['script']:
+                self.conf = self.config_nc['conf']
+                self.nameexp = self.config_nc['nameexp']
+                self.suffix = self.config_nc['suffix']
+                self.group = self.config_nc['group']
+                self.echeance = int(self.config_nc['echeance'])
+            elif self.tree in ['script']:
+                self.type_exp = self.config_nc['typeexp'].lower()
+                self.wlength = None
+                if self.type_exp.lower() not in ['direct']:
+                    self.wlength = int(self.config_nc['wlength']) 
 
     def create_filename(self):
         self.dirhost = f'/home/{self.user}/MOCAGEHM/{self.nameexp}/'
