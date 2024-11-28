@@ -375,20 +375,18 @@ class Netcdf_mocage:
 
     def mask_data(self):
         self.extend = 'both'
-        if float(self.config_plot['vmin']):
+        if float(self.config_plot['vmin']) == 0. or (self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']):
             self.extend = 'max'
-        if self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']:
+        elif self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']:
             self.extend = None
+        else:
+            self.extend = 'min'
         if self.config_plot['maskmin'].lower() in ['true', 't']:
             vmin = float(self.config_plot['vmin'])
             self.data[self.data < vmin] = np.nan
-            if self.config_plot['maskmax'].lower() not in ['true', 't']:
-                self.extend = 'max'
         if self.config_plot['maskmax'].lower() in ['true', 't']:
             vmax = float(self.config_plot['vmax'])
             self.data[self.data > vmax] = np.nan
-            if self.config_plot['maskmin'].lower() not in ['true', 't']:
-                self.extend = 'min'
         
     def process_netcdf(self, config_class):
         if self.var is not None and self.date is not None and self.pseudo is not None:
