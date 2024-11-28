@@ -344,9 +344,20 @@ class Netcdf_mocage:
                     raise Exception("Problème avec la dimension de la variable dans le netcdf") 
 
     def convert_data(self, ds):
-        print('ok', ds[self.var[0]].units)
-        if self.var[1] == 'DU' and self.var[0][-3:] =='_tc' :
-            print('ok')
+        if self.var[1] != '1':
+            unit = ds[self.var[0]].units
+            if self.var[1] == 'DU' and self.var[0][-3:] =='_tc':
+                if unit == 'molec m-2':
+                    self.data = self.data / 2.6867e20
+            else:
+                raise Exception ("Convert {} n'est pas implémenté")
+
+    def cmp_vert_press(self):
+        self.press = np.empty_like(self.lev)
+        for i in range(len(self.lev)):
+            self.press[i] = np.mean(self.psurf[:,:])*b[i] + a[i]
+        self.vert = np.log(101325 / self.press) / 0.00012
+        
         
             
         
@@ -366,14 +377,8 @@ class Netcdf_mocage:
                        ds.coords['lat'].values[-1]]
         self.cmp_boundaries(config_class)
         self.selectdata(ds)
+        self.cmp_vert_press()
         self.convert_data(ds)
-        print(self.data.shape)
-            
-        
-                
-                                   
-        
-                        
 
 def compute_nwind(wlength, hour):
     if hour == 0:
