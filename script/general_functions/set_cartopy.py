@@ -2,7 +2,7 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeLocator, LatitudeLocator, LongitudeFormatter, LatitudeFormatter
 
-def _set_cartopy_(obj, ax, ligne, col)
+def _set_cartopy_(obj, ax, ligne, col):
     """
     Set up Cartopy projection and features on a given axis.
 
