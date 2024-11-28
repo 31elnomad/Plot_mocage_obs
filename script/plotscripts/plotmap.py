@@ -95,7 +95,6 @@ class PlotMap:
                 self.param.append(list_param_plot)
                 # Affichage pour vérification
                 print(f"Paramètre ajouté : {list_param_plot}")
-        quit()
 
     def plot_para(self, List):
         self.cut_list(List)
