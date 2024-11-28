@@ -117,6 +117,8 @@ class PlotMap:
                                           self.date,
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)  
+                print('ok8')
+                quit()
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
         else:
             from read_mocage import Netcdf_mocage
