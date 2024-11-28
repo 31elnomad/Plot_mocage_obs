@@ -131,8 +131,6 @@ class PlotMap:
         else:
             self.var = None
 
-    
-
     def plot_para(self, List):
         self.cut_list(List)
         idx = List[-3] + List[-2]*self.ncol
