@@ -10,7 +10,7 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
     sc = ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, levels, kwargs=kwargs)
     return ax, sc
 
-def __print_colorbar__(fig, sc, config_plot, obj_data):
+def __print_colorbar__(fig, sc, config_plot, obj_data, unit, var):
     colorbar = config_plot['colorbar'].split(':')
     if colorbar[0].lower() in ['t', 'true']:
         if colorbar[1].lower() in ['v']:
@@ -26,6 +26,10 @@ def __print_colorbar__(fig, sc, config_plot, obj_data):
                         orientation=orientation,
                         extend=obj_data.extend
                         )
-        cbar.set_label(label, fontsize=20) #24)
+        if unit is not None:
+            cbar.set_label("{} ({})".format(var, unit))
+        else:
+            cbar.set_label("{}".format(var))
+        cbar.set_label(label, fontsize=20)
         cbar.ax.tick_params(labelsize=20)
     return cbar
