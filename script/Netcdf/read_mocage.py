@@ -252,7 +252,7 @@ class Netcdf_mocage:
         self.lat = ds['lat'].values
         self.lev = ds['lev'].values
         self.data = ds[self.var[0]].squeeze().values
-        print(self.data.shape, '1')
+        dim = len(self.data.shape)
         self.psurf = ds['air_pressure_at_surface'].squeeze().values
         self.a = ds['a_hybr_coord'].values
         self.b = ds['b_hybr_coord'].values
@@ -279,40 +279,71 @@ class Netcdf_mocage:
             else:
                 self.data = self.data[:,idx_lon1]
             self.psurf = self.psurf[:, idx_lon1]
-        print(self.data.shape, '2', idx_lon1, idx_lon2)
-        quit()
         if self.latbnd[0] != self.latbnd[1]:
             tmp = list(np.abs(self.lat - self.latbnd[1]))
             idx_lat2 = np.argmin(tmp)
             self.lat = self.lat[idx_lat1:idx_lat2]
             if len(self.data.shape) == 3:
                 self.data = self.data[:, idx_lat1:idx_lat2, :]
+            elif len(self.data.shape) == 2:
+                if self.lonbnd|0] == self.lonbnd[1]:
+                    self.data = self.data[:, idx_lat1:idx_lat2]
+                else:
+                    self.data = self.data[idx_lat1:idx_lat2, :]
+            elif len(self.data.shape) == 1:
+                self.data = self.data[idx_lat1:idx_lat2]
             else:
-                self.data = self.data[idx_lat1:idx_lat2, :]
-            self.psurf = self.psurf[idx_lat1:idx_lat2, :]
+                raise Exception("Problème avec la dimension de la variable dans le netcdf")
+            if self.lonbnd|0] == self.lonbnd[1]:
+                self.psurf = self.psurf[idx_lat1:idx_lat2]
+            else:
+                self.psurf = self.psurf[idx_lat1:idx_lat2, :]
         else:
             self.lat = self.lat[idx_lat1]
             if len(self.data.shape) == 3:
                 self.data = self.data[:, idx_lat1, :]
+            elif len(self.data.shape) == 2:
+                if self.lonbnd|0] == self.lonbnd[1]:
+                    self.data = self.data[:, idx_lat1]
+                else:
+                    self.data = self.data[idx_lat1, :]
+            elif len(self.data.shape) == 1:
+                self.data = self.data[idx_lat1]
             else:
-                self.data = self.data[idx_lat1, :]
-            self.psurf = self.psurf[idx_lat1, :]
-            
-        if self.levbnd[0] != self.levbnd[1]:
-            tmp = list(np.abs(self.lev - self.levbnd[1]))
-            idx_lev2 = np.argmin(tmp)
-            self.lev = self.lev[idx_lev1:idx_lev2]
-            if len(self.data.shape) == 3:
-                self.data = self.data[idx_lev1:idx_lev2, :, :]
-            self.a = self.a[idx_lev1:idx_lev2]
-            self.b = self.b[idx_lev1:idx_lev2]
-        else:
-            self.lev = self.lev[idx_lev1]
-            if len(self.data.shape) == 3:
-                self.data = self.data[idx_lev1, :, :]
-            self.a = self.a[idx_lev1]
-            self.b = self.b[idx_lev1]
-        print(self.data)
+                raise Exception("Problème avec la dimension de la variable dans le netcdf")
+            if self.lonbnd|0] == self.lonbnd[1]:
+                self.psurf = self.psurf[idx_lat1]
+            else:
+                self.psurf = self.psurf[idx_lat1, :]
+        if dim == 3:    
+            if self.levbnd[0] != self.levbnd[1]:
+                tmp = list(np.abs(self.lev - self.levbnd[1]))
+                idx_lev2 = np.argmin(tmp)
+                self.lev = self.lev[idx_lev1:idx_lev2]
+                self.a = self.a[idx_lev1:idx_lev2]
+                self.b = self.b[idx_lev1:idx_lev2]
+                if len(self.data.shape) == 3:
+                    self.data = self.data[idx_lev1:idx_lev2, :, :]
+                elif len(self.data.shape) == 2:
+                    self.data = self.data[idx_lev1:idx_lev2, :]
+                elif len(self.data.shape) == 1:
+                    self.data = self.data[idx_lev1:idx_lev2]
+                else:
+                    raise Exception("Problème avec la dimension de la variable dans le netcdf")
+            else:
+                self.lev = self.lev[idx_lev1]
+                self.a = self.a[idx_lev1]
+                self.b = self.b[idx_lev1]
+                if len(self.data.shape) == 3:
+                    self.data = self.data[idx_lev1, :, :]
+                elif len(self.data.shape) == 2:
+                    self.data = self.data[idx_lev1, :]
+                elif len(self.data.shape) == 1:
+                    self.data = self.data[idx_lev1]
+                else:
+                    raise Exception("Problème avec la dimension de la variable dans le netcdf")
+                
+            print(self.data)
     
             
         
