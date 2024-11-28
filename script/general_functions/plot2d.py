@@ -27,9 +27,8 @@ def __print_colorbar__(fig, sc, config_plot, obj_data, unit, var):
                         extend=obj_data.extend
                         )
         if unit is not None:
-            cbar.set_label("{} ({})".format(var, unit))
+            cbar.set_label("{} ({})".format(var, unit), fontsize=20)
         else:
-            cbar.set_label("{}".format(var))
-        cbar.set_label(label, fontsize=20)
+            cbar.set_label("{}".format(var), fontsize=20)
         cbar.ax.tick_params(labelsize=20)
     return cbar
