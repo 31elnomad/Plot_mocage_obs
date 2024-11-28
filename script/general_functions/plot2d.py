@@ -26,3 +26,4 @@ def __print_colorbar__(fig, sc, config_plot, obj_data):
                         orientation=orientation,
                         extend=obj_data.extend
                         )
+    return cbar
