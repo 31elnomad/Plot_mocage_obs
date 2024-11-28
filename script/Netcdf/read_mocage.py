@@ -286,7 +286,7 @@ class Netcdf_mocage:
             if len(self.data.shape) == 3:
                 self.data = self.data[:, idx_lat1:idx_lat2, :]
             elif len(self.data.shape) == 2:
-                if self.lonbnd|0] == self.lonbnd[1]:
+                if self.lonbnd[0] == self.lonbnd[1]:
                     self.data = self.data[:, idx_lat1:idx_lat2]
                 else:
                     self.data = self.data[idx_lat1:idx_lat2, :]
@@ -294,7 +294,7 @@ class Netcdf_mocage:
                 self.data = self.data[idx_lat1:idx_lat2]
             else:
                 raise Exception("Problème avec la dimension de la variable dans le netcdf")
-            if self.lonbnd|0] == self.lonbnd[1]:
+            if self.lonbnd[0] == self.lonbnd[1]:
                 self.psurf = self.psurf[idx_lat1:idx_lat2]
             else:
                 self.psurf = self.psurf[idx_lat1:idx_lat2, :]
