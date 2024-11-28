@@ -168,8 +168,6 @@ class PlotMap:
             obj_data.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
             sc = None
-            
-        
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
