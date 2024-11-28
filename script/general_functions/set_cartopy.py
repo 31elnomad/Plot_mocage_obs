@@ -19,6 +19,7 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
     sea_color = '#D3D3D3'
     if obj_plot.proj[0] == 'PlateCarree':
         central_longitude = float(obj_plot.proj[1])
+        mapproj = ccrs.PlateCarree(central_longitude=central_longitude)
     else:
         raise Exception("La projection {} nest pas implémenté".format(obj_plot.proj[0]))
     ax.add_feature(
@@ -76,7 +77,7 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
                    nc_obj.lonbnd[1],
                    nc_obj.latbnd[0],
                    nc_obj.latbnd[1]],
-                  crs=obj_plot.proj[0])
+                  crs=mapproj)
     return ax
         
           
