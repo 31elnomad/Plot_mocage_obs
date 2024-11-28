@@ -11,17 +11,13 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
     return ax, sc
 
 def __print_colorbar__(fig, sc, config_plot, obj_data):
-    print('ok1')
     colorbar = config_plot['colorbar'].split(':')
-    print(colorbar)
     if colorbar[0].lower() in ['t', 'true']:
-        print('ok1_2')
         if colorbar[1].lower() in ['v']:
             fig.subplots_adjust(right=0.8)
             cbar_ax = fig.add_axes([0.84,0.12,0.02, 0.7])
             orientation = 'vertical'
         elif colorbar[1].lower() in ['h']:
-            print('ok1_3')
             fig.subplots_adjust(bottom=0.19)
             cbar_ax = fig.add_axes([0.15, 0.12, 0.7, 0.02])
             orientation = 'horizontal'
@@ -30,4 +26,3 @@ def __print_colorbar__(fig, sc, config_plot, obj_data):
                         orientation=orientation,
                         extend=obj_data.extend
                         )
-    print('ok2')
