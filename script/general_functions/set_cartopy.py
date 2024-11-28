@@ -3,7 +3,7 @@ import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeLocator, LatitudeLocator, LongitudeFormatter, LatitudeFormatter
 import matplotlib.pyplot as plt
 
-def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
+def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col, idx):
     """
     Set up Cartopy projection and features on a given axis.
 
@@ -66,8 +66,10 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
     gl.left_labels = False
     gl.right_labels = False
     gl.bottom_labels = False
-    gl.left_labels = True
-    gl.bottom_labels = True
+    if idx % obj_plot.ncol == 0:
+        gl.left_labels = True
+    if obj_plot.ncol * obj_plot.nligne - idx <= obj_plot.ncol:
+        gl.bottom_labels = True
     gl.xlabel_style = {'size': 20, 'color': 'black'}
     gl.ylabel_style = {'size': 20, 'color': 'black'}
     if nc_obj.lonbnd[0] > nc_obj.lonbnd[1]:
