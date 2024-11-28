@@ -197,7 +197,7 @@ class PlotMap:
                 sc = r[1]
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
-        self.axs = __concat_plot__(self.fig, self.axs, results, 'a')
+        self.axs = __concat_plot__(self.fig, self.axs, results[:,0], 'a')
         __print_colorbar__(self.fig, sc, self.obj_data, self.config_plot)
         
         
