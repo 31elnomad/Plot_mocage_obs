@@ -190,8 +190,9 @@ class PlotMap:
         self.create_fig()
         self.create_list_param()
         with Pool(5) as p:
-            results = p.map(self.plot_para, self.param)
-        print(results)
+            filenames, scs = p.map(self.plot_para, self.param)
+        print(filenames)
+        print(scs)
         quit()
         from concat_plot import __concat_plot__
         __concat_plot__(self.fig, self.axs, results, 'a')
