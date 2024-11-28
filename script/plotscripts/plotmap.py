@@ -107,10 +107,10 @@ class PlotMap:
                                           self.pseudo,
                                           self.date,
                                           self.var)
-                nc_mocage.process_netcdf(self.config_class)   
+                nc_mocage.process_netcdf(self.config_class)  
+                ax = self.axs[List[-3], List[-2]]
                 from set_cartopy import _set_cartopy_
-                print(nc_mocage.__dict__)
-                print(List)
+                ax = _set_cartopy_(self, ax, ligne, col)
 
     def cut_list(self, List):
         if len(List) == 6:
