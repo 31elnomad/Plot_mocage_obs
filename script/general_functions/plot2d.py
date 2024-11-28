@@ -20,7 +20,7 @@ def __print_colorbar__(fig, sc, nc_obj, config_plot):
             orientation = 'vertical'
         elif colorbar[1].lower() in ['h']:
             Fig.subplots_adjust(bottom=0.19)
-            cbar_ax = Fig.add_axes([0.15, 0.12, 0.7, 0.02])
+            cbar_ax = fig.add_axes([0.15, 0.12, 0.7, 0.02])
             orientation = 'horizontal'
         cbar = fig.colorbar(sc, 
                         cax=cbar_ax,
