@@ -110,7 +110,7 @@ class PlotMap:
                 print(List)
 
     def cut_list(self, List):
-        if len(List) == 4:
+        if len(List) == 6:
             if List[-1] in ['map_1', 'map_6']:
                 self.pseudo = List[0]
             elif List[-1] in ['map_2', 'map_5']:
@@ -130,7 +130,7 @@ class PlotMap:
             elif List[-1] in ['map_1', 'map_2']:
                 self.var = List[2] 
         else:
-            raise Exception("List avec 5 éléments pas encore codé dnas plotmap.py")
+            raise Exception("List avec 7 éléments pas encore codé dnas plotmap.py")
         if self.pseudo != "None":
             self.pseudo = self.pseudo.split(':')
         else:
