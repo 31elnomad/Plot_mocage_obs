@@ -79,9 +79,6 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
                    nc_obj.latbnd[0],
                    nc_obj.latbnd[1]],
                   crs=mapproj)
-    plt.savefig('test.png')
-    plt.close()
-    quit()
     return ax
         
           
