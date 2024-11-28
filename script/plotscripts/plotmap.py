@@ -169,6 +169,7 @@ class PlotMap:
                                     cax=cbar_ax, 
                                     extend=nc_mocage.extend, 
                                     orientation="vertical")
+                    print(nc_mocage.extend)
         else:
             from read_mocage import Netcdf_mocage
             nc_mocage = Netcdf_mocage(self.config_class,
