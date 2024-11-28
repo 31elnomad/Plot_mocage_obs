@@ -49,7 +49,7 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
         linewidth=2
     )
     gl = ax.gridlines(
-        crs=obj_plot.proj[0],
+        crs=mapproj,
         draw_labels=True,
         linewidth=0.5,
         color='k',
