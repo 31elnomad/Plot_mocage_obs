@@ -15,6 +15,8 @@ import numpy as np
 class Netcdf_mocage:
 
     def __init__(self, config_class, pseudo, date, var):
+        plot = config_class.config['global']['type_plot']
+        self.config_plot = config_class.config[plot]
         if pseudo is None:
             self.pseudo = None
         else:
@@ -370,6 +372,23 @@ class Netcdf_mocage:
         for i in range(len(self.lev)):
             self.press[i] = np.mean(self.psurf[:,:])*self.b[i] + self.a[i]
         self.vert = np.log(101325 / self.press) / 0.00012
+
+    def mask_data(self):
+        self.extend = 'both'
+        if float(self.config_plot['vmin']:
+            self.extend = 'max'
+        if self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']:
+            self.extend = None
+        if self.config_plot['maskmin'].lower() in ['true', 't']:
+            vmin = float(self.config_plot['vmin'])
+            self.data[self.data < vmin] = np.nan
+            if self.config_plot['maskmax'].lower() not in ['true', 't']:
+                self.extend = 'max'
+         if self.config_plot['maskmax'].lower() in ['true', 't']:
+            vmax = float(self.config_plot['vmax'])
+            self.data[self.data > vmax] = np.nan
+            if self.config_plot['maskmin'].lower() not in ['true', 't']:
+                self.extend = 'min'
         
     def process_netcdf(self, config_class):
         if self.var is not None and self.date is not None and self.pseudo is not None:
