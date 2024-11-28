@@ -25,7 +25,7 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, **kwargs):
     if ligne == 0:
         ax.set_title(title, fontsize=20)
     loc_h = ylim[1] - 0.2*abs(ylim[1]-ylim[0])
-    loc = xlim[1] - 0.2*abs(xlim[1]-xlim[0])
+    loc = xlim[1] - 0.8*abs(xlim[1]-xlim[0])
     if col == 0:
         ax.text(loc, loc_h, txt, fontsize=16, color='white', bbox=dict(facecolor='black'), fontweight='bold')
         
