@@ -186,7 +186,7 @@ class PlotMap:
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
         from plot_opts import process_res
-        filenames, sc, obj_data, ver, unit = process_res(results)
+        filenames, sc, obj_data, var, unit = process_res(results)
         self.axs = __concat_plot__(self.fig, self.axs, filenames)
         plt.tight_layout()
         if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
