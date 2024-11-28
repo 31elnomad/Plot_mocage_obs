@@ -159,10 +159,10 @@ class PlotMap:
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
                     from contourf import __contourf__
-                    nlevs = int(self.config_plot['plot_opt'].split(':')[1])
+                    pas = float(self.config_plot['plot_opt'].split(':')[1])
                     vmin = float(self.config_plot['vmin'])
                     vmax = float(self.config_plot['vmax'])
-                    ax, sc = __contourf__(ax, nc_mocage, nlevs, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
+                    ax, sc = __contourf__(ax, nc_mocage, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
                     fig.subplots_adjust(right=0.8)
                     cbar_ax = fig.add_axes([0.84,0.12,0.02, 0.7])
                     cbar = fig.colorbar(sc, 
