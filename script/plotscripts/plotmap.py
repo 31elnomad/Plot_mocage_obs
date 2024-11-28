@@ -101,6 +101,7 @@ class PlotMap:
     def plot_para(self, List):
         self.cut_list(List)
         from set_cartopy import _set_cartopy_
+        ax = self.axs[List[-3], List[-2]]
         if self.pseudo is not None and self.var is not None and self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
@@ -109,9 +110,15 @@ class PlotMap:
                                           self.date,
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)  
-                ax = self.axs[List[-3], List[-2]]
+                
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
         else:
+            from read_mocage import Netcdf_mocage
+            nc_mocage = Netcdf_mocage(self.config_class,
+                                      self.pseudo,
+                                      self.date,
+                                      self.var)
+            nc_mocage.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
 
     def cut_list(self, List):
