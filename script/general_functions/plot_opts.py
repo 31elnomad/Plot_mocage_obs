@@ -13,4 +13,4 @@ def process_res(results):
             var = r[3]
             unit = r[4]
     print(r)
-    return filenames, sc, obj_data, var, unit
+    return filenames, sc, obj_data, var[0], unit
