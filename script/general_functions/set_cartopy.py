@@ -66,10 +66,8 @@ def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col):
     gl.left_labels = False
     gl.right_labels = False
     gl.bottom_labels = False
-    if col == 0:
-        gl.right_labels = True
-    if ligne == obj_plot.nligne - 1:
-        gl.bottom_labels = True
+    gl.left_labels = True
+    gl.bottom_labels = True
     gl.xlabel_style = {'size': 20, 'color': 'black'}
     gl.ylabel_style = {'size': 20, 'color': 'black'}
     if nc_obj.lonbnd[0] > nc_obj.lonbnd[1]:
