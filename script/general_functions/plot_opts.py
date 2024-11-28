@@ -16,3 +16,10 @@ def process_res(results):
     if var is not None:
         var = var[0]
     return filenames, sc, obj_data, var, unit
+
+def add_plot(ax, ligne, col, order, var, date, pseudo):
+    if order[0] == 'exp':
+        title = pseudo
+    if ligne == 0:
+        ax.set_title(title, fontsize(20))
+        
