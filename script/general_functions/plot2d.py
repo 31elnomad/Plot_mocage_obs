@@ -27,4 +27,4 @@ def __print_colorbar__(fig, sc, nc_obj, config_plot):
                         orientation=orientation,
                         extend=nc_mocage.extend
                         )
-    print(ok2')
+    print('ok2')
