@@ -132,9 +132,11 @@ class PlotMap:
             self.var = None
 
     def __contourf__(self, ax, nc_obj):
+        print(nc_obj.data)
+        print('ok')
         cmap = self.config_plot['cmap']
         nlevs = int(self.config_plot['plot_opt'].split(':')[1])
-        ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, levels, **kwargs)
+        ax.contourf(nc_obj.lon, nc_obj.lat, nc_obj.data, nlevs, cmap=cmap, **kwargs)
         return x
 
     def plot_para(self, List):
