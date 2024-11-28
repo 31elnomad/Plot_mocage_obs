@@ -14,7 +14,7 @@ def __print_colorbar__(fig, sc, config_plot):
     print('ok1')
     colorbar = config_plot['colorbar'].split(':')
     print(colorbar)
-    if colorbar[0].lower() not in ['t', 'true']:
+    if colorbar[0].lower() in ['t', 'true']:
         print('ok1_2')
         if colorbar[1].lower() in ['v']:
             fig.subplots_adjust(right=0.8)
