@@ -3,6 +3,7 @@ def process_res(results):
     obj_data = None
     var = None
     filenames = []
+    unit = None
     for r in results:
         filenames.append(r[0])
         if sc is None and r[1] is not None:
