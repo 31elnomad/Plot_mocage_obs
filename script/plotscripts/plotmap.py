@@ -157,9 +157,9 @@ class PlotMap:
                     if 'var' in self.order[:2] or 'lev' in self.order[:2]:
                         cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data)
                         if unit is not None:
-                            cbar.set_label("{} ({})".format(var, unit))
+                            cbar.set_label("{} ({})".format(self.var[0], obj_data.unit))
                         else:
-                            cbar.set_label("{}".format(var))
+                            cbar.set_label("{}".format(self.var[0]))
         else:
             from read_mocage import Netcdf_mocage
             obj_data = Netcdf_mocage(self.config_class,
@@ -186,7 +186,7 @@ class PlotMap:
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
         from plot_opts import process_res
-        filenames, sc, obj_data, ver, units = process_res(results)
+        filenames, sc, obj_data, ver, unit = process_res(results)
         self.axs = __concat_plot__(self.fig, self.axs, filenames)
         plt.tight_layout()
         if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
