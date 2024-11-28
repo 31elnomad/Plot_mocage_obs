@@ -27,6 +27,8 @@ class PlotMap:
         self.order = self.config_plot['order'].split(',')
         self.listdate = config_class.listdate
         self.boundary = self.config_plot['boundary'].split('/')
+        self.proj = self.config_plot['projection'].split(':')
+        self.grid = self.config_plot['grid'].split(',')
         if self.boundary[2] == 'None':
             self.listlev = None
         else:
@@ -106,6 +108,7 @@ class PlotMap:
                                           self.date,
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)   
+                from set_cartopy import _set_cartopy_
                 print(nc_mocage.__dict__)
                 print(List)
 
