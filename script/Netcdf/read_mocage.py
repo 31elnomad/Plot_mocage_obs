@@ -341,9 +341,8 @@ class Netcdf_mocage:
                 elif len(self.data.shape) == 1:
                     self.data = self.data[idx_lev1]
                 else:
-                    raise Exception("Problème avec la dimension de la variable dans le netcdf")
-                
-            print(self.data)
+                    raise Exception("Problème avec la dimension de la variable dans le netcdf") 
+        
     
             
         
@@ -360,6 +359,7 @@ class Netcdf_mocage:
                        ds.coords['lat'].values[-1]]
         self.cmp_boundaries(config_class)
         self.selectdata(ds)
+        print(self.data)
             
         
                 
