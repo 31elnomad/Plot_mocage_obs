@@ -10,7 +10,7 @@ def process_res(results):
             sc = r[1]
         if obj_data is None and r[2] is not None:
             obj_data = r[2]
-        if var is not None and r[3] is not None:
+        if var is None and r[3] is not None:
             var = r[3]
             unit = r[4]
     if var is not None:
