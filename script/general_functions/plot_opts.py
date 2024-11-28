@@ -17,9 +17,9 @@ def process_res(results):
         var = var[0]
     return filenames, sc, obj_data, var, unit
 
-def add_plot(ax, ligne, col, order, var, date, pseudo):
+def add_plot(ax, col, ligne, order, var, date, pseudo):
     if order[0] == 'exp':
-        title = pseudo
+        title = pseudo[0]
     if ligne == 0:
         ax.set_title(title, fontsize=20)
         
