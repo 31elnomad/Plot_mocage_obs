@@ -192,12 +192,14 @@ class PlotMap:
         with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
         sc = None
+        filenames = []
         for r in results:
+            filenames.append(r[0])
             if sc is None and r[1] is not None:
                 sc = r[1]
         from concat_plot import __concat_plot__
         from plot2d import __print_colorbar__
-        self.axs = __concat_plot__(self.fig, self.axs, results[:][0], 'a')
+        self.axs = __concat_plot__(self.fig, self.axs, filenames, 'a')
         __print_colorbar__(self.fig, sc, self.obj_data, self.config_plot)
         
         
