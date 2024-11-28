@@ -159,7 +159,8 @@ class PlotMap:
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
                     from contourf import __contourf__
-                    ax = __contourf__(ax, nc_mocage, transform=self.mapproj, cmap=self.config_plot['cmap'])
+                    nlevs = int(self.config_plot['plot_opt'].split(':')[1])
+                    ax = __contourf__(ax, nc_mocage, nlev, transform=self.mapproj, cmap=self.config_plot['cmap'])
         else:
             from read_mocage import Netcdf_mocage
             nc_mocage = Netcdf_mocage(self.config_class,
