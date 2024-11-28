@@ -11,6 +11,7 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
     return ax, sc
 
 def __print_colorbar__(fig, sc, nc_obj, config_plot):
+    print('ok1')
     colorbar = config_plot['colorbar'].split(':')
     if colorbar[0].lower() not in ['t', 'true']:
         if colorbar[1].lower() in ['v']:
@@ -26,3 +27,4 @@ def __print_colorbar__(fig, sc, nc_obj, config_plot):
                         orientation=orientation,
                         extend=nc_mocage.extend
                         )
+    print(ok2')
