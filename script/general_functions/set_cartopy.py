@@ -3,7 +3,7 @@ import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeLocator, LatitudeLocator, LongitudeFormatter, LatitudeFormatter
 import matplotlib.pyplot as plt
 
-def _set_cartopy_(obj_plot, nc_obj, ax, ligne, col, idx):
+def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     """
     Set up Cartopy projection and features on a given axis.
 
