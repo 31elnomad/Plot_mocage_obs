@@ -204,6 +204,8 @@ class PlotMap:
         from plot2d import __print_colorbar__
         self.axs = __concat_plot__(self.fig, self.axs, filenames, 'a')
         __print_colorbar__(self.fig, sc, obj_data, self.config_plot)
+        plt.savefig('test.png')
+        plt.close()
         
         
 
