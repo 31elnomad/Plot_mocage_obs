@@ -164,11 +164,12 @@ class PlotMap:
     def __main_plotmap__(self, param_one_plot):
         self.param_one_plot = param_one_plot
         self.create_fig()
+        plt.savefig('test.png')
+        plt.close()
         self.create_list_param()
         with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
-        plt.savefig('test.png')
-        plt.close()
+        
         
 
             
