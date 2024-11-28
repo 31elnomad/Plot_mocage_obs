@@ -15,5 +15,4 @@ def process_res(results):
             unit = r[4]
     if var is not None:
         var = var[0]
-    print(r)
     return filenames, sc, obj_data, var, unit
