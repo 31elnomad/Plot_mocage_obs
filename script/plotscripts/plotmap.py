@@ -117,8 +117,6 @@ class PlotMap:
                                           self.date,
                                           self.var)
                 nc_mocage.process_netcdf(self.config_class)  
-                print('ok8')
-                quit()
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2])
         else:
             from read_mocage import Netcdf_mocage
@@ -171,6 +169,8 @@ class PlotMap:
         self.create_list_param()
         with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
+        plt.savefig('test.png')
+        plt.close()
         
         
 
