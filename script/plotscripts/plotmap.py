@@ -173,7 +173,7 @@ class PlotMap:
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
-        return filename, sc, obj_data, self.var, self.units
+        return filename, sc, obj_data, self.var, obj_data.units
         
 
 
