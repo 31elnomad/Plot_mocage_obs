@@ -101,7 +101,14 @@ class PlotMap:
     def plot_para(self, List):
         self.cut_list(List)
         from set_cartopy import _set_cartopy_
-        ax = self.axs[List[-3], List[-2]]
+        if self.nligne == 1 and self.ncol == 1:
+            ax = self.axs
+        elif (self.nligne == 1 and self.ncol > 1):   
+            ax = self.axs[List[-3]]
+        elif (self.nligne > 1 and self.ncol == 1):
+            ax = self.axs[List[-2]]
+        else:
+            ax = self.axs[List[-3], List[-2]]
         if self.pseudo is not None and self.var is not None and self.date is not None:
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
