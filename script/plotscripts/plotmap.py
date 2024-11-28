@@ -159,19 +159,13 @@ class PlotMap:
                 nc_mocage.process_netcdf(self.config_class)  
                 ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2], idx)
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
-                    from contourf import __contourf__
+                    from plot2d import __contourf__, __print_colorbar__
                     pas = float(self.config_plot['plot_opt'].split(':')[1])
                     vmin = float(self.config_plot['vmin'])
                     vmax = float(self.config_plot['vmax'])
                     ax, sc = __contourf__(ax, nc_mocage, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
-                    fig.subplots_adjust(right=0.8)
-                    cbar_ax = fig.add_axes([0.84,0.12,0.02, 0.7])
-                    cbar = fig.colorbar(sc, 
-                                    cax=cbar_ax,
-                                    orientation="vertical",
-                                    extend=nc_mocage.extend
-                                    )
-                    print(nc_mocage.extend)
+                    if 'var' in self.order[:2] or 'lev' in self.order[:2]:
+                        __print_colorbar__(fig, sc, nc_mocage, self.config_plot)
         else:
             from read_mocage import Netcdf_mocage
             nc_mocage = Netcdf_mocage(self.config_class,
@@ -180,12 +174,13 @@ class PlotMap:
                                       self.var)
             nc_mocage.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, nc_mocage, ax, List[-3], List[-2], idx)
+            sc = None
             
         
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
-        return filename
+        return filename, sc
         
 
 
@@ -196,6 +191,8 @@ class PlotMap:
         self.create_list_param()
         with Pool(5) as p:
             results = p.map(self.plot_para, self.param)
+        print(results)
+        quit()
         from concat_plot import __concat_plot__
         __concat_plot__(self.fig, self.axs, results, 'a')
         
