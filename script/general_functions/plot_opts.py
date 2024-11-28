@@ -19,7 +19,7 @@ def process_res(results):
 
 def add_plot(ax, col, ligne, order, var, date, pseudo):
     if order[0] == 'exp':
-        title = pseudo[0]
+        title = pseudo[1]
     if ligne == 0:
         ax.set_title(title, fontsize=20)
         
