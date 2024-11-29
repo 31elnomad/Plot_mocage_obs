@@ -110,10 +110,9 @@ class obs_mocage:
         self.lat = np.array(self.lat)
         self.data = np.array(self.data)
         if self.config_plot['maskmin'].lower() in ['true', 't']:
-            if instr[:5] not in ['MODIS', 'VIIRS']:
-                if self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
-                    if len(self.data.shape) > 1:
-                        raise Exception("Le cas avec plusieurs colonnes n'a pas été codé pour les observations")
+            if self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
+                if len(self.data.shape) > 1:
+                    raise Exception("Le cas avec plusieurs colonnes n'a pas été codé pour les observations")
             mk = self.data >= float(self.config_plot['vmin'])
             self.lon = self.lon[mk]
             self.lat = self.lat[mk]
