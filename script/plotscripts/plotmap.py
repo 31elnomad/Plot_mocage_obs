@@ -151,12 +151,12 @@ class PlotMap:
                                               self.var)
                 obj_data.process_netcdf(self.config_class)  
             elif self.pseudo[0] in ['obs']:
-                if 'wv' in self.config_class.config[self.pseudo[0]] and self.config_class.config[self.pseudo[0]]['wv'] != 'None':
-                    wv = self.config_class.config[self.pseudo[0]]['wv']
+                if 'wv' in self.config_class.config[self.pseudo[1]] and self.config_class.config[self.pseudo[1]]['wv'] != 'None':
+                    wv = self.config_class.config[self.pseudo[1]]['wv']
                 else:
                     wv = None
-                if 'species' in self.config_class.config[self.pseudo[0]] and self.config_class.config[self.pseudo[0]]['species'] != 'None':
-                    species = self.config_class.config[self.pseudo[0]]['species']
+                if 'species' in self.config_class.config[self.pseudo[1]] and self.config_class.config[self.pseudo[1]]['species'] != 'None':
+                    species = self.config_class.config[self.pseudo[1]]['species']
                 else:
                     species = None
                 from read_mocage_hdat import obs_mocage 
