@@ -55,6 +55,8 @@ class obs_mocage:
         TimeBnd = (d1, d2)
         self.crete_listfile()
         self.create_bnd()
+        print(self.listfile)
+        quit()
         for file in self.listfile:
             if self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
