@@ -20,7 +20,7 @@ def __scatter__(ax, nc_obj, markersize, vmin, vmax, **kwargs):
     if kwargs['cmap'] in ['wbrb', 'brb', 'brbw', 'bwr', 'pwb']:
         from create_cmap import __create_cmap__
         kwargs['cmap'] = __create_cmap__(kwargs['cmap'])
-    if len(nc_obj.data.shape) == 2:
+    if len(nc_obj.data) > 0:
         mapx, mapy = __gridmap__(nc_obj)
         sc = ax.scatter(
             mapx,
@@ -33,14 +33,23 @@ def __scatter__(ax, nc_obj, markersize, vmin, vmax, **kwargs):
             vmax=vmax,
             alpha=1.,
             **kwargs)
+    else:
+        sc = None
     return ax, sc
         
 def __gridmap__(nc_obj):
-    if nc_obj.lonbnd[0] != nc_obj.lonbnd[1] and nc_obj.latbnd[0] != nc_obj.latbnd[1]:
-        mapx = np.repeat(nc_obj.lon.reshape(1, -1), nc_obj.lat.shape[0], axis=0)
-        mapy = np.repeat(nc_obj.lat.reshape(-1, 1), nc_obj.lon.shape[0], axis=1)
+    if len(nc_obj.data.shape) == 2:
+        if nc_obj.lonbnd[0] != nc_obj.lonbnd[1] and nc_obj.latbnd[0] != nc_obj.latbnd[1]:
+            mapx = np.repeat(nc_obj.lon.reshape(1, -1), nc_obj.lat.shape[0], axis=0)
+            mapy = np.repeat(nc_obj.lat.reshape(-1, 1), nc_obj.lon.shape[0], axis=1)
+        else:
+            raise Exception("__gridmap__ n'est pas codé pour ce cas")
     else:
-        raise Exception("__gridmap__ n'est pas codé pour ce cas")
+        if nc_obj.lonbnd[0] != nc_obj.lonbnd[1] and nc_obj.latbnd[0] != nc_obj.latbnd[1]:
+            mapx = nc_obj.lon
+            mapy = nc_obj.lat
+        else:
+            raise Exception("__gridmap__ n'est pas codé pour ce cas")
     return mapx, mapy
 
 def __print_colorbar__(fig, sc, config_plot, obj_data, unit, var):
