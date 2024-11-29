@@ -35,7 +35,7 @@ class obs_mocage:
         else:
             self.lonbnd = (float(tmp[0]), float(tmp[1]))
         tmp = bnd[1].split(',')
-      if bnd[0] == 'None':
+        if bnd[0] == 'None':
             self.latbnd = (-180., 180.)
         elif len(tmp) == 1 or float(tmp[0]) == float(tmp[1]) == 0:
             self.latbnd = (float(tmp[0])-self.delta/2, float(tmp[0])+self.delta/2)
