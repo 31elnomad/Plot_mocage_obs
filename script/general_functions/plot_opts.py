@@ -1,3 +1,5 @@
+import numpy as np
+
 def process_res(results):
     sc = None
     obj_data = None
