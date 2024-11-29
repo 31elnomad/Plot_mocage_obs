@@ -8,7 +8,6 @@ class obs_mocage:
   
     def __init__(self, config_class, pseudo, date, **kwargs): 
         sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
-        import daimonobs
         self.pseudo = pseudo[1]
         self.config_h5 = config_class.config[self.pseudo]
         self.date = datetime.datetime(int(date[:4]),
@@ -47,6 +46,7 @@ class obs_mocage:
             self.latbnd = (float(tmp[0]), float(tmp[1]))
 
     def read_h5(self):
+        import daimonobs
         # Initialize data and coordinates arrays
         self.lon = []
         self.lat = []
