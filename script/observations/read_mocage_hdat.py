@@ -106,7 +106,7 @@ class obs_mocage:
             elif self.pseudo.lower()  in ['modis', 'viirs']:
                 self.data.extend(obj.aod[str(self.kwargs['wv'])])
         # Convert Lon, Lat, and Data lists to NumPy arrays
-        self.lon = np.array(self.fon)
+        self.lon = np.array(self.lon)
         self.lat = np.array(self.lat)
         self.data = np.array(self.data)
         if self.config_plot['maskmin'].lower() in ['true', 't']:
