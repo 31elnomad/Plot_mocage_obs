@@ -28,5 +28,20 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
     loc = xlim[1] - 0.8*abs(xlim[1]-xlim[0])
     if col == 0:
         ax.text(loc, loc_h, txt, fontsize=16, color='white', bbox=dict(facecolor='black'), fontweight='bold')
-    print(list(config_plot.keys()), 'ok')
+    if 'add' in list(config_plot.keys()):
+        if config_plot['add'] != 'None':
+            filename = '../../database/volcanoes.csv'
+            name = config_plot['add'].lower()
+            read_csv(filename, name)
+            #ax.plot(168.1167-180.,-16.25,
+            #"^",
+            #markersize=30,
+            #color='black')
+
+def read_csv(filename, name):
+    with open(filename) as fp:
+        line = fp.readlines()
+    print(line[1])
+
+            
         
