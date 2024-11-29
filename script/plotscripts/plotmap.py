@@ -151,7 +151,7 @@ class PlotMap:
                                               self.var)
                 obj_data.process_netcdf(self.config_class)  
             elif self.pseudo[0] in ['obs']:
-                if 'wv' in self.config_class[self.pseudo[0]] and self.config_class[self.pseudo[0]]['wv' != 'None':
+                if 'wv' in self.config_class[self.pseudo[0]] and self.config_class[self.pseudo[0]]['wv'] != 'None':
                     wv = self.config_class[self.pseudo[0]]['wv']
                 else:
                     wv = None
