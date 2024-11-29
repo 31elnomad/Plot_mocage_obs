@@ -26,7 +26,7 @@ def __scatter__(ax, nc_obj, markersize, vmin, vmax, **kwargs):
             vmin=vmin,
             vmax=vmax,
             alpha=1.,
-            kwargs=kwargs)
+            **kwargs)
     return ax, sc
         
 def __gridmap__(nc_obj):
