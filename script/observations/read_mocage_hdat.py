@@ -4,17 +4,17 @@ import os
 
 class obs_mocage:
   
-    def __init__(self, config, pseudo, date, **kwargs): 
-        sys.path.append(os.path.abspath(config['observations']))
+    def __init__(self, config_class, pseudo, date, **kwargs): 
+        sys.path.append(os.path.abspath(config_class.config['observations']))
         self.pseudo = pseudo[1]
-        self.config_h5 = config[self.pseudo]
+        self.config_h5 = config_class.config[self.pseudo]
         self.date = datetime.datetime(int(date[:4]),
                                       int(date[4:6]),
                                       int(date[6:8]),
                                       int(date[8:10]))
-        self.config_plot = config[config['type_plot']]
+        self.config_plot = config_class.config[config_class.config['type_plot']]
         self.kwargs = kwargs
-        self.delta = float(config['observations'][delta])
+        self.delta = float(config_class.config['observations'][delta])
 
     def crete_listfile(self):
         if self.config_h5['type'].lower() in ['h5_sim', 'h5_obs']:
