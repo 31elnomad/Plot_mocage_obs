@@ -1,6 +1,6 @@
 import matplotlib
 
-def__create_cmap__(cmap):
+def __create_cmap__(cmap):
     """
     Create a custom colormap for visualization.
 
