@@ -15,7 +15,7 @@ class obs_mocage:
                                       int(date[8:10]))
         self.config_plot = config_class.config[config_class.config['global']['type_plot']]
         self.kwargs = kwargs
-        self.delta = float(config_class.config['observations'][delta])
+        self.delta = float(config_class.config['observations']['delta'])
 
     def crete_listfile(self):
         if self.config_h5['type'].lower() in ['h5_sim', 'h5_obs']:
