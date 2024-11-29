@@ -141,6 +141,8 @@ class PlotMap:
                                subplot_kw = self.subplot_kw)
 
         if self.pseudo is not None and self.var is not None and self.date is not None:
+            vmin = float(self.config_plot['vmin'])
+            vmax = float(self.config_plot['vmax'])
             if self.pseudo[0] in ['exp']:
                 from read_mocage import Netcdf_mocage
                 obj_data = Netcdf_mocage(self.config_class,
@@ -148,33 +150,52 @@ class PlotMap:
                                               self.date,
                                               self.var)
                 obj_data.process_netcdf(self.config_class)  
-                ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
-                vmin = float(self.config_plot['vmin'])
-                vmax = float(self.config_plot['vmax'])
-                if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
-                    from plot2d import __contourf__ 
-                    pas = float(self.config_plot['plot_opt'].split(':')[1])
-                    ax, sc = __contourf__(ax,
-                                          obj_data,
-                                          pas,
-                                          vmin,
-                                          vmax,
-                                          transform=self.mapproj,
-                                          cmap=self.config_plot['cmap'],
-                                          extend=obj_data.extend)
-                elif self.config_plot['plot_opt'].split(':')[0] in ['scatter']:
-                    from plot2d import __scatter__
-                    ax, sc = __scatter__(ax,
-                                         obj_data,
-                                         self.config_plot['plot_opt'].split(':')[1],
-                                         vmin,
-                                         vmax,
-                                         transform=self.mapproj,
-                                         cmap=self.config_plot['cmap'])
-                if 'var' in self.order[:2] or 'lev' in self.order[:2]:
-                    from plot2d import __print_colorbar__
-                    cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data, obj_data.unit, self.var[0])
-                        
+            elif self.pseudo[0] in ['obs']:
+                if 'wv' in self.config_class[self.pseudo[0]] and self.config_class[self.pseudo[0]]['wv' != 'None':
+                    wv = self.config_class[self.pseudo[0]]['wv']
+                else:
+                    wv = None
+                if 'species' in self.config_class[self.pseudo[0]] and self.config_class[self.pseudo[0]]['species'] != 'None':
+                    species = self.config_class[self.pseudo[0]]['species']
+                else:
+                    species = None
+                from read_mocage_hdat import obs_mocage 
+                obj_data = obs_mocage(self.config_class,
+                                      self.pseudo,
+                                      self.date,
+                                      wv=wv,
+                                      species=species)
+                obj_data.read_h5()
+                
+            ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
+            if self.config_plot['plot_opt'].split(':')[0] in ['contourf'] and self.pseudo[0] not in ['obs']:
+                from plot2d import __contourf__ 
+                pas = float(self.config_plot['plot_opt'].split(':')[1])
+                ax, sc = __contourf__(ax,
+                                      obj_data,
+                                      pas,
+                                      vmin,
+                                      vmax,
+                                      transform=self.mapproj,
+                                      cmap=self.config_plot['cmap'],
+                                      extend=obj_data.extend)
+            elif self.config_plot['plot_opt'].split(':')[0] in ['scatter'] or self.pseudo[0] in ['obs']:
+                if self.pseudo[0] in ['obs']:
+                    markersize = int(self.config_class.config['observations']['markersize'])
+                else:
+                    markersize = int(self.config_plot['plot_opt'].split(':')[1])
+                from plot2d import __scatter__
+                ax, sc = __scatter__(ax,
+                                     obj_data,
+                                     markersize,
+                                     vmin,
+                                     vmax,
+                                     transform=self.mapproj,
+                                     cmap=self.config_plot['cmap'])
+            if 'var' in self.order[:2] or 'lev' in self.order[:2]:
+                from plot2d import __print_colorbar__
+                cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data, obj_data.unit, self.var[0])
+            
         else:
             from read_mocage import Netcdf_mocage
             obj_data = Netcdf_mocage(self.config_class,
