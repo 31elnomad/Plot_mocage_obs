@@ -18,7 +18,8 @@ class obs_mocage:
         self.kwargs = kwargs
         self.delta = float(config_class.config['observations']['delta'])
 
-    def crete_listfile(self):
+    def create_listfile(self):
+        print('ok')
         if self.config_h5['type'].lower() in ['h5_sim', 'h5_obs']:
             filename = 'hdf5-std.extract.' + self.date.strftime('%Y%m%d') + '*'
         elif self.config_h5['type'].lower() in ['hstat']:
@@ -55,7 +56,7 @@ class obs_mocage:
         d2 = self.date
         d1 = d2 - datetime.timedelta(hours=1)
         TimeBnd = (d1, d2)
-        self.crete_listfile()
+        self.create_listfile()
         self.create_bnd()
         for file in self.listfile:
             if self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c']:
