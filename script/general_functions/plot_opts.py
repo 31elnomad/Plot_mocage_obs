@@ -17,7 +17,7 @@ def process_res(results):
         var = var[0]
     return filenames, sc, obj_data, var, unit
 
-def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, **kwargs):
+def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, **kwargs):
     if order[0] == 'exp':
         title = pseudo[1]
     if order[1] == 'date':
@@ -28,4 +28,5 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, **kwargs):
     loc = xlim[1] - 0.8*abs(xlim[1]-xlim[0])
     if col == 0:
         ax.text(loc, loc_h, txt, fontsize=16, color='white', bbox=dict(facecolor='black'), fontweight='bold')
+    print(list(config_plot.keys()), 'ok')
         
