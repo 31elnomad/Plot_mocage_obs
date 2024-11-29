@@ -47,7 +47,7 @@ def read_csv(filename, name):
     df = pd.read_csv(filename, sep = ';')
     tmp = df[df['name'] == name]
     if len(tmp) == 0:
-        raise Exception("Le volcan {} n'a pas été trouvé dans le fichier {}".format(name, filename)
+        raise Exception("Le volcan {} n'a pas été trouvé dans le fichier {}".format(name, filename))
     lon = np.array(tmp['longitude'])
     lat = np.array(tmp['latitude'])
     return lon, lat
