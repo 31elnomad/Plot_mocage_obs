@@ -19,7 +19,6 @@ class obs_mocage:
         self.delta = float(config_class.config['observations']['delta'])
 
     def create_listfile(self):
-        print('ok')
         if self.config_h5['type'].lower() in ['h5_sim', 'h5_obs']:
             filename = 'hdf5-std.extract.' + self.date.strftime('%Y%m%d') + '*'
         elif self.config_h5['type'].lower() in ['hstat']:
@@ -27,8 +26,6 @@ class obs_mocage:
         elif self.config_h5['type'].lower() in ['hdat']:
             filename = 'HDAT+' + self.date.strftime('%Y%m%d') + '*.h5'
         dirfile = os.path.join(self.config_h5['dirin'], filename)
-        print(dirfile)
-        quit()
         self.listfile = glob.glob(dirfile)
 
     def create_bnd(self):
