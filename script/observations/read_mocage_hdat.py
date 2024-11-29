@@ -61,24 +61,29 @@ class obs_mocage:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'IasiInstr',
                                               species=self.kwargs['species'])
+                self.unit = 'DU'
             elif self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'IasiInstr',
                                               species=self.kwargs['species'],
                                               nmaxlevs=self.kwargs['nmaxlevs'])
+                self.unit = 'DU'
             elif self.pseudo.lower() in ['omi']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'OMIInstr',
                                               species=self.kwargs['species'])
+                self.unit = 'DU'
             elif self.pseudo.lower() in ['tropomi']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'TropomiInstr',
                                               species=self.kwargs['species'])
+                self.unit = 'DU'
             elif self.pseudo.lower() in ['tropomi_lh']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'TropomiConcInstr',
                                               species=self.kwargs['species'],
                                               nmaxlevs=self.kwargs['nmaxlevs'])
+                self.unit = 'DU'
             elif self.pseudo.lower() in ['viirs']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'ViirsAOD',
