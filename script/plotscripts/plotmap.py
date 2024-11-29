@@ -149,14 +149,30 @@ class PlotMap:
                                               self.var)
                 obj_data.process_netcdf(self.config_class)  
                 ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
+                vmin = float(self.config_plot['vmin'])
+                vmax = float(self.config_plot['vmax'])
                 if self.config_plot['plot_opt'].split(':')[0] in ['contourf']:
-                    from plot2d import __contourf__, __print_colorbar__
+                    from plot2d import __contourf__ 
                     pas = float(self.config_plot['plot_opt'].split(':')[1])
-                    vmin = float(self.config_plot['vmin'])
-                    vmax = float(self.config_plot['vmax'])
-                    ax, sc = __contourf__(ax, obj_data, pas, vmin, vmax, transform=self.mapproj, cmap=self.config_plot['cmap'])
-                    if 'var' in self.order[:2] or 'lev' in self.order[:2]:
-                        cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data, obj_data.unit, self.var[0])
+                    ax, sc = __contourf__(ax,
+                                          obj_data,
+                                          pas,
+                                          vmin,
+                                          vmax,
+                                          transform=self.mapproj,
+                                          cmap=self.config_plot['cmap'])
+                elif self.config_plot['plot_opt'].split(':')[0] in ['scatter']:
+                    from plot2d import __scatter__
+                    ax, sc = __scatter__(ax,
+                                         obj_data,
+                                         self.config_plot['plot_opt'].split(':')[1],
+                                         vmin,
+                                         vmax,
+                                         transform=self.mapproj,
+                                         cmap=self.config_plot['cmap'])
+                if 'var' in self.order[:2] or 'lev' in self.order[:2]:
+                    from plot2d import __print_colorbar__
+                    cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data, obj_data.unit, self.var[0])
                         
         else:
             from read_mocage import Netcdf_mocage
