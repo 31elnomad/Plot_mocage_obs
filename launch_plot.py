@@ -65,6 +65,11 @@ def add_path(config_class):
             if netcdf_path not in sys.path:
                 print("Ajout du répertoire 'Netcdf' au PYTHONPATH")
                 sys.path.append(netcdf_path)
+        if "obs" in config_class.config[plot].get('listexp', ''):
+            obs_path = os.path.abspath("script/observations")
+            if obs_path not in sys.path:
+                print("Ajout du répertoire 'observations' au PYTHONPATH")
+                sys.path.append(obs_path)
 
 if __name__ == "__main__":
     # Crée et parse les arguments
