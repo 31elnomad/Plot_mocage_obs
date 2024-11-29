@@ -30,9 +30,11 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
         ax.text(loc, loc_h, txt, fontsize=16, color='white', bbox=dict(facecolor='black'), fontweight='bold')
     if 'add' in list(config_plot.keys()):
         if config_plot['add'] != 'None':
+            print ("Ajout d'un triangle pour le volcan {}".format(config_plot['add'].lower()))
             filename = 'database/volcanoes.csv'
             name = config_plot['add'].lower()
-            read_csv(filename, name)
+            lon, lat = read_csv(filename, name)
+            print (lon, lat)
             #ax.plot(168.1167-180.,-16.25,
             #"^",
             #markersize=30,
@@ -41,7 +43,10 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
 def read_csv(filename, name):
     import pandas as pd
     df = pd.read_csv(filename, sep = ';')
-    print(df[df['name'] == name])
+    tmp = df[df['name'] == name]
+    lon = np.array(tmp['longitude'])
+    lat = np.array(tmp['latitude'])
+    return lon, lat
 
 
             
