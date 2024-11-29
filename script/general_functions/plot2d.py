@@ -3,6 +3,9 @@ import numpy as np
 def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
     if not 'cmap' in kwargs:
         kwargs['cmap'] = 'jet'
+    if kwargs['cmap'] in ['wbrb', 'brb', 'brbw', 'bwr', 'pwb']:
+        from create_cmap import __create_cmap__
+        kwargs['cmap'] = __create_cmap__(kwargs['cmap'])
     levels = np.arange(vmin, vmax+pas, pas)
     sc = ax.contourf(nc_obj.lon,
                      nc_obj.lat,
@@ -14,6 +17,9 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
 def __scatter__(ax, nc_obj, markersize, vmin, vmax, **kwargs):
     if not 'cmap' in kwargs:
         kwargs['cmap'] = 'jet'
+    if kwargs['cmap'] in ['wbrb', 'brb', 'brbw', 'bwr', 'pwb']:
+        from create_cmap import __create_cmap__
+        kwargs['cmap'] = __create_cmap__(kwargs['cmap'])
     if len(nc_obj.data.shape) == 2:
         mapx, mapy = __gridmap__(nc_obj)
         sc = ax.scatter(
