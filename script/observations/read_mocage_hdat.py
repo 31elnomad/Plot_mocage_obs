@@ -80,31 +80,31 @@ class obs_mocage:
                                               species=self.kwargs['species'],
                                               nmaxlevs=self.kwargs['nmaxlevs'])
             elif self.pseudo.lower() in ['viirs']:
-                Obj = daimonobs.DefInstrument(self.config_h5['instrname'],
+                obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'ViirsAOD',
                                               wv=self.kwargs['wv'])
             elif self.pseudo.lower() in ['modis']:
-                Obj = daimonobs.DefInstrument(self.config_h5['instrname'],
+                obj = daimonobs.DefInstrument(self.config_h5['instrname'],
                                               'MODIS_AOD',
                                               wv=self.kwargs['wv'])
 
             # Read data from the current file
             if self.config_h5['type'].lower() in ['h5_sim', 'HSTAT']:
-                Obj.Read(file, ReadAssim={'Region': self.config_h5['domain'], 'ObsType': 'Y'})
+                obj.Read(file, ReadAssim={'Region': self.config_h5['domain'], 'ObsType': 'Y'})
             else:
-                Obj.Read(file)
+                obj.Read(file)
             # Select data within the specified time bounds
-            Obj.Select(TimeBnd=TimeBnd, LonBnd=self.lonbnd, LatBnd=self.latbnd)
+            obj.Select(TimeBnd=TimeBnd, LonBnd=self.lonbnd, LatBnd=self.latbnd)
 
             # Append Lon, Lat, and Data to their respective lists
-            self.lon.extend(Obj.lons)
-            self.lat.extend(Obj.lats)
+            self.lon.extend(obj.lons)
+            self.lat.extend(obj.lats)
             if self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
-                self.data.extend(Obj.col[self.kwargs['species']])
+                self.data.extend(obj.col[self.kwargs['species']])
             elif self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
-                self.data.extend(Obj.pcol[self.kwargs['species']])
+                self.data.extend(obj.pcol[self.kwargs['species']])
             elif self.pseudo.lower()  in ['modis', 'viirs']:
-                self.data.extend(Obj.aod[str(self.kwargs['wv'])])
+                self.data.extend(obj.aod[str(self.kwargs['wv'])])
         # Convert Lon, Lat, and Data lists to NumPy arrays
         Lon = np.array(Lon)
         Lat = np.array(Lat)
