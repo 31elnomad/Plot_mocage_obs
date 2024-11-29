@@ -14,6 +14,7 @@ class obs_mocage:
         self.config_plot = config[config['type_plot']]
         self.var = var
         self.kwargs = kwargs
+        self.delta = float(config['observations'][delta])
 
     def crete_listfile(self):
         if self.config_h5['type'].lower() in ['h5_sim', 'h5_obs']:
@@ -25,6 +26,23 @@ class obs_mocage:
         dirfile = os.path.join(self.config_h5['dirin'], filename)
         self.listfile = glob.glob(dirfile)
 
+    def create_bnd(self):
+        bnd = self.config_plot['boundary'].split('/')
+        tmp = bnd[0].split(',')
+        if bnd[0] == 'None':
+            self.lonbnd = (-180., 180.)
+        elif len(tmp) == 1 or float(tmp[0]) == float(tmp[1]) == 0:
+            self.lonbnd = (float(tmp[0])-self.delta/2, float(tmp[0])+self.delta/2)
+        else:
+            self.lonbnd = (float(tmp[0]), float(tmp[1]))
+        tmp = bnd[1].split(',')
+      if bnd[0] == 'None':
+            self.latbnd = (-180., 180.)
+        elif len(tmp) == 1 or float(tmp[0]) == float(tmp[1]) == 0:
+            self.latbnd = (float(tmp[0])-self.delta/2, float(tmp[0])+self.delta/2)
+        else:
+            self.latbnd = (float(tmp[0]), float(tmp[1]))
+
     def read_h5(self):
         # Initialize data and coordinates arrays
         self.lon = []
@@ -34,6 +52,7 @@ class obs_mocage:
         d1 = d2 - timedelta(hours=1)
         TimeBnd = (d1, d2)
         self.crete_listfile()
+        self.create_bnd()
         for file in self.listfile:
             if self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
@@ -72,7 +91,7 @@ class obs_mocage:
             else:
                 Obj.Read(file)
             # Select data within the specified time bounds
-            Obj.Select(TimeBnd=TimeBnd, LonBnd=None, LatBnd=None)
+            Obj.Select(TimeBnd=TimeBnd, LonBnd=self.lonbnd, LatBnd=self.latbnd)
 
             # Append Lon, Lat, and Data to their respective lists
             self.lon.extend(Obj.lons)
@@ -94,7 +113,7 @@ class obs_mocage:
                         raise Exception("Le cas avec plusieurs colonnes n'a pas été codé pour les observations")
             mk = self.data >= float(self.config_plot['vmin'])
             self.lon = self.lon[mk]
-            self.at = self.lat[mk]
+            self.lat = self.lat[mk]
             self.data = self.data[mk]
             
 
