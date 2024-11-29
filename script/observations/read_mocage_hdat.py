@@ -3,7 +3,7 @@ import glob
 
 class obs_mocage:
   
-    def __init__(self, config, pseudo, date, var, **kwargs): 
+    def __init__(self, config, pseudo, date, **kwargs): 
         sys.path.append(os.path.abspath(config['observations']))
         self.pseudo = pseudo[1]
         self.config_h5 = config[self.pseudo]
