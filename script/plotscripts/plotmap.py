@@ -160,7 +160,8 @@ class PlotMap:
                                           vmin,
                                           vmax,
                                           transform=self.mapproj,
-                                          cmap=self.config_plot['cmap'])
+                                          cmap=self.config_plot['cmap'],
+                                          extend=obj_data.extend)
                 elif self.config_plot['plot_opt'].split(':')[0] in ['scatter']:
                     from plot2d import __scatter__
                     ax, sc = __scatter__(ax,
