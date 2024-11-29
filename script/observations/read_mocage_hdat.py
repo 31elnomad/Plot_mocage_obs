@@ -1,5 +1,6 @@
 import sys
 import glob
+import os
 
 class obs_mocage:
   
