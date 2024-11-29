@@ -8,6 +8,7 @@ class obs_mocage:
   
     def __init__(self, config_class, pseudo, date, **kwargs): 
         sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
+        import daimonobs
         self.pseudo = pseudo[1]
         self.config_h5 = config_class.config[self.pseudo]
         self.date = datetime.datetime(int(date[:4]),
