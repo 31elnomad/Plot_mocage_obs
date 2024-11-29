@@ -26,6 +26,8 @@ class obs_mocage:
         elif self.config_h5['type'].lower() in ['hdat']:
             filename = 'HDAT+' + self.date.strftime('%Y%m%d') + '*.h5'
         dirfile = os.path.join(self.config_h5['dirin'], filename)
+        print(dirfile)
+        quit()
         self.listfile = glob.glob(dirfile)
 
     def create_bnd(self):
@@ -55,8 +57,6 @@ class obs_mocage:
         TimeBnd = (d1, d2)
         self.crete_listfile()
         self.create_bnd()
-        print(self.listfile)
-        quit()
         for file in self.listfile:
             if self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c']:
                 obj = daimonobs.DefInstrument(self.config_h5['instrname'],
