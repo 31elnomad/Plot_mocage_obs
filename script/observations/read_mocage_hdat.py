@@ -13,7 +13,7 @@ class obs_mocage:
                                       int(date[4:6]),
                                       int(date[6:8]),
                                       int(date[8:10]))
-        self.config_plot = config_class.config[config_class.config['type_plot']]
+        self.config_plot = config_class.config[config_class.config['global']['type_plot']]
         self.kwargs = kwargs
         self.delta = float(config_class.config['observations'][delta])
 
