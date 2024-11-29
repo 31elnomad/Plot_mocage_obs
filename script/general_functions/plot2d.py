@@ -8,7 +8,7 @@ def __contourf__(ax, nc_obj, pas, vmin, vmax, **kwargs):
                      nc_obj.lat,
                      nc_obj.data,
                      levels,
-                     kwargs=kwargs)
+                     **kwargs)
     return ax, sc
     
 def __scatter__(ax, nc_obj, markersize, vmin, vmax, **kwargs):
