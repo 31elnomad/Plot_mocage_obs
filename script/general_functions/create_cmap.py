@@ -1,4 +1,5 @@
 import matplotlib
+import numpy as np
 
 def __create_cmap__(cmap):
     """
