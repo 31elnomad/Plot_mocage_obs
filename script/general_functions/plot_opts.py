@@ -30,7 +30,7 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
         ax.text(loc, loc_h, txt, fontsize=16, color='white', bbox=dict(facecolor='black'), fontweight='bold')
     if 'add' in list(config_plot.keys()):
         if config_plot['add'] != 'None':
-            filename = '../../database/volcanoes.csv'
+            filename = 'database/volcanoes.csv'
             name = config_plot['add'].lower()
             read_csv(filename, name)
             #ax.plot(168.1167-180.,-16.25,
