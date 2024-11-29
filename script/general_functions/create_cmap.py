@@ -70,5 +70,5 @@ def __create_cmap__(cmap):
     cmap = matplotlib.colors.LinearSegmentedColormap('mymap', cdict, N=256)
     cmap.set_under(color_under)
     cmap.set_over(color_over)
-    cmap.set_bad(color_bad, alpha=1)
+    #cmap.set_bad(color_bad, alpha=1)
     return cmap
