@@ -39,15 +39,9 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
             #color='black')
 
 def read_csv(filename, name):
-    from csv import reader
-    # open file
-    with open(filename, "r") as my_file:
-        # pass the file object to reader()
-        file_reader = reader(my_file)
-        # do this for all the rows
-        for i in file_reader:
-            # print the rows
-            print(i)
+    import pandas as pd
+    df = pd.read_csv(filename, sep = ';')
+    print(df)
 
 
             
