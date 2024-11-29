@@ -1,6 +1,7 @@
 import sys
 import glob
 import os
+import datetime
 
 class obs_mocage:
   
@@ -49,7 +50,7 @@ class obs_mocage:
         self.lat = []
         self.data = []
         d2 = self.date
-        d1 = d2 - timedelta(hours=1)
+        d1 = d2 - datetime.timedelta(hours=1)
         TimeBnd = (d1, d2)
         self.crete_listfile()
         self.create_bnd()
