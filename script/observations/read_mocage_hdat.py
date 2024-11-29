@@ -12,7 +12,6 @@ class obs_mocage:
                                       int(date[6:8]),
                                       int(date[8:10]))
         self.config_plot = config[config['type_plot']]
-        self.var = var
         self.kwargs = kwargs
         self.delta = float(config['observations'][delta])
 
