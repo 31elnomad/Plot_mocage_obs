@@ -41,7 +41,7 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
 def read_csv(filename, name):
     import pandas as pd
     df = pd.read_csv(filename, sep = ';')
-    print(df)
+    print(df[df['name'] == name])
 
 
             
