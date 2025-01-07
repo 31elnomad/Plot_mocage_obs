@@ -42,9 +42,9 @@ class Netcdf_mocage:
             self.tree = self.config_nc['tree']
             self.type_file = self.config_nc['type_file']
             self.plot_type = config_class.config['global']['type_plot']
+            self.nameexp = self.config_nc['nameexp']
             if self.tree not in ['script']:
                 self.conf = self.config_nc['conf']
-                self.nameexp = self.config_nc['nameexp']
                 self.suffix = self.config_nc['suffix']
                 self.group = self.config_nc['group']
                 self.echeance = int(self.config_nc['echeance'])
