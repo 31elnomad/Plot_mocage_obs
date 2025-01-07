@@ -62,7 +62,7 @@ class Netcdf_mocage:
         if self.type_exp.lower() in ['direct']:
             self.filename1 = f'HM{self.domain.upper()} + {self.date.strftime('%Y%m%d%H')}.nc'
         elif self.type_exp.upper() in ['ANA', 'DRY', 'BKG']:
-            nwind, nwind1 = compyte_nwind(self.wlength, int(self.date.hour))
+            nwind, nwind1 = compute_nwind(self.wlength, int(self.date.hour))
             filename = f'HM{self.domain.upper()}+{self.date.strftime("%Y%m%d%H")}'
             w_exp = f'+{self.type_exp.upper()}"_W{str(nwind).zfill(2)}.nc'
             self.filename1 = filename + w_exp
