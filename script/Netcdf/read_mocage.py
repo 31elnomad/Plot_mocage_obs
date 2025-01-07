@@ -133,6 +133,8 @@ class Netcdf_mocage:
         elif self.tree.lower() in ['script', 'scripts']:
             self.create_filename()
             err = 1
+            print([self.filename1, self.filename2, self.filename3, self.filename4])
+            quit()
             for filename in [self.filename1, self.filename2, self.filename3, self.filename4]:
                 if err == 1:
                     a=1
