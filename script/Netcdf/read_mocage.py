@@ -135,7 +135,8 @@ class Netcdf_mocage:
             err = 1
             for filename in [self.filename1, self.filename2, self.filename3, self.filename4]:
                 if err == 1:
-                    try:
+                    a=1
+                    if a == 1:
                         if self.config_nc['getfile'].lower() in ['t', 'true']:
                             if not os.path.exists(os.path.join(self.dirtmp, self.out_filename)):
                                 ds = self.__get_file__(False, HOST, [self.var[0], 'a_hybr_coord', 'b_hybr_coord', 'air_pressure_at_surface'])
@@ -157,8 +158,8 @@ class Netcdf_mocage:
                         else:
                              ds = __get_file__(self, True, HOST, 'all') 
                         err = 0
-                    except:
-                        pass
+                    #except:
+                    #    pass
             if err == 1:
                 raise Exception("Aucun fichier 'script' n'a été trouvé")
         else:
