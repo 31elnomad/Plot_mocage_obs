@@ -51,6 +51,7 @@ class Netcdf_mocage:
             elif self.tree in ['script']:
                 self.type_exp = self.config_nc['typeexp'].lower()
                 self.wlength = None
+                self.echeance = 0
                 if self.type_exp.lower() not in ['direct']:
                     self.wlength = int(self.config_nc['wlength']) 
 
