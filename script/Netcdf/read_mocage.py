@@ -64,10 +64,10 @@ class Netcdf_mocage:
         elif self.type_exp.upper() in ['ANA', 'DRY', 'BKG']:
             nwind, nwind1 = compute_nwind(self.wlength, int(self.date.hour))
             filename = f'HM{self.domain.upper()}+{self.date.strftime("%Y%m%d%H")}'
-            w_exp = f'+{self.type_exp.upper()}"_W{str(nwind).zfill(2)}.nc'
+            w_exp = f'+{self.type_exp.upper()}_W{str(nwind).zfill(2)}.nc'
             self.filename1 = filename + w_exp
             if self.wlength != 1:
-                w_exp = f'+{self.type_exp.upper()}"_W{str(nwind1).zfill(2)}.nc'
+                w_exp = f'+{self.type_exp.upper()}_W{str(nwind1).zfill(2)}.nc'
                 self.filename2 = filename + w_exp
             if self.type_exp.upper() == 'ANA':
                 self.filename3 = filename + f'+BKG_W{str(nwind).zfill(2)}.nc'
