@@ -198,8 +198,6 @@ class Netcdf_mocage:
                 raise Exception("kwargs['filename'] doit être défini") 
             from get_data import get_login_info, ftp_get_buffer
             login_info = get_login_info(HOST)
-            print(remote_file)
-            quit()
             r = ftp_get_buffer(remote_file, HOST, login_info)
             if return_dataset is True:
                 ds = xr.load_dataset(r)
