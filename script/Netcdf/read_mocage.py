@@ -140,7 +140,7 @@ class Netcdf_mocage:
                     if a == 1:
                         if self.config_nc['getfile'].lower() in ['t', 'true']:
                             if not os.path.exists(os.path.join(self.dirtmp, self.out_filename)):
-                                ds = self.__get_file__(False, HOST, [self.var[0], 'a_hybr_coord', 'b_hybr_coord', 'air_pressure_at_surface'])
+                                ds = self.__get_file__(False, HOST, [self.var[0], 'a_hybr_coord', 'b_hybr_coord', 'air_pressure_at_surface'], self.out_filename)
                             else:
                                 ds = xr.open_dataset(os.path.join(self.dirtmp, self.out_filename))
                                 pres_var = list(ds.keys())
