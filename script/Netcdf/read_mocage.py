@@ -367,8 +367,6 @@ class Netcdf_mocage:
 
     def convert_data(self, ds):
         unit = ds[self.var[0]].units
-        print(unit)
-        quit()
         if self.var[1] != '1':
             if self.var[1] == 'DU' and self.var[0][-3:] =='_tc':
                 self.unit = self.var[1]
