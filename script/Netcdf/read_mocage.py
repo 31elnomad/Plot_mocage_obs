@@ -205,7 +205,7 @@ class Netcdf_mocage:
             else:
                 out_file = os.path.join(self.dirtmp, kwargs['filename'])
                 ds = xr.open_dataset(r)
-                ds = ds[kept_vars]
+                ds = ds[listvar]
                 ds.to_netcdf(
                     out_file,
                     encoding={var: {"zlib": True} for var in kept_vars},
