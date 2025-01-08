@@ -10,5 +10,9 @@ def __concat_plot__(fig, axs, filenames):
             img = plt.imread(filename)
             ax.imshow(img, extent=[-180,180,-90,90], transform=ccrs.PlateCarree())
             ax.axis('off')
+    else:
+        img = plt.imread(filenames[0])
+        axs.imshow(img, extent=[-180,180,-90,90], transform=ccrs.PlateCarree())
+        axs.axis('off')
     return axs
     
