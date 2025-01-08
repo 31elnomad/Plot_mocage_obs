@@ -208,7 +208,7 @@ class Netcdf_mocage:
                 ds = ds[listvar]
                 ds.to_netcdf(
                     out_file,
-                    encoding={var: {"zlib": True} for var in kept_vars},
+                    encoding={var: {"zlib": True} for var in listvar},
                 )
                 r.close()
                 ds = None
