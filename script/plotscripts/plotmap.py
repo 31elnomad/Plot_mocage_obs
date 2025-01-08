@@ -29,6 +29,7 @@ class PlotMap:
         self.listdate = config_class.listdate
         self.boundary = self.config_plot['boundary'].split('/')
         self.proj = self.config_plot['projection'].split(':')
+        self.central_longitude = float(self.proj[1])
         if self.boundary[2] == 'None':
             self.listlev = None
         else:
