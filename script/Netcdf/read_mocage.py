@@ -401,8 +401,7 @@ class Netcdf_mocage:
             self.data[self.data > vmax] = np.nan
         
     def process_netcdf(self, config_class):
-        print(self.var, self.date, self.pseudo)
-        quit()
+        self.unit = None
         if self.var is not None and self.date is not None and self.pseudo is not None:
             ds = self.getfile(config_class)
             if self.config_nc['getfile'].lower() in ['t', 'true']:
