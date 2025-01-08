@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 
 def __concat_plot__(fig, axs, filenames):
+    print(filenames)
     if len(filenames) > 0:
         for ax, filename in zip(axs.flat, filenames):
             img = plt.imread(filename)
