@@ -203,7 +203,7 @@ class Netcdf_mocage:
                 ds = xr.load_dataset(r)
                 r.close()
             else:
-                out_file = os.path.join(self.dirtmp, self.out_file_name)
+                out_file = os.path.join(self.dirtmp, kwargs['filename'])
                 ds = xr.open_dataset(r)
                 ds = ds[kept_vars]
                 ds.to_netcdf(
