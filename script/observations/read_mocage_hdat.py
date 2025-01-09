@@ -121,8 +121,8 @@ class obs_mocage:
         # Convert Lon, Lat, and Data lists to NumPy arrays
         self.lon = np.array(self.lon)
         if self.central_longitude == 180.:
-            self.lon[self.lon + self.central_longitude > 180.] -= self.central_longitude
             self.lon[self.lon + self.central_longitude <= 180.] += self.central_longitude
+            self.lon[self.lon > 180.] = self.lon[self.lon > 180.] - 2*self.central_longitude
         self.lat = np.array(self.lat)
         self.data = np.array(self.data)
         if self.config_plot['maskmin'].lower() in ['true', 't']:
