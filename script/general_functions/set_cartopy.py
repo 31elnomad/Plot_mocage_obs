@@ -63,8 +63,8 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     gl.right_labels = False
     gl.bottom_labels = False
     gl.left_labels = False
-    gl.ylocator = LatitudeLocator(interval=int(float(self.grid[1])))
-    gl.xlocator = LongitudeLocator(interval=int(float(self.grid[0])))
+    gl.ylocator = LatitudeLocator(interval=int(float(obj_plot.grid[1])))
+    gl.xlocator = LongitudeLocator(interval=int(float(obj_plot.grid[0])))
 
     if idx % obj_plot.ncol == 0:
         lat_lab = np.arange(-90, 90, int(obj_plot.grid[1]))
