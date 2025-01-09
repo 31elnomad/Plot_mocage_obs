@@ -18,11 +18,11 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     resol = '50m'
     land_color = '#D3D3D3'
     sea_color = '#D3D3D3'
-    if obj_plot.proj[0] == 'PlateCarree':
-        central_longitude = float(obj_plot.proj[1])
+    if obj_plot.proj == 'PlateCarree':
+        central_longitude = float(obj_plot.central_longitude)
         mapproj = ccrs.PlateCarree(central_longitude=central_longitude)
     else:
-        raise Exception("La projection {} nest pas implémenté".format(obj_plot.proj[0]))
+        raise Exception("La projection {} nest pas implémenté".format(obj_plot.proj))
     ax.add_feature(
         cfeature.NaturalEarthFeature(
             'physical',
