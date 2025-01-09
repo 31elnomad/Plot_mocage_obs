@@ -50,9 +50,9 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         zorder=11,
         linewidth=2
     )
-    """gl = ax.gridlines(
+    gl = ax.gridlines(
         crs=mapproj,
-        draw_labels=True,
+        draw_labels=False,
         linewidth=0.5,
         color='k',
         alpha=1,
@@ -63,8 +63,8 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     gl.right_labels = False
     gl.bottom_labels = False
     gl.left_labels = False
-    gl.ylocator = LatitudeLocator(nbins=int(float(self.grid[1])))
-    gl.yformatter = LatitudeFormatter(auto_hide=False)"""
+    gl.ylocator = LatitudeLocator(interval=int(float(self.grid[1])))
+    gl.xlocator = LongitudeLocator(interval=int(float(self.grid[0])))
 
     if idx % obj_plot.ncol == 0:
         lat_lab = np.arange(-90, 90, int(obj_plot.grid[1]))
