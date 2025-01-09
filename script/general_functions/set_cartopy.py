@@ -1,7 +1,7 @@
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
-from matplolib.ticker import LongitudeLocator, LatitudeLocator
+from matplotlib.ticker import LongitudeLocator, LatitudeLocator
 import matplotlib.pyplot as plt
 import numpy as np
 
