@@ -211,7 +211,7 @@ class PlotMap:
             obj_data.process_netcdf(self.config_class)  
             ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
             sc = None
-        add_plot(ax, List[-3], List[-2], self.order, self.var[0], self.date, self.pseudo, obj_data.lonbnd, obj_data.latbnd, self.config_plot)
+        add_plot(ax, List[-3], List[-2], self.order, self.var[0], self.date, self.pseudo, obj_data.lonbnd, obj_data.latbnd, self.config_plot, central_longitude=self.central_longitude)
         filename = f"subplot_{idx}.png"
         plt.savefig(filename)
         plt.close()
