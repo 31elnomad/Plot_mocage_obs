@@ -230,7 +230,7 @@ class PlotMap:
         from plot2d import __print_colorbar__
         from plot_opts import process_res
         filenames, sc, obj_data, var, unit = process_res(results)
-        self.axs = __concat_plot__(self.fig, self.axs, filenames)
+        self.axs = __concat_plot__(self.fig, self.axs, filenames, 'map', central_longitude=self.central_longitude)
         plt.tight_layout()
         if 'var' not in self.order[:2] and 'lev' not in self.order[:2]:
             cbar = __print_colorbar__(self.fig, sc, self.config_plot, obj_data, unit, var)
