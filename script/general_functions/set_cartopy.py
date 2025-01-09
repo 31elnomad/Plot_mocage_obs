@@ -82,8 +82,6 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     gl.ylabel_style = {'size': 20, 'color': 'black'}
     if nc_obj.lonbnd[0] > nc_obj.lonbnd[1]:
         raise Exception ("Cas où lonbnd[0] > lonbnd[1] n'est pas implémenté")
-    print( nc_obj.lonbnd)
-    quit()
     ax.set_extent([nc_obj.lonbnd[0],
                    nc_obj.lonbnd[1],
                    nc_obj.latbnd[0],
