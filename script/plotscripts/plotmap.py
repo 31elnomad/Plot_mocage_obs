@@ -52,7 +52,6 @@ class PlotMap:
     def create_fig(self):
         figsize = self.config_plot['figsize'].split(',')
         figsize = (int(figsize[0]), int(figsize[1]))
-        self.proj = self.config_plot['projection'].split(':')
         if self.proj in ['PlateCarree']:
             self.mapproj = ccrs.PlateCarree(
                             central_longitude=self.central_longitude)
