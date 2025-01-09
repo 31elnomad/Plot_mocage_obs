@@ -62,7 +62,7 @@ class PlotMap:
                             central_latitude=self.central_latitude)
             self.subplot_kw={'projection': self.mapproj}
         else:
-            raise Exception("{} projection is unknown".format(self.proj[0]))
+            raise Exception("{} projection is unknown".format(self.proj))
         self.fig, self.axs = plt.subplots(
                                     ncols = self.ncol,
                                     nrows = self.nligne,
