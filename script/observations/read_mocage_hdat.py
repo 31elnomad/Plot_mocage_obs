@@ -99,17 +99,26 @@ class obs_mocage:
             else:
                 obj.Read(file)
             # Select data within the specified time bounds
-            obj.Select(TimeBnd=TimeBnd, LonBnd=self.lonbnd, LatBnd=self.latbnd)
-
+            if self.lonbnd[0] <= self.lonbnd[1]:
+                obj.Select(TimeBnd=TimeBnd, LonBnd=self.lonbnd, LatBnd=self.latbnd)
+            else:
+                import copy
+                obj_copy = copy.deepcopy(obj)
+                lonbnd = self.lonbnd
+                lonbnd[1]= 180.
+                obj_copy.Select(TimeBnd=TimeBnd, LonBnd=lonbnd, LatBnd=self.latbnd)
+                self.lon.extend(obj_copy.lons)
+                self.lat.extend(obj_copy.lats)
+                self.__read_h5__(obj_copy)
+                lonbnd = self.lonbnd
+                lonbnd[0] = -180.
+                obj.Select(TimeBnd=TimeBnd, LonBnd=lonbnd, LatBnd=self.latbnd)
             # Append Lon, Lat, and Data to their respective lists
             self.lon.extend(obj.lons)
             self.lat.extend(obj.lats)
-            if self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
-                self.data.extend(obj.col[self.kwargs['species']])
-            elif self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
-                self.data.extend(obj.pcol[self.kwargs['species']])
-            elif self.pseudo.lower()  in ['modis', 'viirs']:
-                self.data.extend(obj.aod[str(self.kwargs['wv'])])
+            self.__read_h5__()
+            
+            
         # Convert Lon, Lat, and Data lists to NumPy arrays
         self.lon = np.array(self.lon)
         self.lat = np.array(self.lat)
@@ -122,5 +131,13 @@ class obs_mocage:
             self.lon = self.lon[mk]
             self.lat = self.lat[mk]
             self.data = self.data[mk]
-            
+
+    def __read_h5__(self, obj):
+      if self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
+          self.data.extend(obj.col[self.kwargs['species']])
+      elif self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
+          self.data.extend(obj.pcol[self.kwargs['species']])
+      elif self.pseudo.lower()  in ['modis', 'viirs']:
+          self.data.extend(obj.aod[str(self.kwargs['wv'])])
+      
 
