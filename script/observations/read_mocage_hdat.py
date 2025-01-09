@@ -136,6 +136,9 @@ class obs_mocage:
 
     def __read_h5__(self, obj):
       self.lon.extend(obj.lons)
+      if len(self.lon) > 0:
+          print(self.lon)
+          quit()
       self.lat.extend(obj.lats)
       if self.pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
           self.data.extend(obj.col[self.kwargs['species']])
