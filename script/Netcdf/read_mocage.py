@@ -16,7 +16,7 @@ class Netcdf_mocage:
 
     def __init__(self, config_class, pseudo, date, var, **kwargs):
         self.plot = config_class.config['global']['type_plot']
-        self.config_plot = config_class.config[plot]
+        self.config_plot = config_class.config[self.plot]
         if pseudo is None:
             self.pseudo = None
         else:
