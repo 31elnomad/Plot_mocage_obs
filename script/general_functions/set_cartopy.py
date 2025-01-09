@@ -59,18 +59,13 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         linestyle='--',
         zorder=12
     )
-    #gl.xlocator = LongitudeLocator(nbins=int(float(obj_plot.grid[0])))
-    #gl.xformatter = LongitudeFormatter(auto_hide=False)
-    gl.ylocator = LatitudeLocator(nbins=int(float(obj_plot.grid[1])))
-    gl.yformatter = LatitudeFormatter(auto_hide=False) 
-    gl.top_labels = False
-    gl.left_labels = False
-    gl.right_labels = False
-    gl.bottom_labels = False
     if idx % obj_plot.ncol == 0:
-        gl.left_labels = True
+        lat_lab = np.arange(-90, 90, int(obj_plot.grid[1]))
+        ax.set_xticks(lat_lab)
+        ax.xaxis.set_major_formatter(LatitudeFormatter())
+        for label in ax.xaxis.get_ticklabels():
+            label.set_fontsize(20)
     if obj_plot.ncol * obj_plot.nligne - idx <= obj_plot.ncol:
-        gl.bottom_labels = False
         lon_lab = np.arange(-180, 180, int(obj_plot.grid[0]))
         lon_lab = lon_lab + float(obj_plot.central_longitude)
         lon_lab[lon_lab>180.] = lon_lab[lon_lab>180.] - 360.
@@ -78,8 +73,6 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         ax.xaxis.set_major_formatter(LongitudeFormatter())
         for label in ax.xaxis.get_ticklabels():
             label.set_fontsize(20)
-    gl.xlabel_style = {'size': 20, 'color': 'black'}
-    gl.ylabel_style = {'size': 20, 'color': 'black'}
     if nc_obj.lonbnd[0] > nc_obj.lonbnd[1]:
         raise Exception ("Cas où lonbnd[0] > lonbnd[1] n'est pas implémenté")
     ax.set_extent([nc_obj.lonbnd[0],
