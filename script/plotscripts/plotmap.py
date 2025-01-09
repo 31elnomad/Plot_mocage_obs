@@ -165,14 +165,14 @@ class PlotMap:
                     species = self.config_class.config[self.pseudo[1]]['species']
                 else:
                     species = None
-                from main_obs import __main_obs__ 
-                obj_data = __main_obs__(self.config_class,
+                from main_obs import obs_mocage 
+                obj_data = obs_mocage(self.config_class,
                                       self.pseudo,
                                       self.date,
                                       wv=wv,
                                       species=species,
                                       central_longitude=self.central_longitude)
-                obj_data.read_h5()
+                obj_data.__main_obs__()
                 
             ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
             if self.config_plot['plot_opt'].split(':')[0] in ['contourf'] and self.pseudo[0] not in ['obs']:
