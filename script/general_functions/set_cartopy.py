@@ -81,8 +81,8 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         ax.xaxis.set_major_formatter(LongitudeFormatter())
         for label in ax.xaxis.get_ticklabels():
             label.set_fontsize(20)
-    if nc_obj.lonbnd[0] > nc_obj.lonbnd[1]:
-        raise Exception ("Cas où lonbnd[0] > lonbnd[1] n'est pas implémenté")
+    #if nc_obj.lonbnd[0] > nc_obj.lonbnd[1] and central_longitude != 0:
+    #    raise Exception ("Cas où lonbnd[0] > lonbnd[1] n'est pas implémenté")
     ax.set_extent([nc_obj.lonbnd[0],
                    nc_obj.lonbnd[1],
                    nc_obj.latbnd[0],
