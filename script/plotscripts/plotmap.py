@@ -170,7 +170,8 @@ class PlotMap:
                                       self.pseudo,
                                       self.date,
                                       wv=wv,
-                                      species=species)
+                                      species=species,
+                                      central_longitude=self.central_longitude)
                 obj_data.read_h5()
                 
             ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
