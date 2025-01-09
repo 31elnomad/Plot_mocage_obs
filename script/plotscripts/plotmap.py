@@ -153,7 +153,8 @@ class PlotMap:
                 obj_data = Netcdf_mocage(self.config_class,
                                               self.pseudo,
                                               self.date,
-                                              self.var)
+                                              self.var,
+                                              central_longitude=self.central_longitude)
                 obj_data.process_netcdf(self.config_class)  
             elif self.pseudo[0] in ['obs']:
                 if 'wv' in self.config_class.config[self.pseudo[1]] and self.config_class.config[self.pseudo[1]]['wv'] != 'None':
