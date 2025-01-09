@@ -29,7 +29,12 @@ class PlotMap:
         self.listdate = config_class.listdate
         self.boundary = self.config_plot['boundary'].split('/')
         self.proj = self.config_plot['projection'].split(':')
-        self.central_longitude = float(self.proj[1])
+        if self.proj[0] in ['PlateCarree']:
+            self.central_longitude = float(self.proj[1])
+        elif self.proj[0] in ['Orthographic']:
+            self.central_longitude=float(self.proj[1].split('/')[0]),
+            self.central_latitude=float(self.proj[1].split('/')[1]))
+        self.proj = self.proj[0]
         if self.boundary[2] == 'None':
             self.listlev = None
         else:
@@ -48,14 +53,14 @@ class PlotMap:
         figsize = self.config_plot['figsize'].split(',')
         figsize = (int(figsize[0]), int(figsize[1]))
         self.proj = self.config_plot['projection'].split(':')
-        if self.proj[0] in ['PlateCarree']:
+        if self.proj in ['PlateCarree']:
             self.mapproj = ccrs.PlateCarree(
-                            central_longitude=float(self.proj[1]))
+                            central_longitude=self.central_longitude)
             self.subplot_kw = {'projection': self.mapproj}
-        elif self.proj[0] in ['Orthographic']:
+        elif self.proj in ['Orthographic']:
             self.mapproj = ccrs.Orthographic(
-                            central_longitude=float(self.proj[1].split('/')[0]),
-                            central_latitude=float(self.proj[1].split('/')[1]))
+                            central_longitude=self.central_longitude,
+                            central_latitude=self.central_latitude)
             self.subplot_kw={'projection': self.mapproj}
         else:
             raise Exception("{} projection is unknown".format(self.proj[0]))
