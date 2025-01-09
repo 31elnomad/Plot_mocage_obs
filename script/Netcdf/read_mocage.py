@@ -312,12 +312,12 @@ class Netcdf_mocage:
                 mask[idx_lon1:] = True
                 mask[:idx_lon2] = True
             self.lon = self.lon[mask]
+            self.lon = self.lon + self.central_longitude
+            self.lon[self.lon>180.] =  self.lon[self.lon>180.] - 360
             if len(self.data.shape) == 3:
                 self.data = self.data[:, :, mask]
             else:
                 self.data = self.data[:, mask]
-            print(self.data)
-            quit()
             self.psurf = self.psurf[:, mask]
         else:
             self.lon = self.lon[idx_lon1]
