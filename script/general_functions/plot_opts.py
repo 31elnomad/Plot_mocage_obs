@@ -20,6 +20,9 @@ def process_res(results):
     return filenames, sc, obj_data, var, unit
 
 def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, **kwargs):
+    central_longitude = 0
+    if 'central_longitude' in kwargs:
+        central_longitude = kwargs['central_longitude']
     if order[0] == 'exp':
         title = pseudo[1]
     if order[1] == 'date':
@@ -37,6 +40,10 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
                 print ("Ajout d'un triangle pour le volcan {}".format(volc.lower()))
                 filename = 'database/volcanoes.csv'
                 lon, lat = read_csv(filename, volc.lower())
+                if lon + central_longitude > 180:
+                    lon = lon - central_longitude
+                else:
+                    raise Exception("Not implemented")
                 ax.plot(lon, lat,
                         "^",
                         markersize=30,
