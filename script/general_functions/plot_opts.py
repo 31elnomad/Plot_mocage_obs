@@ -40,12 +40,10 @@ def add_plot(ax, col, ligne, order, var, date, pseudo, xlim, ylim, config_plot, 
                 print ("Ajout d'un triangle pour le volcan {}".format(volc.lower()))
                 filename = 'database/volcanoes.csv'
                 lon, lat = read_csv(filename, volc.lower())
-                print(lon)
-                quit()
                 if lon + central_longitude > 180:
                     lon = lon - central_longitude
                 else:
-                    raise Exception("Not implemented")
+                    lon = lon
                 ax.plot(lon, lat,
                         "^",
                         markersize=30,
