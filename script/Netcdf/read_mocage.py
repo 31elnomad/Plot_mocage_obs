@@ -233,7 +233,10 @@ class Netcdf_mocage:
                 tmp = self.boundary[0].split(',')
                 tmp = [float(i) for i in tmp]
                 if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1] and tmp[1] >= self.lonbnd[0] and tmp[1] <= self.lonbnd[1]:
-                    self.lonbnd = [tmp[0]-self.central_longitude, abs(tmp[1]-self.central_longitude)]
+                    if abs(tmp[1]-self.central_longitude) <= 180:
+                        self.lonbnd = [tmp[0]-self.central_longitude, abs(tmp[1]-self.central_longitude)]
+                    else:
+                        self.lonbnd = [tmp[0]-self.central_longitude, tmp[1]+self.central_longitude]
                     print(self.lonbnd)
                     quit()
                 else:
