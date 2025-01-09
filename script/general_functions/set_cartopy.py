@@ -2,6 +2,7 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeLocator, LatitudeLocator, LongitudeFormatter, LatitudeFormatter
 import matplotlib.pyplot as plt
+import numpy as np
 
 def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     """
