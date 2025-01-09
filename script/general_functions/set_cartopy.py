@@ -71,10 +71,10 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         gl.left_labels = True
     if obj_plot.ncol * obj_plot.nligne - idx <= obj_plot.ncol:
         gl.bottom_labels = False
-        lon_lab = np.arange(-180, 180, int(self.grid[0]))
+        lon_lab = np.arange(-180, 180, int(obj_plot.grid[0]))
         lon_lab = lon_lab + float(obj_plot.central_longitude)
         lon_lab[lon_lab>180.] = lon_lab[lon_lab>180.] - 360.
-        ax.set_xticks(np.arange(-180,180, int(self.grid[0])))
+        ax.set_xticks(lon_lab)
         ax.xaxis.set_major_formatter(LongitudeFormatter())
         for label in ax.xaxis.get_ticklabels():
             label.set_fontsize(20)
