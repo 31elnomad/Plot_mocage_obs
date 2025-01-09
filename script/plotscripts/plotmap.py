@@ -165,8 +165,8 @@ class PlotMap:
                     species = self.config_class.config[self.pseudo[1]]['species']
                 else:
                     species = None
-                from read_mocage_hdat import obs_mocage 
-                obj_data = obs_mocage(self.config_class,
+                from main_obs import __main_obs__ 
+                obj_data = __main_obs__(self.config_class,
                                       self.pseudo,
                                       self.date,
                                       wv=wv,
