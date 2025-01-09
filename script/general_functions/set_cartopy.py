@@ -58,12 +58,19 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         alpha=1,
         linestyle='--',
         zorder=12
-    )"""
+    )
+    gl.top_labels = False
+    gl.right_labels = False
+    gl.bottom_labels = False
+    gl.left_labels = False
+    gl.ylocator = LatitudeLocator(nbins=int(float(self.grid[1])))
+    gl.yformatter = LatitudeFormatter(auto_hide=False)"""
+
     if idx % obj_plot.ncol == 0:
         lat_lab = np.arange(-90, 90, int(obj_plot.grid[1]))
-        ax.set_xticks(lat_lab)
-        ax.xaxis.set_major_formatter(LatitudeFormatter())
-        for label in ax.xaxis.get_ticklabels():
+        ax.set_yticks(lat_lab)
+        ax.yaxis.set_major_formatter(LatitudeFormatter())
+        for label in ax.yaxis.get_ticklabels():
             label.set_fontsize(20)
     if obj_plot.ncol * obj_plot.nligne - idx <= obj_plot.ncol:
         lon_lab = np.arange(-180, 180, int(obj_plot.grid[0]))
