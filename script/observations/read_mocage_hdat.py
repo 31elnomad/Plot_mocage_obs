@@ -105,6 +105,8 @@ class obs_mocage:
                 import copy
                 obj_copy = obj
                 lonbnd = self.lonbnd
+                print(lonbnd)
+                quit()
                 lonbnd[1]= 180.
                 obj_copy.Select(TimeBnd=TimeBnd, LonBnd=lonbnd, LatBnd=self.latbnd)
                 self.lon.extend(obj_copy.lons)
