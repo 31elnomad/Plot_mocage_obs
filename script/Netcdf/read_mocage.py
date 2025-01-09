@@ -14,7 +14,7 @@ import numpy as np
 
 class Netcdf_mocage:
 
-    def __init__(self, config_class, pseudo, date, var):
+    def __init__(self, config_class, pseudo, date, var, **kwargs):
         plot = config_class.config['global']['type_plot']
         self.config_plot = config_class.config[plot]
         if pseudo is None:
@@ -54,6 +54,10 @@ class Netcdf_mocage:
                 self.echeance = 0
                 if self.type_exp.lower() not in ['direct']:
                     self.wlength = int(self.config_nc['wlength']) 
+            if 'central_longitude' in kwargs:
+                self.central_longitude = kwargs['central_longitude']
+            else:
+                raise Exception("Central longitude na pas été trouvé dans la class Netcdf")
 
     def create_filename(self):
         self.dirhost = f'/home/{self.user}/MOCAGEHM/{self.nameexp}/'
@@ -228,8 +232,10 @@ class Netcdf_mocage:
             elif len(self.boundary[0].split(',')) == 2:
                 tmp = self.boundary[0].split(',')
                 tmp = [float(i) for i in tmp]
-                if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1] and tmp[1] >= tmp[0] and tmp[1] >= self.lonbnd[0] and tmp[1] <= self.lonbnd[1]:
-                    self.lonbnd = [tmp[0], tmp[1]]
+                if tmp[0] >= self.lonbnd[0] and tmp[0] <= self.lonbnd[1] and tmp[1] >= self.lonbnd[0] and tmp[1] <= self.lonbnd[1]:
+                    self.lonbnd = [tmp[0]-self.central_longitude, abs(tmp[1]-self.central_longitude)]
+                    print(self.lonbnd)
+                    quit()
                 else:
                     raise Exception("Les longitudes données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
