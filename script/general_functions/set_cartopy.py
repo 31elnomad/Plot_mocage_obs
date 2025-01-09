@@ -50,7 +50,7 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         zorder=11,
         linewidth=2
     )
-    gl = ax.gridlines(
+    """gl = ax.gridlines(
         crs=mapproj,
         draw_labels=True,
         linewidth=0.5,
@@ -58,7 +58,7 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         alpha=1,
         linestyle='--',
         zorder=12
-    )
+    )"""
     if idx % obj_plot.ncol == 0:
         lat_lab = np.arange(-90, 90, int(obj_plot.grid[1]))
         ax.set_xticks(lat_lab)
