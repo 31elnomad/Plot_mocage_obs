@@ -15,7 +15,7 @@ import numpy as np
 class Netcdf_mocage:
 
     def __init__(self, config_class, pseudo, date, var, **kwargs):
-        plot = config_class.config['global']['type_plot']
+        self.plot = config_class.config['global']['type_plot']
         self.config_plot = config_class.config[plot]
         if pseudo is None:
             self.pseudo = None
@@ -54,10 +54,16 @@ class Netcdf_mocage:
                 self.echeance = 0
                 if self.type_exp.lower() not in ['direct']:
                     self.wlength = int(self.config_nc['wlength']) 
-            if 'central_longitude' in kwargs:
-                self.central_longitude = kwargs['central_longitude']
+            if self.plot in ['map']:
+                if 'central_longitude' in kwargs:
+                    self.central_longitude = kwargs['central_longitude']
+                else:
+                    raise Exception("Central longitude na pas été trouvé dans la class Netcdf")
             else:
-                raise Exception("Central longitude na pas été trouvé dans la class Netcdf")
+                self.central_longitude = 0.
+                if 'central_longitude' in kwargs:
+                    self.central_longitude = kwargs['central_longitude']
+                
 
     def create_filename(self):
         self.dirhost = f'/home/{self.user}/MOCAGEHM/{self.nameexp}/'
@@ -237,8 +243,6 @@ class Netcdf_mocage:
                         self.lonbnd = [tmp[0]-self.central_longitude, abs(tmp[1]-self.central_longitude)]
                     else:
                         self.lonbnd = [tmp[0]-self.central_longitude, tmp[1]+self.central_longitude]
-                    print(self.lonbnd)
-                    quit()
                 else:
                     raise Exception("Les longitudes données dans [plot][boundary] sont en dehors du domain {}".format(self.domain.lower()))
             else:
@@ -287,7 +291,7 @@ class Netcdf_mocage:
         self.psurf = ds['air_pressure_at_surface'].squeeze().values
         self.a = ds['a_hybr_coord'].values
         self.b = ds['b_hybr_coord'].values
-        tmp = list(np.abs(self.lon - self.lonbnd[0]))
+        tmp = list(np.abs(self.lon - (self.lonbnd[0] + self.central_longitude)))
         idx_lon1 = np.argmin(tmp)
         tmp = list(np.abs(self.lat - self.latbnd[0]))
         idx_lat1 = np.argmin(tmp)
@@ -295,14 +299,24 @@ class Netcdf_mocage:
         idx_lev1 = np.argmin(tmp)
         
         if self.lonbnd[0] != self.lonbnd[1]:
-            tmp = list(np.abs(self.lon - self.lonbnd[1]))
-            idx_lon2 = np.argmin(tmp)
-            self.lon = self.lon[idx_lon1:idx_lon2]
-            if len(self.data.shape) == 3:
-                self.data = self.data[:, :, idx_lon1:idx_lon2]
+            if abs(self.lonbnd[1] + self.central_longitude) <= 180.:
+                tmp = list(np.abs(self.lon - (self.lonbnd[1] + self.central_longitude)))
             else:
-                self.data = self.data[:, idx_lon1:idx_lon2]
-            self.psurf = self.psurf[:, idx_lon1:idx_lon2]
+                tmp = list(np.abs(self.lon - (self.lonbnd[1] - self.central_longitude)))
+            idx_lon2 = np.argmin(tmp)
+            mask = np.empty_like(self.lon).astype(bool)
+            mask[:] = False
+            if idx_lon1 > idx_lon2:
+                mask[idx_lon1:idx_lon2]  = True
+            else:
+                mask[idx_lon1:] = True
+                mask[:idx_lon2] = True
+            self.lon = self.lon[mask]
+            if len(self.data.shape) == 3:
+                self.data = self.data[:, :, mask]
+            else:
+                self.data = self.data[:, mask]
+            self.psurf = self.psurf[:, mask]
         else:
             self.lon = self.lon[idx_lon1]
             if len(self.data.shape) == 3:
