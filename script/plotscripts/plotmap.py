@@ -173,8 +173,6 @@ class PlotMap:
                                       species=species,
                                       central_longitude=self.central_longitude)
                 obj_data.read_h5()
-                print(obj_data.lon, obj_data.lat, obj_data.data)
-                quit()
                 
             ax = _set_cartopy_(self, obj_data, ax, List[-3], List[-2], idx)
             if self.config_plot['plot_opt'].split(':')[0] in ['contourf'] and self.pseudo[0] not in ['obs']:
