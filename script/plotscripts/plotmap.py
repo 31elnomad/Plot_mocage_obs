@@ -193,6 +193,7 @@ class PlotMap:
                                      vmax,
                                      transform=self.mapproj,
                                      cmap=self.config_plot['cmap'])"""
+                sc = None
             if 'var' in self.order[:2] or 'lev' in self.order[:2]:
                 from plot2d import __print_colorbar__
                 cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data, obj_data.unit, self.var[0])
