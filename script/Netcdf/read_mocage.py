@@ -311,8 +311,6 @@ class Netcdf_mocage:
             else:
                 mask[idx_lon1:] = True
                 mask[:idx_lon2] = True
-            print(mask)
-            quit()
             self.lon = self.lon[mask]
             if len(self.data.shape) == 3:
                 self.data = self.data[:, :, mask]
