@@ -40,7 +40,7 @@ class obs_mocage:
         self.create_bnd()
         __main_tropomi__(config_class, pseudo, date, lonbnd, latbnd, **kwargs)
 
-        dirscript = tropomi.py"
+        """dirscript = tropomi.py"
         function = "__main_tropomi__"
-        from dirscript import function
+        from dirscript import function"""
           
