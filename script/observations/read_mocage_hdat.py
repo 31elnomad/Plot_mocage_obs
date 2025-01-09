@@ -103,7 +103,7 @@ class obs_mocage:
                 obj.Select(TimeBnd=TimeBnd, LonBnd=self.lonbnd, LatBnd=self.latbnd)
             else:
                 import copy
-                obj_copy = copy.deepcopy(obj)
+                obj_copy = obj
                 lonbnd = self.lonbnd
                 lonbnd[1]= 180.
                 obj_copy.Select(TimeBnd=TimeBnd, LonBnd=lonbnd, LatBnd=self.latbnd)
