@@ -16,7 +16,7 @@ def __concat_plot__(fig, axs, filenames, type_plot, **kwargs):
                 ax.axis('off')
         else:
             img = plt.imread(filenames[0])
-            axs.imshow(img, extent=[-180,180,-90,90], transform=ccrs.PlateCarree(central_longitude=central_longitude))
+            axs.imshow(img, extent=[0,360,-90,90], transform=ccrs.PlateCarree(central_longitude=central_longitude))
             axs.axis('off')
     return axs
     
