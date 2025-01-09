@@ -107,14 +107,13 @@ class obs_mocage:
                 lonbnd = list(self.lonbnd)
                 lonbnd[1]= 180.
                 lonbnd = tuple(lonbnd)
-                print(lonbnd)
-                quit()
                 obj_copy.Select(TimeBnd=TimeBnd, LonBnd=lonbnd, LatBnd=self.latbnd)
                 self.lon.extend(obj_copy.lons)
                 self.lat.extend(obj_copy.lats)
                 self.__read_h5__(obj_copy)
-                lonbnd = self.lonbnd
+                lonbnd = list(self.lonbnd)
                 lonbnd[0] = -180.
+                lonbnd = tuple(lonbnd)
                 obj.Select(TimeBnd=TimeBnd, LonBnd=lonbnd, LatBnd=self.latbnd)
             # Append Lon, Lat, and Data to their respective lists
             self.lon.extend(obj.lons)
