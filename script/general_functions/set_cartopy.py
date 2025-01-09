@@ -1,7 +1,7 @@
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
-from matplotlib.ticker import LongitudeLocator, LatitudeLocator
+from matplotlib.ticker import FixedLocator #LongitudeLocator, LatitudeLocator
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -64,8 +64,8 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
     gl.right_labels = False
     gl.bottom_labels = False
     gl.left_labels = False
-    gl.ylocator = LatitudeLocator(interval=int(float(obj_plot.grid[1])))
-    gl.xlocator = LongitudeLocator(interval=int(float(obj_plot.grid[0])))
+    gl.xlocator = FixedLocator(range(-180,181, int(obj_plot.grid[0]))
+    gl.ylocator = FixedLocator(range(-90,91, int(obj_plot.grid[1]))
 
     if idx % obj_plot.ncol == 0:
         lat_lab = np.arange(-90, 90, int(obj_plot.grid[1]))
