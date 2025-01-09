@@ -32,8 +32,8 @@ class PlotMap:
         if self.proj[0] in ['PlateCarree']:
             self.central_longitude = float(self.proj[1])
         elif self.proj[0] in ['Orthographic']:
-            self.central_longitude=float(self.proj[1].split('/')[0]),
-            self.central_latitude=float(self.proj[1].split('/')[1]))
+            self.central_longitude=float(self.proj[1].split('/')[0])
+            self.central_latitude=float(self.proj[1].split('/')[1])
         self.proj = self.proj[0]
         if self.boundary[2] == 'None':
             self.listlev = None
