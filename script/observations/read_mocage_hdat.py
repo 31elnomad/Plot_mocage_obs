@@ -118,7 +118,7 @@ class obs_mocage:
             # Append Lon, Lat, and Data to their respective lists
             self.lon.extend(obj.lons)
             self.lat.extend(obj.lats)
-            self.__read_h5__()
+            self.__read_h5__(obj)
             
             
         # Convert Lon, Lat, and Data lists to NumPy arrays
