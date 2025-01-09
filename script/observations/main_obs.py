@@ -35,12 +35,12 @@ class obs_mocage:
         else:
             self.latbnd = (float(tmp[0]), float(tmp[1]))
 
-      def __main_obs__(self):
-          module = importlib.import_module(self.script_name)
-          self.create_bnd()
-          __main_tropomi__(config_class, pseudo, date, lonbnd, latbnd, **kwargs)
+    def __main_obs__(self):
+        module = importlib.import_module(self.script_name)
+        self.create_bnd()
+        __main_tropomi__(config_class, pseudo, date, lonbnd, latbnd, **kwargs)
 
-         dirscript = tropomi.py"
-         function = "__main_tropomi__"
-         from dirscript import function
+        dirscript = tropomi.py"
+        function = "__main_tropomi__"
+        from dirscript import function
           
