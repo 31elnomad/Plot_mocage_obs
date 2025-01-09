@@ -316,6 +316,8 @@ class Netcdf_mocage:
                 self.data = self.data[:, :, mask]
             else:
                 self.data = self.data[:, mask]
+            print(self.data)
+            quit()
             self.psurf = self.psurf[:, mask]
         else:
             self.lon = self.lon[idx_lon1]
