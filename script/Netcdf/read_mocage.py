@@ -306,13 +306,13 @@ class Netcdf_mocage:
             idx_lon2 = np.argmin(tmp)
             mask = np.empty_like(self.lon).astype(bool)
             mask[:] = False
-            print('ok1', idx_lon1, idx_lon2)
-            quit()
             if idx_lon1 > idx_lon2:
                 mask[idx_lon1:idx_lon2]  = True
             else:
                 mask[idx_lon1:] = True
                 mask[:idx_lon2] = True
+            print(mask)
+            quit()
             self.lon = self.lon[mask]
             if len(self.data.shape) == 3:
                 self.data = self.data[:, :, mask]
