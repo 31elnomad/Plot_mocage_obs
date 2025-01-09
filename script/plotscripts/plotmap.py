@@ -186,13 +186,13 @@ class PlotMap:
                 else:
                     markersize = int(self.config_plot['plot_opt'].split(':')[1])
                 from plot2d import __scatter__
-                ax, sc = __scatter__(ax,
+                """ax, sc = __scatter__(ax,
                                      obj_data,
                                      markersize,
                                      vmin,
                                      vmax,
                                      transform=self.mapproj,
-                                     cmap=self.config_plot['cmap'])
+                                     cmap=self.config_plot['cmap'])"""
             if 'var' in self.order[:2] or 'lev' in self.order[:2]:
                 from plot2d import __print_colorbar__
                 cbar = __print_colorbar__(fig, sc, self.config_plot, obj_data, obj_data.unit, self.var[0])
