@@ -82,6 +82,7 @@ def _set_cartopy_(obj_plot, nc_obj, ax, col, ligne, idx):
         for label in ax.xaxis.get_ticklabels():
             label.set_fontsize(20)
     if nc_obj.lonbnd[0] > nc_obj.lonbnd[1] and obj_plot.central_longitude != 0:
+        nc_obj.lonbnd = list(nc_obj.lonbnd )
         if nc_obj.lonbnd[0] + obj_plot.central_longitude > 180.:
             nc_obj.lonbnd[0] = nc_obj.lonbnd[0] - obj_plot.central_longitude
             nc_obj.lonbnd[1] = nc_obj.lonbnd[1] + obj_plot.central_longitude
