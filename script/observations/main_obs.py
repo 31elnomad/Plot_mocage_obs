@@ -42,12 +42,10 @@ class obs_mocage:
         self.create_bnd()
         if self.module_name in ['tropomi']:
             obs_function = getattr(self.module_name, '__main_tropomi__')
-        lon, lat, data = obs_function(config_class, pseudo, date, lonbnd, latbnd, **kwargs
-        
-        __main_tropomi__(self.config_class,
-                         self.pseudo,
-                         self.date,
-                         self.lonbnd,
-                         self.latbnd,
-                         central_longitude=self.central_longitude)
+        lon, lat, data = obs_function(self.config_class,
+                                      self.pseudo,
+                                      self.date,
+                                      self.lonbnd,
+                                      self.latbnd,
+                                      central_longitude=self.central_longitude)
           
