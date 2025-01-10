@@ -24,7 +24,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         dir = config_class.config[pseudo]['dirpass']
     listfile = create_listfile_obs(dir, date, pseudo)
     var = config_class.config[pseudo]['var'].split(':')
-    lon, lat, data = openfile(file, var, date, lonbnd, latbnd)
+    lon, lat, data = openfile(listfile, var, date, lonbnd, latbnd)
         
 
 def openfile(file, var, date, lonbnd, latbnd):
