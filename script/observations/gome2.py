@@ -28,8 +28,18 @@ def process_obs_file(config_class, date, pseudo):
 def openfile(file):
     f = h5py.File(file, 'r')
     time = f['GEOLOCATION/Time'][:]
-    print(time)
+    lon_a = f['GEOLOCATION/LongitudeA'][:]
+    lon_b = f['GEOLOCATION/LongitudeB'][:]
+    lon_c = f['GEOLOCATION/LongitudeC'][:]
+    lon_d = f['GEOLOCATION/LongitudeD'][:]
+    lat_a = f['GEOLOCATION/LatitudeA'][:]
+    lat_b = f['GEOLOCATION/LatitudeB'][:]
+    lat_c = f['GEOLOCATION/LatitudeC'][:]
+    lat_d = f['GEOLOCATION/LatitudeD'][:]
+    print(lon_d, lat_d)
     quit()
+
+
 
 def create_listfile_obs(dir, date, pseudo):
     if pseudo[-1].lower() == 'a':
