@@ -1,6 +1,6 @@
 
 
-def convert_data(file_unit, unit, data):
+def __convert_data__(file_unit, unit, data):
     if unit != '1':
         if unit == 'DU':
             if file_unit == 'molec m-2':
