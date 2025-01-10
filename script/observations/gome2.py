@@ -60,8 +60,6 @@ def openfile(file, var, date, lonbnd, latbnd):
         create_mask(data, date, time, lonbnd, latbnd, flag1=flag1, flag2=flag2)
     #from convert_data import __convert_data__
     #data, unit = __convert_data__(file_unit, var[1], data)
-    
-    quit()
 
 def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
     date_min = date - datetime.timedelta(hours=1)
@@ -79,8 +77,9 @@ def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
                 kept_obs[t] = True
             else:
                 kept_obs[t] = False
-    print(np.sum(kept_obs))
-    quit()
+    if np.sum(kept_obs) > 0:
+        print(np.sum(kept_obs))
+        quit()
           
 
 
