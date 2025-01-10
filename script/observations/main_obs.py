@@ -65,5 +65,5 @@ class obs_mocage:
                                                                 self.lonbnd,
                                                                 self.latbnd,
                                                                 kwargs=self.kwargs)
-         self.mask_data()
+        self.mask_data()
           
