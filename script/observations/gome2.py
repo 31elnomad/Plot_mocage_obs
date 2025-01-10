@@ -49,10 +49,10 @@ def openfile(file, var):
     elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
         data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
         flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
-        flag = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
+        flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
         
             
-    print(flag1)
+    print(flag1, np.min(flag1), flag2)
     quit()
 
 
