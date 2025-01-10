@@ -48,8 +48,11 @@ def openfile(file, var):
         data = f['CLOUD_PROPERTIES/CloudType'][:]
     elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
         data = f['DETAILLED_RESULTS/SO2/VCDCorrected'][:]
+        flag1 = f['DETAILLED_RESULTS/SO2/SO2_Flag'][:]
+        flag = f['DETAILLED_RESULTS/SO2/SO2_Volcano_Flag'][:]
+        
             
-    print(lon_d, lat_d)
+    print(flag1)
     quit()
 
 
