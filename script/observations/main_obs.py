@@ -37,6 +37,21 @@ class obs_mocage:
         else:
             self.latbnd = (float(tmp[0]), float(tmp[1]))
 
+    def mask_data(self):
+        self.extend = 'both'
+        if float(self.config_plot['vmin']) == 0. or (self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['false', 'f']):
+            self.extend = 'max'
+        elif self.config_plot['maskmin'].lower() in ['true', 't'] and self.config_plot['maskmax'].lower() in ['true', 't']:
+            self.extend = None
+        else:
+            self.extend = 'min'
+        if self.config_plot['maskmin'].lower() in ['true', 't']:
+            vmin = float(self.config_plot['vmin'])
+            self.data[self.data < vmin] = np.nan
+        if self.config_plot['maskmax'].lower() in ['true', 't']:
+            vmax = float(self.config_plot['vmax'])
+            self.data[self.data > vmax] = np.nan
+
     def __main_obs__(self):
         module = importlib.import_module(self.module_name)
         self.create_bnd()
@@ -50,4 +65,5 @@ class obs_mocage:
                                                                 self.lonbnd,
                                                                 self.latbnd,
                                                                 kwargs=self.kwargs)
+         self.mask_data()
           
