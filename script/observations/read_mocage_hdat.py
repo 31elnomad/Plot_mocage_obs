@@ -8,7 +8,6 @@ def __main_readh5__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
     sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
     import daimonobs
     delta = float(config_class.config['observations']['delta'])
-    pseudo = pseudo[1]
     config_h5 = config_class.config[pseudo]
     config_plot = config_class.config[config_class.config['global']['type_plot']]
     listfile = create_listfile(config_h5, date)
