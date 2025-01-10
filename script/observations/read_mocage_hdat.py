@@ -82,13 +82,13 @@ def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
             lonbnd_[1]= 180.
             lonbnd_= tuple(lonbnd)
             obj_copy.Select(TimeBnd=TimeBnd, LonBnd=lonbnd_, LatBnd=latbnd)
-            lon, lat, data = __read_h5__(obj_copy, lon, lat, data, kwargs)
+            lon, lat, data = __read_h5__(obj_copy, lon, lat, data, pseudo, kwargs)
             lonbnd_ = list(lonbnd)
             lonbnd_[0] = -180.
             lonbnd_ = tuple(lonbnd_)
             obj.Select(TimeBnd=TimeBnd, LonBnd=lonbnd_, LatBnd=latbnd)
         # Append Lon, Lat, and Data to their respective lists
-        lon, lat, data = __read_h5__(obj, lon, lat, data, kwargs)
+        lon, lat, data = __read_h5__(obj, lon, lat, data, pseudo, kwargs)
     # Convert Lon, Lat, and Data lists to NumPy arrays
     lon = np.array(lon)
     if central_longitude == 180.:
@@ -106,7 +106,7 @@ def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
         data = data[mk]
     return lon, lat, data
 
-def __read_h5__(obj, lon, lat, data, kwargs):
+def __read_h5__(obj, lon, lat, data, pseudo, kwargs):
     lon.extend(obj.lons)
     lat.extend(obj.lats)
     if pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
