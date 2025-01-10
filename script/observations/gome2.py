@@ -66,7 +66,7 @@ def openfile(listfile, var, date, lonbnd, latbnd):
             data, unit = __convert_data__(file_unit, var[1], data)
             Lon.extend(lon[kept_time])
             Lat.extend(lat[kept_time])
-            Data.extend(data[kept_time])
+            Data.extend(data[kept_time],2)
     return np.array(Lon), np.array(Lat), np.array(Data)
         
     
