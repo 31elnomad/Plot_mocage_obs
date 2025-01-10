@@ -78,10 +78,6 @@ def openfile(listfile, var, date, lonbnd, latbnd):
                             [f['DETAILED_RESULTS/SO2/SO2_Flag'][:] == 0] +
                             [kept_times] +
                             [f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:] == Detect_flag]
-                            """[product_vars['latitude'][:].flatten() >= self.latbnd[0]] +
-                            [product_vars['latitude'][:].flatten() <= self.latbnd[1]] +
-                            [product_vars['longitude'][:].flatten() >= self.lonbnd[0]] +
-                            [product_vars['longitude'][:].flatten() <= self.lonbnd[1]]"""
                             )"""
             from convert_data import __convert_data__
             data, unit = __convert_data__(file_unit, var[1], data)
