@@ -58,7 +58,7 @@ def openfile(file, var):
         flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
     from convert_data import __convert_data__
     data, unit = __convert_data__(file_unit, var[1], data)
-    print(data)
+    print(np.max(data))
     quit()
 
 
