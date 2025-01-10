@@ -48,6 +48,6 @@ class obs_mocage:
                                       self.date,
                                       self.lonbnd,
                                       self.latbnd,
-                                      central_longitude=self.central_longitude
+                                      central_longitude=self.central_longitude,
                                       kwargs=kwargs)
           
