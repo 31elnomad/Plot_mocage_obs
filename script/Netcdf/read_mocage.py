@@ -390,7 +390,7 @@ class Netcdf_mocage:
                 else:
                     raise Exception("Problème avec la dimension de la variable dans le netcdf") 
 
-    def convert_data(self, ds):
+    """def convert_data(self, ds):
         unit = ds[self.var[0]].units
         if self.var[1] != '1':
             if self.var[1] == 'DU' and self.var[0][-3:] =='_tc':
@@ -400,7 +400,7 @@ class Netcdf_mocage:
             else:
                 raise Exception ("Convert {} n'est pas implémenté")
         else:
-            self.unit = unit
+            self.unit = unit"""
 
     def cmp_vert_press(self):
         self.press = np.empty_like(self.lev)
@@ -438,7 +438,8 @@ class Netcdf_mocage:
             self.cmp_boundaries(config_class)
             self.selectdata(ds)
             self.cmp_vert_press()
-            self.convert_data(ds)
+            from convert_data import __convert_data__
+            self.data, self.unit = __convert_data__(ds[self.var[0]].units, self.var[1], self.data)
             self.mask_data()
         else:
             self.levbnd = [1, 60]
