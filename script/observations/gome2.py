@@ -26,7 +26,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         Detect_flag = ['0', '1', '2', '3']
     listfile = create_listfile_obs(dir, date, pseudo)
     var = config_class.config[pseudo]['var'].split(':')
-    lon, lat, data = openfile(confil_class, listfile, date, lonbnd, latbnd)
+    lon, lat, data = openfile(config_class, listfile, date, lonbnd, latbnd)
     return lon, lat, data, 'DU'
         
 
