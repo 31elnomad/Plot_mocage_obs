@@ -16,7 +16,7 @@ class obs_mocage:
         self.central_longitude = 0.
         if 'central_longitude' in kwargs:
             self.central_longitude = kwargs['central_longitude']
-        self.script_name = self.config_obs['python_path_obscript'][:-2]
+        self.script_name = self.config_obs['python_path_obscript'][:-3]
         
 
     def create_bnd(self):
