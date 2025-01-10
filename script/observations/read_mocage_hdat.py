@@ -106,14 +106,14 @@ def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
         data = data[mk]
     return lon, lat, data
 
-    def __read_h5__(obj, lon, lat, data, kwargs):
-      lon.extend(obj.lons)
-      lat.extend(obj.lats)
-      if pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
-          data.extend(obj.col[kwargs['species']])
-      elif pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
-          data.extend(obj.pcol[kwargs['species']])
-      elif pseudo.lower()  in ['modis', 'viirs']:
-          data.extend(obj.aod[str(kwargs['wv'])])
-      return lon, lat, data
+def __read_h5__(obj, lon, lat, data, kwargs):
+    lon.extend(obj.lons)
+    lat.extend(obj.lats)
+    if pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
+        data.extend(obj.col[kwargs['species']])
+    elif pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
+        data.extend(obj.pcol[kwargs['species']])
+    elif pseudo.lower()  in ['modis', 'viirs']:
+        data.extend(obj.aod[str(kwargs['wv'])])
+    return lon, lat, data
 
