@@ -67,4 +67,7 @@ class obs_mocage:
                                                                 self.latbnd,
                                                                 kwargs=self.kwargs)
         self.mask_data()
+        if self.central_longitude == 180.:
+            self.lon += self.central_longitude
+            self.lon[self.lon > 180.] = self.lon[self.lon > 180.] - 2*self.central_longitude
           
