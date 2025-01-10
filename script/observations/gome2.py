@@ -38,7 +38,7 @@ def openfile(listfile, var, date, lonbnd, latbnd):
             print("Skipping file {}".format(file))
             err = 1
             continue
-        if err == 0
+        if err == 0:
             time = f['GEOLOCATION/Time'][:]
             lon = f['GEOLOCATION/LongitudeCentre'][:]
             lat = f['GEOLOCATION/LatitudeCentre'][:]
