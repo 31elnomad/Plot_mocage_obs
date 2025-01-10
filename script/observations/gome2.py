@@ -14,8 +14,8 @@ def __main_gome2__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
         from read_mocage_hdat import read_h5
         lon, lat, data = read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs)
     elif config_class.config[pseudo]['overpass'] == 'F' and config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
-        lon, lat, data = process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs)
-    return lon, lat, data
+        lon, lat, data, unit = process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs)
+    return lon, lat, data, unit
 
 def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
     if config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
@@ -25,6 +25,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
     listfile = create_listfile_obs(dir, date, pseudo)
     var = config_class.config[pseudo]['var'].split(':')
     lon, lat, data = openfile(listfile, var, date, lonbnd, latbnd)
+    return lon, lat, data, 'DU'
         
 
 def openfile(listfile, var, date, lonbnd, latbnd):
