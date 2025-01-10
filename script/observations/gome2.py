@@ -71,7 +71,7 @@ def openfile(listfile, var, date, lonbnd, latbnd):
                             print(Detect_flag)
                             quit()
                     kept_obs = np.array([False]*len(kept_time))
-                    for Detect_flag in detect_flag:
+                    """for Detect_flag in detect_flag:
                         # index of accepted obs
                         kept_obs = kept_obs +reduce(
                             np.logical_and,
@@ -82,7 +82,7 @@ def openfile(listfile, var, date, lonbnd, latbnd):
                             [product_vars['latitude'][:].flatten() <= self.latbnd[1]] +
                             [product_vars['longitude'][:].flatten() >= self.lonbnd[0]] +
                             [product_vars['longitude'][:].flatten() <= self.lonbnd[1]]"""
-                            )
+                            )"""
             from convert_data import __convert_data__
             data, unit = __convert_data__(file_unit, var[1], data)
             Lon.extend(lon[kept_time])
