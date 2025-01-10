@@ -64,7 +64,12 @@ def openfile(listfile, var, date, lonbnd, latbnd):
                 file_unit = 'molec cm-2'
                 data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
                 if config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
-                    Detect_flag = config_class.config[pseudo]['volcano_flag'].split(',')
+                    obs_opts = config_class.config[pseudo]['obs_opts'].split(';')
+                    for i in range(len(obs_opts)):
+                        if obs_opts[i].split(":")[0] in ['volcano_flag']:
+                            Detect_flag = obs_opts[i].split(":")[1][1:-1].split(',')
+                            print(Detect_flag)
+                            quit()
                     kept_obs = np.array([False]*len(kept_time))
                     for Detect_flag in detect_flag:
                         # index of accepted obs
