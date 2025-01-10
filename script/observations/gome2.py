@@ -73,7 +73,7 @@ def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
     hour_max = date_max.strftime('%H')
     kept_obs = np.empty(len(time)).astype(bool)
     for t in range(len(time)):
-        print(time[t])
+        print(time[t][0])
         quit()
 
 
