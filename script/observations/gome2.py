@@ -13,7 +13,7 @@ def __main_gome2__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
         from read_mocage_hdat import read_h5
         lon, lat, data = read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs)
     elif config_class.config[pseudo]['overpass'] == 'F' and config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
-        process_obs_file(config_class, date, pseudo)
+        process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs)
     return lon, lat, data
 
 def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
