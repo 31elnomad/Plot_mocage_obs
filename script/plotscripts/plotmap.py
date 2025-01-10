@@ -144,7 +144,8 @@ class PlotMap:
         fig, ax = plt.subplots(ncols = 1,
                                nrows = 1,
                                subplot_kw = self.subplot_kw)
-
+        print(self.pseudo, self.var, self.date)
+        quit()
         if self.pseudo is not None and self.var is not None and self.date is not None:
             vmin = float(self.config_plot['vmin'])
             vmax = float(self.config_plot['vmax'])
