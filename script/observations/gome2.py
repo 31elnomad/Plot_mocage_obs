@@ -81,7 +81,7 @@ def create_listfile_obs(dir, date, pseudo):
     filename = 'GOME_O3-NO2-NO2Tropo-BrO-SO2-H2O-HCHO_L2_{date}*_METOP{x}*.HDF5'.format(date=date.strftime('%Y%m%d'), x=sat)
     listfile = os.path.join(dir, filename)
     listfile = glob.glob(listfile)
-    date = date - datetime(days=1)
+    date = date - datetime.timedelta(days=1)
     filename = 'GOME_O3-NO2-NO2Tropo-BrO-SO2-H2O-HCHO_L2_{date}*_METOP{x}*.HDF5'.format(date=date.strftime('%Y%m%d'), x=sat)
     listfile1 = os.path.join(dir, filename)
     listfile = listfile + glob.glob(listfile1)
