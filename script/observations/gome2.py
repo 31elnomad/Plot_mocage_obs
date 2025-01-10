@@ -27,7 +27,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         print(file)
         openfile(file, var, date)
 
-def openfile(file, var, date):
+def openfile(file, var, date, lonbnd, latbnd):
     f = h5py.File(file, 'r')
     time = f['GEOLOCATION/Time'][:]
     lon_a = f['GEOLOCATION/LongitudeA'][:]
