@@ -2,6 +2,7 @@ import h5py
 import os
 import glob
 import numpy as np
+import datetime
 
 def __main_gome2__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
     if config_class.config[pseudo]['overpass'] == 'T' and config_class[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
@@ -56,20 +57,17 @@ def openfile(file, var, date, lonbnd, latbnd):
         data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
         flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
         flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
-    from convert_data import __convert_data__
-    data, unit = __convert_data__(file_unit, var[1], data)
-    create_mask(data, date, time, lonbnd, latbnd)
+        create_mask(data, date, time, lonbnd, latbnd, flag1=flag1, flag2=flag2)
+    #from convert_data import __convert_data__
+    #data, unit = __convert_data__(file_unit, var[1], data)
+    
     quit()
 
 def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
-    date_min = date
-    print(date)
-
-
-
-        
-            
-
+    kept_obs = np.empty_like(time).astype(bool)
+    date_min = date - datetime.timedelta(hours=1)
+    hour = date_min.strftime('%H')
+    print(date, time)
 
 
 
@@ -83,4 +81,8 @@ def create_listfile_obs(dir, date, pseudo):
     filename = 'GOME_O3-NO2-NO2Tropo-BrO-SO2-H2O-HCHO_L2_{date}*_METOP{x}*.HDF5'.format(date=date.strftime('%Y%m%d'), x=sat)
     listfile = os.path.join(dir, filename)
     listfile = glob.glob(listfile)
+    date = date - datetime(days=1)
+    filename = 'GOME_O3-NO2-NO2Tropo-BrO-SO2-H2O-HCHO_L2_{date}*_METOP{x}*.HDF5'.format(date=date.strftime('%Y%m%d'), x=sat)
+    listfile1 = os.path.join(dir, filename)
+    listfile = listfile + glob.glob(listfile1)
     return listfile
