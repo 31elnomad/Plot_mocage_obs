@@ -4,6 +4,7 @@ import datetime
 class obs_mocage:
 
     def __init__(self, config_class, pseudo, date, **kwargs): 
+        self.config_class = config_class
         self.pseudo = pseudo[1]
         self.config_obs = config_class.config[self.pseudo]
         self.date = datetime.datetime(int(date[:4]),
@@ -16,7 +17,7 @@ class obs_mocage:
         self.central_longitude = 0.
         if 'central_longitude' in kwargs:
             self.central_longitude = kwargs['central_longitude']
-        self.script_name = self.config_obs['python_path_obscript'][:-3]
+        self.module_name = self.config_obs['python_path_obscript'][:-3]
         
 
     def create_bnd(self):
@@ -37,7 +38,16 @@ class obs_mocage:
             self.latbnd = (float(tmp[0]), float(tmp[1]))
 
     def __main_obs__(self):
-        module = importlib.import_module(self.script_name)
+        module = importlib.import_module(self.module_name)
         self.create_bnd()
-        __main_tropomi__(config_class, pseudo, date, lonbnd, latbnd, **kwargs)
+        if self.module_name in ['tropomi']:
+            obs_function = getattr(self.module_name, '__main_tropomi__')
+        lon, lat, data = obs_function(config_class, pseudo, date, lonbnd, latbnd, **kwargs
+        
+        __main_tropomi__(self.config_class,
+                         self.pseudo,
+                         self.date,
+                         self.lonbnd,
+                         self.latbnd,
+                         central_longitude=self.central_longitude)
           
