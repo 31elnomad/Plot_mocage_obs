@@ -4,7 +4,6 @@ import datetime
 class obs_mocage:
 
     def __init__(self, config_class, pseudo, date, **kwargs): 
-        print(kwargs)
         self.config_class = config_class
         self.pseudo = pseudo[1]
         self.config_obs = config_class.config[self.pseudo]
@@ -49,5 +48,5 @@ class obs_mocage:
                                       self.lonbnd,
                                       self.latbnd,
                                       central_longitude=self.central_longitude,
-                                      kwargs=kwargs)
+                                      kwargs=self.kwargs)
           
