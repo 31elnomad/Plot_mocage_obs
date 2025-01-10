@@ -19,7 +19,7 @@ def create_listfile(config_h5, date):
         filename = 'HSTAT+' + date.strftime('%Y%m%d') + '*.h5'
     elif config_h5['type'].lower() in ['hdat']:
         filename = 'HDAT+' + date.strftime('%Y%m%d') + '*.h5'
-    dirfile = os.path.join(self.config_h5['dirin'], filename)
+    dirfile = os.path.join(config_h5['dirin'], filename)
     listfile = glob.glob(dirfile)
     return listfile
 
@@ -89,15 +89,15 @@ def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
             lonbnd_[1]= 180.
             lonbnd_= tuple(lonbnd)
             obj_copy.Select(TimeBnd=TimeBnd, LonBnd=lonbnd_, LatBnd=latbnd)
-            lon, lat, data = __read_h5__(obj_copy, lon, lat, data)
+            lon, lat, data = __read_h5__(obj_copy, lon, lat, data, kwargs)
             lonbnd_ = list(lonbnd)
             lonbnd_[0] = -180.
             lonbnd_ = tuple(lonbnd_)
             obj.Select(TimeBnd=TimeBnd, LonBnd=lonbnd_, LatBnd=latbnd)
         # Append Lon, Lat, and Data to their respective lists
-        lon, lat, data = __read_h5__(obj, lon, lat, data)
+        lon, lat, data = __read_h5__(obj, lon, lat, data, kwargs)
     # Convert Lon, Lat, and Data lists to NumPy arrays
-    self.lon = np.array(self.lon)
+    lon = np.array(lon)
     if central_longitude == 180.:
         lon += central_longitude
         lon[lon > 180.] = lon[lon > 180.] - 2*central_longitude
@@ -113,14 +113,14 @@ def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
         data = data[mk]
     return lon, lat, data
 
-    def __read_h5__(obj, lon, lat, data):
+    def __read_h5__(obj, lon, lat, data, kwargs):
       lon.extend(obj.lons)
       lat.extend(obj.lats)
       if pseudo.lower() in ['iasi_a_lh', 'iasi_b_lh', 'iasi_c_lh', 'tropomi_lh']:
-          data.extend(obj.col[self.kwargs['species']])
-      elif self.pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
-          self.data.extend(obj.pcol[self.kwargs['species']])
-      elif self.pseudo.lower()  in ['modis', 'viirs']:
-          self.data.extend(obj.aod[str(self.kwargs['wv'])])
+          data.extend(obj.col[kwargs['species']])
+      elif pseudo.lower() in ['iasi_a', 'iasi_b', 'iasi_c', 'tropomi']:
+          data.extend(obj.pcol[kwargs['species']])
+      elif pseudo.lower()  in ['modis', 'viirs']:
+          data.extend(obj.aod[str(kwargs['wv'])])
       return lon, lat, data
 
