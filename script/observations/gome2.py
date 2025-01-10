@@ -37,7 +37,7 @@ def openfile(file, var, date, lonbnd, latbnd):
         f = h5py.File(file, 'r')
     except:
         print("Skipping file {}".format(file))
-        pass      
+        continue     
     time = f['GEOLOCATION/Time'][:]
     lon = f['GEOLOCATION/LongitudeCentre'][:]
     lat = f['GEOLOCATION/LatitudeCentre'][:]
