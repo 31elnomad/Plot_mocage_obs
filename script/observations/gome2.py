@@ -64,8 +64,13 @@ def openfile(file, var, date, lonbnd, latbnd):
     quit()
 
 def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
-    kept_obs = np.empty(len(time)).astype(bool)
     date_min = date - datetime.timedelta(hours=1)
+    first_date = datetime.datetime(1970, 1, 1)
+    time_since = date_min - first_date
+    seconds = int(time_since.total_seconds())
+    print(seconds)
+    kept_obs = np.empty(len(time)).astype(bool)
+    
     hour = date_min.strftime('%H')
     print(date, time)
 
