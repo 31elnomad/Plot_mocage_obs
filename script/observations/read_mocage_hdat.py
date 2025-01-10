@@ -17,6 +17,8 @@ def create_listfile(config_h5, date):
 
 def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
     kwargs = kwargs['kwargs']
+    if 'central_longitude' in kwargs:
+        central_longitude = kwargs['central_longitude']
     sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
     import daimonobs
     delta = float(config_class.config['observations']['delta'])
