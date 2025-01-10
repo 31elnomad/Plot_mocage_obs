@@ -1,5 +1,5 @@
 def __main_tropomi__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
-    print( dict(config_class.items()))
+    print( dict(config_class.items('TROPOMI')))
     if config_class[pseudo]['overpass'] == 'T' and config_class[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
         raise Exception ("Not implemented tropomi.py ligne 3")
     elif config_class[pseudo]['overpass'] == 'T' and config_class[pseudo]['type'] in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
