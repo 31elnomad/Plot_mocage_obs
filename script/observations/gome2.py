@@ -73,8 +73,9 @@ def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
     hour_max = date_max.strftime('%H')
     kept_obs = np.empty(len(time)).astype(bool)
     for t in range(len(time)):
-        print(time[t][0])
-        quit()
+        if time[t][0] == njour:
+            print(time[t][1]/3600000)
+            quit()
 
 
 
