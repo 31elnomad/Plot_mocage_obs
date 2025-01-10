@@ -15,7 +15,8 @@ def create_listfile(config_h5, date):
     listfile = glob.glob(dirfile)
     return listfile
 
-def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
+def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):config_details = get_config_dict()
+    print(kwargs)
     sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
     import daimonobs
     delta = float(config_class.config['observations']['delta'])
