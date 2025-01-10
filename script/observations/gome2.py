@@ -68,7 +68,8 @@ def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
     first_date = datetime.datetime(1970, 1, 1)
     time_since = date_min - first_date
     seconds = int(time_since.total_seconds())
-    print(seconds//(24*3600), time)
+    print(date-timedelta(days=25186))
+    quit()
     kept_obs = np.empty(len(time)).astype(bool)
     
     hour = date_min.strftime('%H')
