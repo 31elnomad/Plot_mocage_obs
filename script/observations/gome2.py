@@ -75,12 +75,14 @@ def openfile(config_class, pseudo, listfile, date, lonbnd, latbnd):
                             [f['DETAILED_RESULTS/SO2/SO2_Flag'][:] == 0] +
                             [kept_time] +
                             [f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:] == int(detect_flag)]
-                            )
+                        )
+                else:
+                    kept_obs = kept_time
             from convert_data import __convert_data__
             data, unit = __convert_data__(file_unit, var[1], data)
-            Lon.extend(lon[kept_time])
-            Lat.extend(lat[kept_time])
-            Data.extend(data[kept_time,2])
+            Lon.extend(lon[kept_obs])
+            Lat.extend(lat[kept_obs])
+            Data.extend(data[kept_obs,2])
     return np.array(Lon), np.array(Lat), np.array(Data)
         
     
