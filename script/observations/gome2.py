@@ -21,6 +21,8 @@ def process_obs_file(config_class, date, pseudo):
     elif config_class.config[pseudo]['type'] in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs'] and config_class.config[pseudo]['overpass'] == 'T':
         dir = config_class.config[pseudo]['dirpass']
     listfile = create_listfile_obs(dir, date, pseudo)
+    print(listfile)
+    quit()
 
 def create_listfile_obs(dir, date, pseudo):
     if pseudo[-1].lower() == 'a':
