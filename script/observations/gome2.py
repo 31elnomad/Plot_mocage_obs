@@ -30,7 +30,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
     return lon, lat, data, 'DU'
         
 
-def openfile(listfile, var, date, lonbnd, latbnd):
+def openfile(config_class, listfile, var, date, lonbnd, latbnd):
     var = config_class.config[pseudo]['var'].split(':')
     Lon, Lat, Data = [], [], []
     for file in listfile:
