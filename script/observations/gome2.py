@@ -25,7 +25,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
     var = config_class.config[pseudo]['var'].split(':')
     for file in listfile:
         print(file)
-        openfile(file, var)
+        openfile(file, var, date)
 
 def openfile(file, var, date):
     f = h5py.File(file, 'r')
