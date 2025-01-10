@@ -98,7 +98,7 @@ def create_masktime(date, time):
     kept_time = np.empty(len(time)).astype(bool)
     for t in range(len(time)):
         if time[t][0] == njour:
-            tmp = time[t][1]/3600000
+            tmp = float(time[t][1]/3600000)
             print(type(int(hour_min)), type(tmp), hour_max)
             if tmp > int(hour_min) and tmp <= int(hour_max):
                 print('ok')
