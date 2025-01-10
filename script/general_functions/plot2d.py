@@ -20,6 +20,8 @@ def __scatter__(ax, nc_obj, markersize, vmin, vmax, **kwargs):
     if kwargs['cmap'] in ['wbrb', 'brb', 'brbw', 'bwr', 'pwb']:
         from create_cmap import __create_cmap__
         kwargs['cmap'] = __create_cmap__(kwargs['cmap'])
+    print(nc_obs.data.shape)
+    quit()
     if len(nc_obj.data.shape) > 1:
         mapx, mapy = __gridmap__(nc_obj)
         sc = ax.scatter(
