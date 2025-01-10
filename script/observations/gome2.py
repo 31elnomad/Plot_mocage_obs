@@ -58,7 +58,7 @@ def openfile(file, var, date, lonbnd, latbnd):
         flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
     from convert_data import __convert_data__
     data, unit = __convert_data__(file_unit, var[1], data)
-    create_mask(data, date, time, lonbnd, latbnd, **kwargs)
+    create_mask(data, date, time, lonbnd, latbnd)
     quit()
 
 def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
