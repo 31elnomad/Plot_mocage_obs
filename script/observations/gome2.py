@@ -83,8 +83,6 @@ def openfile(config_class, pseudo, listfile, date, lonbnd, latbnd):
             Lon.extend(lon[kept_obs])
             Lat.extend(lat[kept_obs])
             Data.extend(data[kept_obs,2])
-    print(Lon, Lat, Data)
-    quit()
     return np.array(Lon), np.array(Lat), np.array(Data)
         
     
