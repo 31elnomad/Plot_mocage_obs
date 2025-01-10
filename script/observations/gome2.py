@@ -99,7 +99,7 @@ def create_masktime(date, time):
     for t in range(len(time)):
         if time[t][0] == njour:
             tmp = time[t][1]/3600000
-            print(hour_min, tmp, hour_max)
+            print(type(int(hour_min)), type(tmp), hour_max)
             if tmp > int(hour_min) and tmp <= int(hour_max):
                 print('ok')
                 kept_time[t] = True
