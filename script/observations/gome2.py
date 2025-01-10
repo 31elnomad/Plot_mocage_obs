@@ -24,45 +24,46 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         dir = config_class.config[pseudo]['dirpass']
     listfile = create_listfile_obs(dir, date, pseudo)
     var = config_class.config[pseudo]['var'].split(':')
+    lon, lat, data = openfile(file, var, date, lonbnd, latbnd)
+        
+
+def openfile(file, var, date, lonbnd, latbnd):
     Lon, Lat, Data = [], [], []
     for file in listfile:
         print(file)
-        lon, lat, data = openfile(file, var, date, lonbnd, latbnd)
-        Lon.extend(lon)
-        Lat.extend(Lat)
-        Data.extend(data)
-
-def openfile(file, var, date, lonbnd, latbnd):
-    try:
-        f = h5py.File(file, 'r')
-    except:
-        print("Skipping file {}".format(file))
-        continue     
-    time = f['GEOLOCATION/Time'][:]
-    lon = f['GEOLOCATION/LongitudeCentre'][:]
-    lat = f['GEOLOCATION/LatitudeCentre'][:]
-    kept_time = create_masktime(date, time)
-    if var[0] in ['CloudFraction']:
-        file_unit = '1'
-        data = f['CLOUD_PROPERTIES/CloudFraction'][:]
-    elif var[0] in ['ClouHeight']:
-        if var[1].lower() in ['m', 'km']:
-            file_unit = 'km'
-            data = f['CLOUD_PROPERTIES/CloudTopHeight'][:]
-        elif var[1].lower() in ['Pa', 'hPa']:
-            file_unit = 'hPa'
-            data = f['CLOUD_PROPERTIES/CloudTopPressure'][:]
-    elif var[0] in ['CloudType']:
-        file_unit = '1'
-        data = f['CLOUD_PROPERTIES/CloudType'][:]
-    elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
-        file_unit = 'molec cm-2'
-        data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
-        flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
-        flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
-    from convert_data import __convert_data__
-    data, unit = __convert_data__(file_unit, var[1], data)
-    return lon[kept_time], lat[kept_time], data[kept_time,2]
+        try:
+            f = h5py.File(file, 'r')   
+            time = f['GEOLOCATION/Time'][:]
+            lon = f['GEOLOCATION/LongitudeCentre'][:]
+            lat = f['GEOLOCATION/LatitudeCentre'][:]
+            kept_time = create_masktime(date, time)
+            if var[0] in ['CloudFraction']:
+                file_unit = '1'
+                data = f['CLOUD_PROPERTIES/CloudFraction'][:]
+            elif var[0] in ['ClouHeight']:
+                if var[1].lower() in ['m', 'km']:
+                    file_unit = 'km'
+                    data = f['CLOUD_PROPERTIES/CloudTopHeight'][:]
+                elif var[1].lower() in ['Pa', 'hPa']:
+                    file_unit = 'hPa'
+                    data = f['CLOUD_PROPERTIES/CloudTopPressure'][:]
+            elif var[0] in ['CloudType']:
+                file_unit = '1'
+                data = f['CLOUD_PROPERTIES/CloudType'][:]
+            elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
+                file_unit = 'molec cm-2'
+                data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
+                flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
+                flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
+            from convert_data import __convert_data__
+            data, unit = __convert_data__(file_unit, var[1], data)
+            Lon.extend(lon[kept_time])
+            Lat.extend(Lat[kept_time])
+            Data.extend(data[kept_time])
+        except:
+            print("Skipping file {}".format(file))
+            continue 
+    return Lon, Lat, Data
         
     
 
