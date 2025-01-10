@@ -101,8 +101,6 @@ def create_masktime(date, time):
             tmp = time[t][1]/3600000
             if tmp > int(hour_min) and tmp <= int(hour_max):
                 kept_time[t] = True
-                print (int(hour_min), tmp, int(hour_max))
-                quit()
             else:
                 kept_time[t] = False
     return kept_time
