@@ -74,8 +74,14 @@ def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
     kept_obs = np.empty(len(time)).astype(bool)
     for t in range(len(time)):
         if time[t][0] == njour:
-            print(time[t][1]/3600000)
-            quit()
+            tmp = time[t][1]/3600000
+            if tmp > int(hour_min) and tmp <= int(hour_max):
+                kept_obs[t] = True
+            else:
+                kept_obs[t] = False
+    print(np.sum(kept_obs))
+    quit()
+          
 
 
 
