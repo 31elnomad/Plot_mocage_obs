@@ -39,22 +39,33 @@ def openfile(file, var):
     lat_c = f['GEOLOCATION/LatitudeC'][:]
     lat_d = f['GEOLOCATION/LatitudeD'][:]
     if var[0] in ['CloudFraction']:
+        file_unit = '1'
         data = f['CLOUD_PROPERTIES/CloudFraction'][:]
     elif var[0] in ['ClouHeight']:
         if var[1].lower() in ['m', 'km']:
+            file_unit = 'km'
             data = f['CLOUD_PROPERTIES/CloudTopHeight'][:]
         elif var[1].lower() in ['Pa', 'hPa']:
+            file_unit = 'hPa'
             data = f['CLOUD_PROPERTIES/CloudTopPressure'][:]
     elif var[0] in ['CloudType']:
+        file_unit = '1'
         data = f['CLOUD_PROPERTIES/CloudType'][:]
     elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
+        file_unit = 'molec cm-2'
         data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
         flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
         flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
+    from convert_data import __convert_data__
+    data, unit = __convert_data__(file_unit, var[1], data)
+    print(data)
+    quit()
+
+
+
         
             
-    print(flag1, np.min(flag1), flag2)
-    quit()
+
 
 
 
