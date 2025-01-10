@@ -35,10 +35,3 @@ def create_listfile_obs(dir, date, pseudo):
     listfile = os.path.join(dir, filename)
     listfile = glob.glob(listfile)
     return listfile
-
-
-  
-
-GOME_O3-NO2-NO2Tropo-BrO-SO2-H2O-HCHO_L2_20181216093206_051_METOPB_32402_DLR_06.HDF5
-
-
