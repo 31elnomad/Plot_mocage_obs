@@ -14,7 +14,7 @@ def __main_gome2__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
         from read_mocage_hdat import read_h5
         lon, lat, data = read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs)
     elif config_class.config[pseudo]['overpass'] == 'F' and config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
-        process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs)
+        lon, lat, data = process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs)
     return lon, lat, data
 
 def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
@@ -24,21 +24,20 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         dir = config_class.config[pseudo]['dirpass']
     listfile = create_listfile_obs(dir, date, pseudo)
     var = config_class.config[pseudo]['var'].split(':')
+    Lon, Lat, Data = [], [], []
     for file in listfile:
         print(file)
-        openfile(file, var, date, lonbnd, latbnd)
+        lon, lat, data = openfile(file, var, date, lonbnd, latbnd)
+        Lon.extend(lon)
+        Lat.extend(Lat)
+        Data.extend(data)
 
 def openfile(file, var, date, lonbnd, latbnd):
     f = h5py.File(file, 'r')
     time = f['GEOLOCATION/Time'][:]
-    lon_a = f['GEOLOCATION/LongitudeA'][:]
-    lon_b = f['GEOLOCATION/LongitudeB'][:]
-    lon_c = f['GEOLOCATION/LongitudeC'][:]
-    lon_d = f['GEOLOCATION/LongitudeD'][:]
-    lat_a = f['GEOLOCATION/LatitudeA'][:]
-    lat_b = f['GEOLOCATION/LatitudeB'][:]
-    lat_c = f['GEOLOCATION/LatitudeC'][:]
-    lat_d = f['GEOLOCATION/LatitudeD'][:]
+    lon = f['GEOLOCATION/LongitudeCentre'][:]
+    lat = f['GEOLOCATION/LatitudeCentre'][:]
+    kept_time = create_masktime(date, time)
     if var[0] in ['CloudFraction']:
         file_unit = '1'
         data = f['CLOUD_PROPERTIES/CloudFraction'][:]
@@ -55,13 +54,17 @@ def openfile(file, var, date, lonbnd, latbnd):
     elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
         file_unit = 'molec cm-2'
         data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
+        print(data.shape)
+        quit()
         flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
         flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
-        create_mask(data, date, time, lonbnd, latbnd, flag1=flag1, flag2=flag2)
-    #from convert_data import __convert_data__
-    #data, unit = __convert_data__(file_unit, var[1], data)
+    from convert_data import __convert_data__
+    data, unit = __convert_data__(file_unit, var[1], data)
+    return lon[kept_time], lat[kept_time], data[kept_time]
+        
+    
 
-def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
+def create_masktime(date, time):
     date_min = date - datetime.timedelta(hours=1)
     date_max = date
     first_date = datetime.datetime(1950, 1, 1)
@@ -69,17 +72,15 @@ def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
     njour = int(time_since.total_seconds()) // (3600*24)
     hour_min = date_min.strftime('%H')
     hour_max = date_max.strftime('%H')
-    kept_obs = np.empty(len(time)).astype(bool)
+    kept_time = np.empty(len(time)).astype(bool)
     for t in range(len(time)):
         if time[t][0] == njour:
             tmp = time[t][1]/3600000
             if tmp > int(hour_min) and tmp <= int(hour_max):
-                kept_obs[t] = True
+                kept_time[t] = True
             else:
-                kept_obs[t] = False
-    if np.sum(kept_obs) > 0:
-        print(np.sum(kept_obs))
-        quit()
+                kept_time[t] = False
+    return kept_time
           
 
 
