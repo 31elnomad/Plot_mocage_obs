@@ -73,7 +73,7 @@ def openfile(config_class, pseudo, listfile, date, lonbnd, latbnd):
                         kept_obs = kept_obs +reduce(
                             np.logical_and,
                             [f['DETAILED_RESULTS/SO2/SO2_Flag'][:] == 0] +
-                            #[kept_time] +
+                            [kept_time] +
                             [f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:] == int(detect_flag)]
                         )
                 else:
