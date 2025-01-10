@@ -104,8 +104,6 @@ class PlotMap:
                 print(f"Paramètre ajouté : {list_param_plot}")
 
     def cut_list(self, List):
-        print(List)
-        quit()
         if len(List) == 6:
             if List[-1] in ['map_1', 'map_6']:
                 self.pseudo = List[0]
