@@ -33,7 +33,11 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         Data.extend(data)
 
 def openfile(file, var, date, lonbnd, latbnd):
-    f = h5py.File(file, 'r')
+    try:
+        f = h5py.File(file, 'r')
+    except:
+        print("Skipping file {}".format(file))
+        pass      
     time = f['GEOLOCATION/Time'][:]
     lon = f['GEOLOCATION/LongitudeCentre'][:]
     lat = f['GEOLOCATION/LatitudeCentre'][:]
