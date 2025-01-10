@@ -27,7 +27,7 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
     lon, lat, data = openfile(listfile, var, date, lonbnd, latbnd)
         
 
-def openfile(file, var, date, lonbnd, latbnd):
+def openfile(listfile, var, date, lonbnd, latbnd):
     Lon, Lat, Data = [], [], []
     for file in listfile:
         print(file)
