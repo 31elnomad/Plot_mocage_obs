@@ -21,11 +21,12 @@ def process_obs_file(config_class, date, pseudo):
     elif config_class.config[pseudo]['type'] in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs'] and config_class.config[pseudo]['overpass'] == 'T':
         dir = config_class.config[pseudo]['dirpass']
     listfile = create_listfile_obs(dir, date, pseudo)
+    var = config_class.config[pseudo]['var'].split(':')
     for file in listfile:
         print(file)
-        openfile(file)
+        openfile(file, var)
 
-def openfile(file):
+def openfile(file, var):
     f = h5py.File(file, 'r')
     time = f['GEOLOCATION/Time'][:]
     lon_a = f['GEOLOCATION/LongitudeA'][:]
@@ -36,6 +37,18 @@ def openfile(file):
     lat_b = f['GEOLOCATION/LatitudeB'][:]
     lat_c = f['GEOLOCATION/LatitudeC'][:]
     lat_d = f['GEOLOCATION/LatitudeD'][:]
+    if var[0] in ['CloudFraction']:
+        data = f['CLOUD_PROPERTIES/CloudFraction'][:]
+    elif var[0] in ['ClouHeight']:
+        if var[1].lower() in ['m', 'km']:
+            data = f['CLOUD_PROPERTIES/CloudTopHeight'][:]
+        elif var[1].lower() in ['Pa', 'hPa']:
+            data = f['CLOUD_PROPERTIES/CloudTopPressure'][:]
+    elif var[0] in ['CloudType']:
+        data = f['CLOUD_PROPERTIES/CloudType'][:]
+    elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
+        data = f['DETAILLED_RESULTS/SO2/VCDCorrected'][:]
+            
     print(lon_d, lat_d)
     quit()
 
