@@ -3,6 +3,7 @@ import os
 import glob
 import numpy as np
 import datetime
+from functools import reduce
 
 def __main_gome2__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
     if config_class.config[pseudo]['overpass'] == 'T' and config_class[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
@@ -22,13 +23,15 @@ def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
         dir = config_class.config[pseudo]['dirin']
     elif config_class.config[pseudo]['type'] in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs'] and config_class.config[pseudo]['overpass'] == 'T':
         dir = config_class.config[pseudo]['dirpass']
+        Detect_flag = ['0', '1', '2', '3']
     listfile = create_listfile_obs(dir, date, pseudo)
     var = config_class.config[pseudo]['var'].split(':')
-    lon, lat, data = openfile(listfile, var, date, lonbnd, latbnd)
+    lon, lat, data = openfile(confil_class, listfile, date, lonbnd, latbnd)
     return lon, lat, data, 'DU'
         
 
 def openfile(listfile, var, date, lonbnd, latbnd):
+    var = config_class.config[pseudo]['var'].split(':')
     Lon, Lat, Data = [], [], []
     for file in listfile:
         print(file)
@@ -60,8 +63,21 @@ def openfile(listfile, var, date, lonbnd, latbnd):
             elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
                 file_unit = 'molec cm-2'
                 data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
-                flag1 = f['DETAILED_RESULTS/SO2/SO2_Flag'][:]
-                flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
+                if config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']
+                    Detect_flag = config_class.config[pseudo]['volcano_flag'].split(',')
+                    kept_obs = np.array([False]*len(kept_time))
+                    for Detect_flag in detect_flag:
+                        # index of accepted obs
+                        kept_obs = kept_obs +reduce(
+                            np.logical_and,
+                            [f['DETAILED_RESULTS/SO2/SO2_Flag'][:] == 0] +
+                            [kept_times] +
+                            [f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:] == Detect_flag]
+                            """[product_vars['latitude'][:].flatten() >= self.latbnd[0]] +
+                            [product_vars['latitude'][:].flatten() <= self.latbnd[1]] +
+                            [product_vars['longitude'][:].flatten() >= self.lonbnd[0]] +
+                            [product_vars['longitude'][:].flatten() <= self.lonbnd[1]]"""
+                            )
             from convert_data import __convert_data__
             data, unit = __convert_data__(file_unit, var[1], data)
             Lon.extend(lon[kept_time])
