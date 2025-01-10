@@ -22,6 +22,7 @@ def process_obs_file(config_class, date, pseudo):
         dir = config_class.config[pseudo]['dirpass']
     listfile = create_listfile_obs(dir, date, pseudo)
     for file in listfile:
+        print(file)
         openfile(file)
 
 def openfile(file):
