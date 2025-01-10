@@ -16,7 +16,7 @@ def __main_gome2__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
         process_obs_file(config_class, date, pseudo)
     return lon, lat, data
 
-def process_obs_file(config_class, date, pseudo):
+def process_obs_file(config_class, date, pseudo, lonbnd, latbnd, kwargs):
     if config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
         dir = config_class.config[pseudo]['dirin']
     elif config_class.config[pseudo]['type'] in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs'] and config_class.config[pseudo]['overpass'] == 'T':
@@ -58,8 +58,12 @@ def openfile(file, var):
         flag2 = f['DETAILED_RESULTS/SO2/SO2_Volcano_Flag'][:]
     from convert_data import __convert_data__
     data, unit = __convert_data__(file_unit, var[1], data)
-    print(np.max(data))
+    create_mask(data, date, time, lonbnd, latbnd, **kwargs)
     quit()
+
+def create_mask(data, date, time, lonbnd, latbnd, **kwargs):
+    date_min = date
+    print(date)
 
 
 
