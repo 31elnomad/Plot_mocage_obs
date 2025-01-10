@@ -63,7 +63,7 @@ def openfile(listfile, var, date, lonbnd, latbnd):
             elif var[0] in ['SO2', 'SO_2', 'SO_2_tc', 'SO2_tc']:
                 file_unit = 'molec cm-2'
                 data = f['DETAILED_RESULTS/SO2/VCDCorrected'][:]
-                if config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']
+                if config_class.config[pseudo]['type'] not in ['HDAT', 'HSTAT', 'h5_sim', 'h5_obs']:
                     Detect_flag = config_class.config[pseudo]['volcano_flag'].split(',')
                     kept_obs = np.array([False]*len(kept_time))
                     for Detect_flag in detect_flag:
