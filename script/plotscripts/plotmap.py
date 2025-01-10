@@ -104,6 +104,8 @@ class PlotMap:
                 print(f"Paramètre ajouté : {list_param_plot}")
 
     def cut_list(self, List):
+        print(List)
+        quit()
         if len(List) == 6:
             if List[-1] in ['map_1', 'map_6']:
                 self.pseudo = List[0]
@@ -144,8 +146,6 @@ class PlotMap:
         fig, ax = plt.subplots(ncols = 1,
                                nrows = 1,
                                subplot_kw = self.subplot_kw)
-        print(self.pseudo, self.var, self.date)
-        quit()
         if self.pseudo is not None and self.var is not None and self.date is not None:
             vmin = float(self.config_plot['vmin'])
             vmax = float(self.config_plot['vmax'])
