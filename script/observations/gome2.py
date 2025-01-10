@@ -31,8 +31,14 @@ def openfile(listfile, var, date, lonbnd, latbnd):
     Lon, Lat, Data = [], [], []
     for file in listfile:
         print(file)
+        err = 0
         try:
-            f = h5py.File(file, 'r')   
+            f = h5py.File(file, 'r')
+        except:
+            print("Skipping file {}".format(file))
+            err = 1
+            continue
+        if err == 0
             time = f['GEOLOCATION/Time'][:]
             lon = f['GEOLOCATION/LongitudeCentre'][:]
             lat = f['GEOLOCATION/LatitudeCentre'][:]
@@ -60,9 +66,7 @@ def openfile(listfile, var, date, lonbnd, latbnd):
             Lon.extend(lon[kept_time])
             Lat.extend(Lat[kept_time])
             Data.extend(data[kept_time])
-        except:
-            print("Skipping file {}".format(file))
-            continue 
+            
     return Lon, Lat, Data
         
     
