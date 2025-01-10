@@ -4,14 +4,6 @@ import os
 import datetime
 import numpy as np
 
-def __main_readh5__(config_class, pseudo, date, lonbnd, latbnd, **kwargs):
-    sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
-    import daimonobs
-    delta = float(config_class.config['observations']['delta'])
-    config_h5 = config_class.config[pseudo]
-    config_plot = config_class.config[config_class.config['global']['type_plot']]
-    listfile = create_listfile(config_h5, date)
-
 def create_listfile(config_h5, date):
     if config_h5['type'].lower() in ['h5_sim', 'h5_obs']:
         filename = 'hdf5-std.extract.' + date.strftime('%Y%m%d') + '*'
@@ -24,6 +16,8 @@ def create_listfile(config_h5, date):
     return listfile
 
 def read_h5(config_class, pseudo, date, lonbnd, latbnd, kwargs):
+    print(kwargs)
+    quit()
     sys.path.append(os.path.abspath(config_class.config['observations']['daimon_path']))
     import daimonobs
     delta = float(config_class.config['observations']['delta'])
